@@ -3,5 +3,3 @@ name: Health Check
 method: GET
 url: '{{baseUrl}}/health'
 order: 2000
-auth:
-  type: noauth

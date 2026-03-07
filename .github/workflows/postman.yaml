@@ -1,4 +1,4 @@
-name: Publish to Postman Workspace
+name: Postman API Validation & Publish
 
 on:
   push:
@@ -8,12 +8,22 @@ on:
   workflow_dispatch:
 
 jobs:
-  postman:
+  validate:
+    name: Validate API Spec & Collection
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - run: curl -o- "https://dl-cli.pstmn.io/install/unix.sh" | sh
+      - name: Install Postman CLI
+        run: curl -o- "https://dl-cli.pstmn.io/install/unix.sh" | sh
+
+      - name: Login to Postman
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: postman login --with-api-key "$POSTMAN_API_KEY"
+
+      - name: Lint API Spec
+        run: postman spec lint ./postman/specs/book-api.yaml --fail-severity WARNING
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,39 +34,39 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start server in background
+      - name: Start server
         run: |
           npm run dev &
-          echo $! > pidfile
-          # Wait for server to be ready (port 3000)
           for i in {1..20}; do
-            if nc -z localhost 3000; then
-              echo "Server is up!"
-              break
-            fi
+            nc -z localhost 3000 && echo "Server is up!" && break
             echo "Waiting for server..."
             sleep 2
           done
 
-      - name: Validate Collection
-        env:
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
-        run: |
-          postman login --with-api-key "$POSTMAN_API_KEY"
-          postman collection run ./postman/collections/Book-API
-
-      - name: Push to Postman Cloud
-        if: github.event_name == 'push'
-        env:
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
-        run: |
-          postman login --with-api-key "$POSTMAN_API_KEY"
-          postman workspace push -y
+      - name: Run Collection Tests
+        run: postman collection run ./postman/collections/Book-API -e ./postman/environments/local.json
 
       - name: Stop server
         if: always()
+        run: pkill -f "node src/server.js" || true
+
+  publish:
+    name: Push to Postman Cloud
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Postman CLI
+        run: curl -o- "https://dl-cli.pstmn.io/install/unix.sh" | sh
+
+      - name: Login to Postman
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: postman login --with-api-key "$POSTMAN_API_KEY"
+
+      - name: Prepare & Push to Cloud
         run: |
-          if [ -f pidfile ]; then
-            kill $(cat pidfile) || true
-            rm pidfile
-          fi
+          postman workspace prepare
+          postman workspace push -y

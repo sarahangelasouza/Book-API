@@ -47,7 +47,7 @@ paths:
                 $ref: "#/components/schemas/BookListResponse"
         "500":
           description: Internal server error   
-          content:
+          content: 
             application/json:
               schema: 
                 $ref: "#/components/schemas/Error"

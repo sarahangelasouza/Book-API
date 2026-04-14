@@ -44,7 +44,7 @@ jobs:
           done
 
       - name: Run Collection Tests
-        run: postman collection run "./postman/collections/Book API" -e ./postman/environments/local.json
+        run: postman collection run "./postman/collections/Book API" -e ./postman/environments/local.json --report-events
 
       - name: Stop server
         if: always()

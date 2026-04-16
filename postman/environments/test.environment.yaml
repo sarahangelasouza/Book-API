@@ -1,5 +1,0 @@
-name: test
-values:
-  - key: baseUrl
-    value: 'localhost:3000'
-    enabled: true

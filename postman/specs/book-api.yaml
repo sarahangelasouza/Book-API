@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  title: Book API
+  version: 1.0.0
+  description: >
+    A RESTful API for managing a collection of books. Supports listing, creating,
+    retrieving, updating, and deleting books, as well as a health check endpoint
+    and an API root that describes available routes.
+
+servers:
+  - url: '{{baseUrl}}'
+    description: Base server URL
+
+paths:
+  /:
+    get:
+      summary: API Root
+      operationId: getRoot
+      description: Returns API info and a list of available routes.
+      responses:
+        '200':
+          description: API info and available routes.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Welcome to the Book API
+                  routes:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                      - GET /
+                      - GET /health
+                      - GET /api/v1/books
+                      - POST /api/v1/books
+                      - GET /api/v1/books/{bookId}
+                      - PUT /api/v1/books/{bookId}
+                      - DELETE /api/v1/books/{bookId}
+
+  /health:
+    get:
+      summary: Health Check
+      operationId: getHealth
+      description: Returns the health status of the API.
+      responses:
+        '200':
+          description: API is healthy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  uptime:
+                    type: number
+                    description: Server uptime in seconds.
+                    example: 3600
+
+  /api/v1/books:
+    get:
+      summary: List Books
+      operationId: listBooks
+      description: Returns a list of all books in the collection.
+      responses:
+        '200':
+          description: A list of books.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+
+    post:
+      summary: Create Book
+      operationId: createBook
+      description: Creates a new book. `title` and `author` are required. `year` is optional.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+            example:
+              title: The Great Gatsby
+              author: F. Scott Fitzgerald
+              year: 1925
+      responses:
+        '201':
+          description: Book created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid request body. `title` and `author` are required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/v1/books/{bookId}:
+    parameters:
+      - name: bookId
+        in: path
+        required: true
+        description: The unique identifier of the book.
+        schema:
+          type: string
+
+    get:
+      summary: Get Book
+      operationId: getBook
+      description: Returns a single book by its ID.
+      responses:
+        '200':
+          description: The requested book.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      summary: Update Book
+      operationId: updateBook
+      description: Updates an existing book by ID. All fields (`title`, `author`, `year`) are optional.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookUpdate'
+            example:
+              title: The Great Gatsby (Updated)
+              author: F. Scott Fitzgerald
+              year: 1925
+      responses:
+        '200':
+          description: Book updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      summary: Delete Book
+      operationId: deleteBook
+      description: Deletes a book by its ID.
+      responses:
+        '204':
+          description: Book deleted successfully. No content returned.
+        '404':
+          description: Book not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Book:
+      type: object
+      description: Represents a book in the collection.
+      required:
+        - title
+        - author
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the book.
+          example: a1b2c3d4
+        title:
+          type: string
+          description: The title of the book.
+          example: The Great Gatsby
+        author:
+          type: string
+          description: The author of the book.
+          example: F. Scott Fitzgerald
+        year:
+          type: integer
+          description: The publication year of the book.
+          example: 1925
+
+    BookInput:
+      type: object
+      description: Payload for creating a new book.
+      required:
+        - title
+        - author
+      properties:
+        title:
+          type: string
+          description: The title of the book.
+          example: The Great Gatsby
+        author:
+          type: string
+          description: The author of the book.
+          example: F. Scott Fitzgerald
+        year:
+          type: integer
+          description: The publication year of the book.
+          example: 1925
+
+    BookUpdate:
+      type: object
+      description: Payload for updating an existing book. All fields are optional.
+      properties:
+        title:
+          type: string
+          description: The updated title of the book.
+          example: The Great Gatsby (Updated)
+        author:
+          type: string
+          description: The updated author of the book.
+          example: F. Scott Fitzgerald
+        year:
+          type: integer
+          description: The updated publication year of the book.
+          example: 1925
+
+    Error:
+      type: object
+      description: A standard error response.
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+          example: Book not found

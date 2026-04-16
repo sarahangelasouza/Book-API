@@ -1,0 +1,6 @@
+$kind: http-request
+name: Get Book
+method: GET
+url: '{{baseUrl}}/api/v1/books/{{bookId}}'
+description: Returns a single book by ID.
+order: 2000

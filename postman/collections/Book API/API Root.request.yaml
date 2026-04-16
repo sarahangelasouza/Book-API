@@ -1,0 +1,6 @@
+$kind: http-request
+name: API Root
+method: GET
+url: '{{baseUrl}}/'
+description: Returns API info and available routes.
+order: 1000

@@ -1,12 +1,15 @@
 $kind: http-request
 name: Update Book
 method: PUT
-url: '{{baseUrl}}/api/v1/books/{{bookId}}'
-description: 'Updates an existing book by ID. Fields `title`, `author`, `year` are all optional.'
-order: 4000
+url: "{{baseUrl}}/books/:id"
+description: Updates an existing book by ID. Fields `title`, `author`, `year` are all optional.
+pathVariables:
+  - key: id
+    value: "{{bookID}}"
+    $type: ""
+order: 4370
 headers:
-  - key: Content-Type
-    value: application/json
+  Content-Type: application/json
 body:
   type: json
   content: |-
@@ -15,3 +18,4 @@ body:
       "author": "F. Scott Fitzgerald",
       "year": 1925
     }
+examples: ./.resources/Update Book.resources/examples

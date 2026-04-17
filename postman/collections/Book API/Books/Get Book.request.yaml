@@ -1,6 +1,13 @@
 $kind: http-request
 name: Get Book
 method: GET
-url: '{{baseUrl}}/api/v1/books/{{bookId}}'
+url: "{{baseUrl}}/books/:id"
 description: Returns a single book by ID.
+headers:
+  "": ""
+pathVariables:
+  - key: id
+    value: "{{bookID}}"
+    $type: ""
+examples: .resources/Get Book.resources/examples
 order: 2000

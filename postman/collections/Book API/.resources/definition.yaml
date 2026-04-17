@@ -2,6 +2,5 @@ $kind: collection
 name: Book API
 description: Collection for the Book API - CRUD operations for managing books.
 variables:
-  - key: baseUrl
-    value: 'http://localhost:3000'
-    description: Base URL for the Book API
+  baseUrl: http://localhost:3000
+  bookID: ""

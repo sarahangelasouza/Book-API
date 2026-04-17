@@ -1,6 +1,7 @@
 $kind: http-request
 name: List Books
 method: GET
-url: '{{baseUrl}}/api/v1/books'
+url: "{{baseUrl}}/books"
 description: Returns a list of all books.
+examples: .resources/List Books.resources/examples
 order: 1000

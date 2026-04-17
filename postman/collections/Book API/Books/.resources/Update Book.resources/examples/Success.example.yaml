@@ -1,0 +1,28 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/books/:id"
+  method: PUT
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    id: "{{bookID}}"
+  body:
+    type: json
+    content: |-
+      {
+          "title": "The Great Gatsby (Updated)",
+          "author": "F. Scott Fitzgerald",
+          "year": 1925
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Book successfully updated."
+      }
+order: 1000

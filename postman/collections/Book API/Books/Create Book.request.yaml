@@ -1,17 +1,18 @@
 $kind: http-request
 name: Create Book
 method: POST
-url: '{{baseUrl}}/api/v1/books'
-description: 'Creates a new book. Requires `title` and `author`. `year` is optional.'
+url: "{{baseUrl}}/books"
+description: Creates a new book. Requires `title` and `author`. `year` is optional.
+examples: .resources/Create Book.resources/examples
 order: 3000
 headers:
-  - key: Content-Type
-    value: application/json
+  Content-Type: application/json
 body:
   type: json
   content: |-
     {
-      "title": "The Great Gatsby",
-      "author": "F. Scott Fitzgerald",
-      "year": 1925
+        "title": "{{tempBookTitle}}",
+        "author": "{{$randomFirstName}} {{$randomLastName}}",
+        "genre": "fiction",
+        "yearPublished": "1987"
     }

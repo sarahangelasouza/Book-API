@@ -1,0 +1,335 @@
+openapi: 3.0.0
+info:
+  title: Book API
+  version: 1.0.0
+  description: >-
+    A RESTful API for managing a library book collection. Supports listing,
+    retrieving, creating, updating, and deleting books.
+servers:
+  - url: '{{baseUrl}}'
+    description: Base URL
+
+tags:
+  - name: Books
+    description: Operations related to books
+
+paths:
+  /books:
+    get:
+      summary: List Books
+      operationId: listBooks
+      description: Returns a list of all books.
+      tags:
+        - Books
+      responses:
+        '200':
+          description: A list of books.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+              example:
+                - id: ZUST9JFx-Sd9X0k
+                  title: Ficciones
+                  author: Jorge Luis Borges
+                  genre: fiction
+                  yearPublished: 1944
+                  checkedOut: true
+                  isPermanentCollection: false
+                  createdAt: '2021-06-02 17:37:38'
+                - id: bJmPVX5oFzAQJwI
+                  title: Dust Tracks on a Road
+                  author: Zora Neale Hurston
+                  genre: biography
+                  yearPublished: 1942
+                  checkedOut: true
+                  isPermanentCollection: false
+                  createdAt: '2021-06-02 17:37:38'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+
+    post:
+      summary: Create Book
+      operationId: createBook
+      description: 'Creates a new book. Requires `title` and `author`. `year` is optional.'
+      tags:
+        - Books
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+            example:
+              title: The Great Gatsby
+              author: F. Scott Fitzgerald
+              genre: fiction
+              yearPublished: 1925
+      responses:
+        '200':
+          description: Book successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+              example:
+                id: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+                title: The Great Gatsby
+                author: F. Scott Fitzgerald
+                genre: fiction
+                yearPublished: 1925
+                checkedOut: false
+                isPermanentCollection: false
+                createdAt: '2024-09-27T15:48:46.962Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+
+  /books/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: The unique identifier of the book.
+        schema:
+          type: string
+        example: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+
+    get:
+      summary: Get Book
+      operationId: getBook
+      description: Returns a single book by ID.
+      tags:
+        - Books
+      responses:
+        '200':
+          description: A single book object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+              example:
+                id: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+                title: Rubber maroon
+                author: Gabriel García Márquez
+                genre: fiction
+                yearPublished: 1967
+                checkedOut: false
+                isPermanentCollection: false
+                createdAt: '2024-09-27T15:59:14.438Z'
+        '404':
+          description: Book not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 404
+                  message: Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+
+    put:
+      summary: Update Book
+      operationId: updateBook
+      description: 'Updates an existing book by ID. Fields `title`, `author`, `year` are all optional.'
+      tags:
+        - Books
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+            example:
+              title: The Great Gatsby (Updated)
+              author: F. Scott Fitzgerald
+              year: 1925
+      responses:
+        '200':
+          description: Book successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+              example:
+                id: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+                title: The Great Gatsby (Updated)
+                author: F. Scott Fitzgerald
+                genre: fiction
+                yearPublished: 1925
+                checkedOut: false
+                isPermanentCollection: false
+                createdAt: '2024-09-27T15:48:46.962Z'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+
+    delete:
+      summary: Delete Book
+      operationId: deleteBook
+      description: Deletes a book by ID.
+      tags:
+        - Books
+      responses:
+        '200':
+          description: Book successfully removed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              example:
+                message: Book successfully removed.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 400
+                  message: Bad Request
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                error:
+                  code: 500
+                  message: Internal Server Error
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the book.
+          example: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+        title:
+          type: string
+          description: The title of the book.
+          example: The Great Gatsby
+        author:
+          type: string
+          description: The author of the book.
+          example: F. Scott Fitzgerald
+        genre:
+          type: string
+          description: The genre of the book.
+          example: fiction
+        yearPublished:
+          type: integer
+          description: The year the book was published.
+          example: 1925
+        checkedOut:
+          type: boolean
+          description: Whether the book is currently checked out.
+          example: false
+        isPermanentCollection:
+          type: boolean
+          description: Whether the book is part of the permanent collection.
+          example: false
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp of when the book record was created.
+          example: '2024-09-27T15:48:46.962Z'
+
+    BookInput:
+      type: object
+      properties:
+        title:
+          type: string
+          description: The title of the book.
+          example: The Great Gatsby
+        author:
+          type: string
+          description: The author of the book.
+          example: F. Scott Fitzgerald
+        genre:
+          type: string
+          description: The genre of the book.
+          example: fiction
+        yearPublished:
+          type: integer
+          description: The year the book was published.
+          example: 1925
+      required:
+        - title
+        - author
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: integer
+              description: HTTP status code.
+              example: 400
+            message:
+              type: string
+              description: Error message.
+              example: Bad Request

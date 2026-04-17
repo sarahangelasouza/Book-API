@@ -27,9 +27,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Book'
+                $ref: '#/components/schemas/BookList'
               example:
                 - id: ZUST9JFx-Sd9X0k
                   title: Ficciones
@@ -119,7 +117,7 @@ paths:
         required: true
         description: The unique identifier of the book.
         schema:
-          type: string
+          $ref: '#/components/schemas/BookId'
         example: 7f04875b-9201-4c8f-b381-18370f9b2dfb
 
     get:
@@ -230,10 +228,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
+                $ref: '#/components/schemas/DeleteBookResponse'
               example:
                 message: Book successfully removed.
         '400':
@@ -318,6 +313,24 @@ components:
       required:
         - title
         - author
+
+    BookList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Book'
+
+    BookId:
+      type: string
+      description: Unique identifier for a book.
+      example: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+
+    DeleteBookResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Confirmation message.
+          example: Book successfully removed.
 
     Error:
       type: object

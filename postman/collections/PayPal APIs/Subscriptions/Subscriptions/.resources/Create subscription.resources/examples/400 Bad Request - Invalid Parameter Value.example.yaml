@@ -1,0 +1,118 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/subscriptions"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 72 hours.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  body:
+    type: json
+    content: |-
+      {
+          "plan_id": "{{billing_plan_id}}",
+          "start_time": "2018-11-01T00:00:00Z",
+          "shipping_amount": {
+              "currency_code": "USD",
+              "value": "10.00"
+          },
+          "subscriber": {
+              "name": {
+                  "given_name": "FooBuyer",
+                  "surname": "Jones"
+              },
+              "email_address": "foobuyer@example.com",
+              "shipping_address": {
+                  "name": {
+                      "full_name": "John Doe"
+                  },
+                  "address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "Building 17",
+                      "admin_area_2": "San Jose",
+                      "admin_area_1": "CA",
+                      "postal_code": "95131",
+                      "country_code": "US"
+                  }
+              }
+          },
+          "application_context": {
+              "brand_name": "Example Inc",
+              "locale": "en-US",
+              "shipping_preference": "SET_PROVIDED_ADDRESS",
+              "user_action": "SUBSCRIBE_NOW",
+              "payment_method": {
+                  "payer_selected": "PAYPAL",
+                  "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+              },
+              "return_url": "https://example.com/return",
+              "cancel_url": "https://example.com/cancel"
+          }
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Connection: keep-alive
+    Content-Length: "462"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: d13a6dfd2ab93
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Mon, 10 Apr 2023 17:01:20 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000073-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681146080.268613,VS0,VE294
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "d13a6dfd2ab93",
+          "details": [
+              {
+                  "field": "/start_time",
+                  "value": "2018-11-01T00:00:00Z",
+                  "location": "body",
+                  "issue": "INVALID_PARAMETER_VALUE",
+                  "description": "Start time must be a valid future date and time."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#INVALID_REQUEST",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 3000

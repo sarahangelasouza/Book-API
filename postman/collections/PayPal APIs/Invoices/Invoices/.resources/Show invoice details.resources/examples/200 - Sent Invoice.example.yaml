@@ -1,0 +1,268 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/invoices/:invoice_id"
+  method: GET
+  pathVariables:
+    - key: invoice_id
+      value: "{{invoice_id}}"
+      description: (Required) The ID of the invoice for which to show details.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "4590"
+    Connection: keep-alive
+    Date: Fri, 04 Feb 2022 03:27:56 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 4919eeadc67ff
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "id": "INV2-2HRT-K358-WWVB-J4MA",
+          "status": "SENT",
+          "detail": {
+              "reference": "<The reference data. Includes a post office (PO) number.>",
+              "currency_code": "USD",
+              "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+              "terms_and_conditions": "<The general terms of the invoice. Can include return or cancellation policy and other terms and conditions.>",
+              "memo": "<A private bookkeeping note for merchant.>",
+              "additional_data": "<Any additional information. Includes business hours.>",
+              "category_code": "SHIPPABLE",
+              "invoice_number": "1643945247",
+              "invoice_date": "2022-01-04",
+              "payment_term": {
+                  "term_type": "NET_10",
+                  "due_date": "2022-01-14"
+              },
+              "viewed_by_recipient": false,
+              "group_draft": false,
+              "metadata": {
+                  "create_time": "2022-02-04T03:27:27Z",
+                  "last_update_time": "2022-02-04T03:27:27Z",
+                  "first_sent_time": "2022-02-04T03:27:41Z",
+                  "last_sent_time": "2022-02-04T03:27:41Z",
+                  "created_by_flow": "REGULAR_SINGLE",
+                  "recipient_view_url": "https://www.sandbox.paypal.com/invoice/p/#2HRTK358WWVBJ4MA",
+                  "invoicer_view_url": "https://www.sandbox.paypal.com/invoice/details/INV2-2HRT-K358-WWVB-J4MA",
+                  "caller_type": "API_V2_INVOICE"
+              },
+              "archived": false
+          },
+          "invoicer": {
+              "name": {
+                  "given_name": "David",
+                  "surname": "Larusso",
+                  "full_name": "David Larusso"
+              },
+              "address": {
+                  "address_line_1": "1234 First Street",
+                  "address_line_2": "337673 Hillside Court",
+                  "admin_area_2": "Anytown",
+                  "admin_area_1": "CA",
+                  "postal_code": "98765",
+                  "country_code": "US"
+              },
+              "phones": [
+                  {
+                      "country_code": "001",
+                      "national_number": "4085551234",
+                      "phone_type": "MOBILE"
+                  }
+              ],
+              "website": "www.example.com",
+              "tax_id": "XX-XXXXXXX",
+              "additional_notes": "<Any additional information. Includes business hours.>",
+              "logo_url": "https://example.com/logo.png"
+          },
+          "primary_recipients": [
+              {
+                  "billing_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers",
+                          "full_name": "Stephanie Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      },
+                      "email_address": "foobuyer@gmail.com"
+                  },
+                  "shipping_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers",
+                          "full_name": "Stephanie Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      }
+                  }
+              }
+          ],
+          "items": [
+              {
+                  "id": "ITEM-3PU08942JX400064E",
+                  "name": "Yoga Mat",
+                  "description": "Elastic mat to practice yoga.",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "50.00"
+                  },
+                  "tax": {
+                      "id": "TAX-0N0416338A793061R",
+                      "name": "Sales Tax",
+                      "percent": "7.25",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "3.27"
+                      }
+                  },
+                  "discount": {
+                      "percent": "5",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "-2.50"
+                      }
+                  },
+                  "unit_of_measure": "QUANTITY"
+              },
+              {
+                  "id": "ITEM-23E9660697077221W",
+                  "name": "Yoga t-shirt",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "10.00"
+                  },
+                  "tax": {
+                      "id": "TAX-0N0416338A793061R",
+                      "name": "Sales Tax",
+                      "percent": "7.25",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "0.34"
+                      }
+                  },
+                  "discount": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "-5.00"
+                      }
+                  },
+                  "unit_of_measure": "QUANTITY"
+              }
+          ],
+          "configuration": {
+              "tax_calculated_after_discount": true,
+              "tax_inclusive": false,
+              "allow_tip": true,
+              "partial_payment": {
+                  "allow_partial_payment": true,
+                  "minimum_amount_due": {
+                      "currency_code": "USD",
+                      "value": "20.00"
+                  }
+              },
+              "template_id": "TEMP-8LK05440PT816351U"
+          },
+          "amount": {
+              "breakdown": {
+                  "item_total": {
+                      "currency_code": "USD",
+                      "value": "60.00"
+                  },
+                  "discount": {
+                      "invoice_discount": {
+                          "percent": "5",
+                          "amount": {
+                              "currency_code": "USD",
+                              "value": "-2.63"
+                          }
+                      },
+                      "item_discount": {
+                          "currency_code": "USD",
+                          "value": "-7.50"
+                      }
+                  },
+                  "tax_total": {
+                      "currency_code": "USD",
+                      "value": "4.34"
+                  },
+                  "shipping": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      },
+                      "tax": {
+                          "id": "TAX-21H03009JA248315P",
+                          "name": "Sales Tax",
+                          "percent": "7.25",
+                          "amount": {
+                              "currency_code": "USD",
+                              "value": "0.73"
+                          }
+                      }
+                  },
+                  "custom": {
+                      "label": "Packing Charges",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  }
+              },
+              "currency_code": "USD",
+              "value": "74.21"
+          },
+          "due_amount": {
+              "currency_code": "USD",
+              "value": "74.21"
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-2HRT-K358-WWVB-J4MA",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-2HRT-K358-WWVB-J4MA",
+                  "rel": "replace",
+                  "method": "PUT"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-2HRT-K358-WWVB-J4MA/cancel",
+                  "rel": "cancel",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-2HRT-K358-WWVB-J4MA/remind",
+                  "rel": "remind",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-2HRT-K358-WWVB-J4MA/payments",
+                  "rel": "record-payment",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-2HRT-K358-WWVB-J4MA/generate-qr-code",
+                  "rel": "qr-code",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 9000

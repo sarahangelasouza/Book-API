@@ -1,0 +1,62 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id?views=process_view"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  queryParams:
+    - key: views
+      value: process_view
+      description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response.
+  pathVariables:
+    - key: id
+      value: "1111111"
+      description: The ID of the seller.
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Connection: keep-alive
+    Content-Length: "426"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: e4e0ce5107d16
+    Server-Timing: traceparent;desc="00-0000000000000000000e4e0ce5107d16-afa99cb70d562660-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Fri, 14 Apr 2023 02:02:41 GMT
+    X-Served-By: cache-hnd18731-HND, cache-nrt-rjtf7700070-NRT
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681437761.911755,VS0,VE414
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "e4e0ce5107d16",
+          "details": [
+              {
+                  "field": "merchant_payer_id",
+                  "value": "Account does not exist",
+                  "location": "path",
+                  "issue": "INVALID_PARAMETER_VALUE",
+                  "description": "merchant_payer_id is invalid"
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/managed-accounts",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 4000

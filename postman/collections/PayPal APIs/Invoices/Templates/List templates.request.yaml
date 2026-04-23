@@ -1,0 +1,22 @@
+$kind: http-request
+description: Lists merchant-created templates with associated details. The associated details include the emails, addresses, and phone numbers from the user's PayPal profile.<br/>The user can select which values to show in the business information section of their template.
+url: "{{base_url}}/v2/invoicing/templates?fields=all&page=1&page_size=10"
+method: GET
+queryParams:
+  - key: fields
+    value: all
+    description: The fields to return in the response. Value is `all` or `none`. To return only the template name, ID, and default attributes, specify `none`.
+  - key: page
+    value: "1"
+    description: The page number to be retrieved, for the list of templates. So, a combination of `page=1` and `page_size=20` returns the first 20 templates. A combination of `page=2` and `page_size=20` returns the next 20 templates.
+  - key: page_size
+    value: "10"
+    description: The maximum number of templates to return in the response.
+scripts:
+  - type: beforeRequest
+    code: |-
+      // first API in the folder enable delay subsequent APIs only during folder/collection run.
+      pm.variables.set('delayed_run', 'true');
+    language: text/javascript
+examples: ./.resources/List templates.resources/examples
+order: 1000

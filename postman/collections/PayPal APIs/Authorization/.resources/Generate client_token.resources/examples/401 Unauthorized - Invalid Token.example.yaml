@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/identity/generate-token"
+  method: POST
+  body:
+    type: json
+    content: |-
+      {
+          "customer_id": "{{$timestamp}}"
+      }
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 82ceba7ef951e
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 06 Apr 2023 22:02:30 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100077-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680818551.710604,VS0,VE127
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 3000

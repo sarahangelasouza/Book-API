@@ -1,0 +1,18 @@
+$kind: http-request
+description: |-
+  Shows details for a managed account, by account ID.
+
+  The detailed description for the endpoint can be found on PayPal Developer Portal under [Managed Accounts](https://developer.paypal.com/api/limited-release/managed-accounts/v3/#managed-accounts_get).
+url: "{{base_url}}/v3/customer/managed-accounts/:id"
+method: GET
+queryParams:
+  - key: views
+    value: process_view
+    disabled: true
+    description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response.
+pathVariables:
+  - key: id
+    value: "{{managed_path_account_id}}"
+    description: The ID of the seller.
+examples: ./.resources/Search managed account by Seller Id.resources/examples
+order: 3000

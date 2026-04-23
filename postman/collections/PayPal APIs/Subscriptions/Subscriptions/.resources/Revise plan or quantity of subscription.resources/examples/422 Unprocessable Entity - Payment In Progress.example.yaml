@@ -1,0 +1,83 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/subscriptions/:subscription_id/revise"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    subscription_id: "{{subscription_id}}"
+  body:
+    type: json
+    content: |-
+      {
+        "plan_id": "{{billing_plan_id}}",
+        "shipping_amount": {
+          "currency_code": "USD",
+          "value": "10.00"
+        },
+        "shipping_address": {
+          "name": {
+            "full_name": "John Doe"
+          },
+          "address": {
+            "address_line_1": "2211 N First Street",
+            "address_line_2": "Building 17",
+            "admin_area_2": "San Jose",
+            "admin_area_1": "CA",
+            "postal_code": "95131",
+            "country_code": "US"
+          }
+        },
+        "application_context": {
+          "brand_name": "walmart",
+          "locale": "en-US",
+          "shipping_preference": "SET_PROVIDED_ADDRESS",
+          "payment_method": {
+            "payer_selected": "PAYPAL",
+            "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+          },
+          "return_url": "https://example.com/returnUrl",
+          "cancel_url": "https://example.com/cancelUrl"
+        }
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Connection: keep-alive
+    Content-Length: "420"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: aad888244f6ae
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Mon, 10 Apr 2023 17:34:00 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000073-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681148040.722637,VS0,VE403
+  body:
+    type: json
+    content: |-
+      {
+          "name": "UNPROCESSABLE_ENTITY",
+          "message": "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          "debug_id": "aad888244f6ae",
+          "details": [
+              {
+                  "issue": "PAYMENT_IN_PROGRESS",
+                  "description": "Payment for the subscription is in progress."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#UNPROCESSABLE_ENTITY",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 5000

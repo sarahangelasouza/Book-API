@@ -1,0 +1,54 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/oauth2/token/terminate"
+  method: POST
+  body:
+    type: urlencoded
+    content:
+      - key: token
+        value: "{{access_token}}"
+      - key: token_type_hint
+        value: ACCESS_TOKEN
+      - key: grant_type
+        value: client_credentials
+        disabled: true
+      - key: grant_type
+        value: refresh_token
+        disabled: true
+      - key: refresh_token
+        value: "{{refresh_token}}"
+        disabled: true
+      - key: grant_type
+        value: authorization_code
+        disabled: true
+      - key: code
+        value: "{{authorization_code}}"
+        disabled: true
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: ad750a9c25505
+    X-Paypal-Token-Service: IAAS
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Wed, 05 Apr 2023 17:31:51 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000129-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680715911.153051,VS0,VE260
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 3000

@@ -1,0 +1,33 @@
+$kind: http-request
+url: "{{baseUrl}}/parts/:id"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  id: 550e8400-e29b-41d4-a716-446655440000
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |+
+      pm.test('Status code is 200', function () {
+          pm.response.to.have.status(200);
+      })
+
+
+
+      pm.test('Updated fields match the request body', function () {
+          const jsonData = pm.response.json();
+          const requestBody = JSON.parse(pm.request.body.raw);
+          Object.keys(requestBody).forEach(function (key) {
+              pm.expect(jsonData[key]).to.equal(requestBody[key]);
+          });
+      })
+
+    language: text/javascript
+examples: ./.resources/Update Part.resources/examples
+order: 3000

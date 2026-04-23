@@ -1,0 +1,296 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/templates?fields=all&page=1&page_size=10"
+  method: GET
+  queryParams:
+    - key: fields
+      value: all
+      description: The fields to return in the response. Value is `all` or `none`. To return only the template name, ID, and default attributes, specify `none`.
+    - key: page
+      value: "1"
+      description: The page number to be retrieved, for the list of templates. So, a combination of `page=1` and `page_size=20` returns the first 20 templates. A combination of `page=2` and `page_size=20` returns the next 20 templates.
+    - key: page_size
+      value: "10"
+      description: The maximum number of templates to return in the response.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "3728"
+    Connection: keep-alive
+    Date: Mon, 07 Feb 2022 23:24:17 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: adb13d7eadc1a
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "addresses": [
+              {
+                  "address_line_1": "1 Main St",
+                  "address_line_2": "",
+                  "admin_area_2": "San Jose",
+                  "admin_area_1": "CA",
+                  "postal_code": "95131"
+              },
+              {
+                  "address_line_1": "1 Main St",
+                  "address_line_2": "",
+                  "admin_area_2": "San Jose",
+                  "admin_area_1": "CA",
+                  "postal_code": "95131"
+              }
+          ],
+          "emails": "etondoze-facilitator@gmail.com",
+          "templates": [
+              {
+                  "id": "TEMP-2GF67762TU7270255",
+                  "name": "Amount",
+                  "default_template": false,
+                  "template_info": {
+                      "detail": {
+                          "currency_code": "USD",
+                          "metadata": {
+                              "create_time": "2021-11-14T23:49:30Z"
+                          }
+                      },
+                      "invoicer": {
+                          "business_name": "test facilitator's Test Store",
+                          "address": {
+                              "address_line_1": "1 Main St",
+                              "address_line_2": "",
+                              "admin_area_2": "San Jose",
+                              "admin_area_1": "CA",
+                              "postal_code": "95131"
+                          },
+                          "email_address": "etondoze-facilitator@gmail.com"
+                      }
+                  },
+                  "settings": {
+                      "template_item_settings": [
+                          {
+                              "field_name": "items.date",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.discount",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.tax",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.description",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.quantity",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          }
+                      ],
+                      "template_subtotal_settings": [
+                          {
+                              "field_name": "custom",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "discount",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "shipping",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          }
+                      ]
+                  },
+                  "unit_of_measure": "AMOUNT",
+                  "standard_template": true,
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/templates/TEMP-2GF67762TU7270255",
+                          "rel": "self",
+                          "method": "GET"
+                      }
+                  ]
+              },
+              {
+                  "id": "TEMP-21S46474NR9308124",
+                  "name": "Hours",
+                  "default_template": false,
+                  "template_info": {
+                      "detail": {
+                          "currency_code": "USD",
+                          "metadata": {
+                              "create_time": "2021-11-14T23:49:31Z"
+                          }
+                      },
+                      "invoicer": {
+                          "business_name": "test facilitator's Test Store",
+                          "address": {
+                              "address_line_1": "1 Main St",
+                              "address_line_2": "",
+                              "admin_area_2": "San Jose",
+                              "admin_area_1": "CA",
+                              "postal_code": "95131"
+                          },
+                          "email_address": "etondoze-facilitator@gmail.com"
+                      }
+                  },
+                  "settings": {
+                      "template_item_settings": [
+                          {
+                              "field_name": "items.date",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.discount",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.tax",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          }
+                      ],
+                      "template_subtotal_settings": [
+                          {
+                              "field_name": "custom",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "shipping",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          }
+                      ]
+                  },
+                  "unit_of_measure": "HOURS",
+                  "standard_template": true,
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/templates/TEMP-21S46474NR9308124",
+                          "rel": "self",
+                          "method": "GET"
+                      }
+                  ]
+              },
+              {
+                  "id": "TEMP-8LK05440PT816351U",
+                  "name": "Quantity",
+                  "default_template": true,
+                  "template_info": {
+                      "detail": {
+                          "currency_code": "USD",
+                          "metadata": {
+                              "create_time": "2021-11-14T23:49:31Z"
+                          }
+                      },
+                      "invoicer": {
+                          "business_name": "test facilitator's Test Store",
+                          "address": {
+                              "address_line_1": "1 Main St",
+                              "address_line_2": "",
+                              "admin_area_2": "San Jose",
+                              "admin_area_1": "CA",
+                              "postal_code": "95131"
+                          },
+                          "email_address": "etondoze-facilitator@gmail.com"
+                      }
+                  },
+                  "settings": {
+                      "template_item_settings": [
+                          {
+                              "field_name": "items.date",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.discount",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "items.tax",
+                              "display_preference": {
+                                  "hidden": false
+                              }
+                          },
+                          {
+                              "field_name": "items.description",
+                              "display_preference": {
+                                  "hidden": false
+                              }
+                          }
+                      ],
+                      "template_subtotal_settings": [
+                          {
+                              "field_name": "custom",
+                              "display_preference": {
+                                  "hidden": true
+                              }
+                          },
+                          {
+                              "field_name": "discount",
+                              "display_preference": {
+                                  "hidden": false
+                              }
+                          },
+                          {
+                              "field_name": "shipping",
+                              "display_preference": {
+                                  "hidden": false
+                              }
+                          }
+                      ]
+                  },
+                  "unit_of_measure": "QUANTITY",
+                  "standard_template": true,
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/templates/TEMP-8LK05440PT816351U",
+                          "rel": "self",
+                          "method": "GET"
+                      }
+                  ]
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/templates?page=1&page_size=10",
+                  "rel": "self",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

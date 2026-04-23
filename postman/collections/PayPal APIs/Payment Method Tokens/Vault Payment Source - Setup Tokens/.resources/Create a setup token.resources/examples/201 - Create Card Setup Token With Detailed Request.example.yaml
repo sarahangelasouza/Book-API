@@ -1,0 +1,79 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/setup-tokens"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  body:
+    type: json
+    content: |-
+      {
+          "payment_source": {
+              "card": {
+                  "number": {{card_number}},
+                  "expiry": "2027-02",
+                  "name": "John Doe",
+                  "billing_address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "17.3.160",
+                      "admin_area_1": "CA",
+                      "admin_area_2": "San Jose",
+                      "postal_code": "95131",
+                      "country_code": "US"
+                  }
+              }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: json
+    content: |-
+      {
+          "id": "83C13517RU867205M",
+          "customer": {
+              "id": "LufmsuLEQp"
+          },
+          "status": "APPROVED",
+          "payment_source": {
+              "card": {
+                  "name": "John Doe",
+                  "last_digits": "1111",
+                  "expiry": "2027-02",
+                  "billing_address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "17.3.160",
+                      "admin_area_2": "San Jose",
+                      "admin_area_1": "CA",
+                      "postal_code": "95131",
+                      "country_code": "US"
+                  }
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/setup-tokens/83C13517RU867205M",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens",
+                  "rel": "confirm",
+                  "method": "POST",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 4000

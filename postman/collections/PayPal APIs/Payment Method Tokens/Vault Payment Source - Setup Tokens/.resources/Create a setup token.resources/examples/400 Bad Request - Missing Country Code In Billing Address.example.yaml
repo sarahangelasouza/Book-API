@@ -1,0 +1,57 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/setup-tokens"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  body:
+    type: json
+    content: |-
+      {
+          "payment_source": {
+              "card": {
+                  "number": "{{card_number}}",
+                  "expiry": "2027-02",
+                  "name": "John Doe",
+                  "billing_address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "17.3.160",
+                      "admin_area_1": "CA",
+                      "admin_area_2": "San Jose",
+                      "postal_code": "95131"
+                  }
+              }
+          }
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "879c9621b371a",
+          "details": [
+              {
+                  "field": "/payment_source/card/billing_address/country_code",
+                  "value": "",
+                  "location": "body",
+                  "issue": "MISSING_REQUIRED_PARAMETER",
+                  "description": "a required field / parameter is missing."
+              }
+          ],
+          "links": []
+      }
+order: 13000

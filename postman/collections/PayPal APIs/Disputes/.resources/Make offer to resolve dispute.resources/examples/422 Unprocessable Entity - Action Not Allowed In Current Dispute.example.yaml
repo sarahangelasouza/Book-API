@@ -1,0 +1,55 @@
+$kind: http-example
+name: 422 Unprocessable Entity - Action Not Allowed In Current Dispute State
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/make-offer"
+  method: POST
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "note": "Offer refund with replacement item.",
+          "offer_amount": {
+              "currency_code": "USD",
+              "value": "23"
+          },
+          "offer_type": "REFUND_WITH_REPLACEMENT"
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Connection: keep-alive
+    Content-Length: "337"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 5da465e11c0c5
+    Server-Timing: traceparent;desc="00-00000000000000000005da465e11c0c5-fe85a0d14c45a89d-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Tue, 11 Apr 2023 19:37:38 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100049-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681241858.258427,VS0,VE400
+  body:
+    type: json
+    content: |-
+      {
+          "name": "UNPROCESSABLE_ENTITY",
+          "message": "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          "debug_id": "5da465e11c0c5",
+          "information_link": "https://developer.paypal.com/docs/api/customer-disputes/v1/#errors",
+          "details": [
+              {
+                  "issue": "ACTION_NOT_ALLOWED_IN_CURRENT_DISPUTE_STATE"
+              }
+          ],
+          "links": []
+      }
+order: 5000

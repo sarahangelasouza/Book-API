@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/pricing/quote-exchange-rates/invalid_fx_if"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      disabled: true
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "133"
+    Content-Type: application/json
+    Server: nginx
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: f265216c9c3d8
+    Server-Timing: traceparent;desc="00-0000000000000000000f265216c9c3d8-5a126325888fe2e8-01"
+    HTTP_X_PP_AZ_LOCATOR: ccg18.slc
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Mon, 17 Nov 2025 07:55:54 GMT
+    X-Served-By: cache-qpg1256-QPG, cache-maa10231-MAA
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1763366154.744085,VS0,VE964
+    Vary: Accept-Encoding
+  body:
+    type: text
+    content: |-
+      {
+          "name": "INVALID_RESOURCE_ID",
+          "message": "The requested resource ID was not found",
+          "debug_id": "f265216c9c3d8",
+          "details": [],
+          "links": []
+      }
+order: 2000

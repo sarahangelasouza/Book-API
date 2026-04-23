@@ -1,0 +1,65 @@
+$kind: http-example
+name: 201 - Create PayPal Wallet Setup Token With Vault instruction as ON_PAYER_APPROVAL
+request:
+  url: "{{base_url}}/v3/vault/setup-tokens"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  body:
+    type: json
+    content: |-
+      {
+          "payment_source": {
+              "paypal": {
+                  "usage_type": "MERCHANT",
+                  "experience_context": {
+                      "vault_instruction": "ON_PAYER_APPROVAL",
+                      "return_url": "https://example.com/return",
+                      "cancel_url": "https://example.com/cancel"
+                  }
+              }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: json
+    content: |-
+      {
+          "id": "5LU67289XB478645D",
+          "customer": {
+              "id": "jQzcSJzyOd"
+          },
+          "status": "PAYER_ACTION_REQUIRED",
+          "payment_source": {
+              "paypal": {
+                  "usage_type": "MERCHANT"
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/setup-tokens/5LU67289XB478645D",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://sandbox.paypal.com/agreements/approve?approval_session_id=5LU67289XB478645D",
+                  "rel": "approve",
+                  "method": "GET",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 10000

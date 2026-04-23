@@ -1,0 +1,339 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id"
+  method: GET
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 9b1535a75c4d0
+    Paypal-Dispute-Context: '{"actor_relationship_to_dispute":"SELLER"}'
+    Server-Timing: traceparent;desc="00-00000000000000000009b1535a75c4d0-8c1cc948f8db91a9-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Tue, 11 Apr 2023 17:13:56 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000067-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681233235.165217,VS0,VE1693
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "dispute_id": "PP-R-GSS-10059837",
+          "create_time": "2023-03-27T09:06:12.409Z",
+          "update_time": "2023-03-29T17:45:30.974Z",
+          "disputed_transactions": [
+              {
+                  "buyer_transaction_id": "4DV78168SM660625N",
+                  "seller_transaction_id": "47987518DF175504N",
+                  "create_time": "2023-03-27T09:00:52.000Z",
+                  "transaction_status": "REFUNDED",
+                  "gross_amount": {
+                      "currency_code": "EUR",
+                      "value": "10.00"
+                  },
+                  "buyer": {
+                      "email": "pp-personal01@otto-payments.de",
+                      "name": "John Doe"
+                  },
+                  "seller": {
+                      "email": "john_merchant@example.com",
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "name": "John Merchant's Test Store"
+                  },
+                  "items": [
+                      {
+                          "item_name": "T-Shirt",
+                          "item_description": "T-Shirt",
+                          "item_quantity": "1",
+                          "reason": "MERCHANDISE_OR_SERVICE_NOT_AS_DESCRIBED",
+                          "item_type": "PRODUCT"
+                      }
+                  ],
+                  "seller_protection_eligible": false,
+                  "regulation_info": {
+                      "regulation_covered": "PPBP"
+                  },
+                  "provisional_credit_status": "NOT_APPLICABLE"
+              }
+          ],
+          "reason": "MERCHANDISE_OR_SERVICE_NOT_AS_DESCRIBED",
+          "status": "RESOLVED",
+          "dispute_amount": {
+              "currency_code": "EUR",
+              "value": "10.00"
+          },
+          "dispute_state": "RESOLVED",
+          "fee_policy": {
+              "transaction_fee": "RETAIN_ALL_FEE"
+          },
+          "dispute_outcome": {
+              "outcome_code": "RESOLVED_BUYER_FAVOUR",
+              "amount_refunded": {
+                  "currency_code": "EUR",
+                  "value": "10.00"
+              }
+          },
+          "money_movements": [
+              {
+                  "affected_party": "BUYER",
+                  "amount": {
+                      "currency_code": "EUR",
+                      "value": "10.00"
+                  },
+                  "initiated_time": "2023-03-29T17:42:21.219Z",
+                  "type": "CREDIT",
+                  "reason": "DISPUTE_SETTLEMENT"
+              },
+              {
+                  "affected_party": "SELLER",
+                  "amount": {
+                      "currency_code": "EUR",
+                      "value": "10.00"
+                  },
+                  "initiated_time": "2023-03-29T17:42:21.219Z",
+                  "type": "DEBIT",
+                  "reason": "DISPUTE_SETTLEMENT"
+              }
+          ],
+          "dispute_life_cycle_stage": "CHARGEBACK",
+          "dispute_channel": "INTERNAL",
+          "messages": [
+              {
+                  "posted_by": "SELLER",
+                  "time_posted": "2023-03-27T10:21:24.228Z",
+                  "content": "Full refund to the customer."
+              }
+          ],
+          "extensions": {
+              "merchant_contacted": true,
+              "merchant_contacted_outcome": "NO_RESPONSE",
+              "buyer_contacted_time": "2023-03-27T10:34:52.293Z",
+              "buyer_contacted_channel": "RESOLUTION_CENTER"
+          },
+          "evidences": [
+              {
+                  "evidence_type": "CREATE",
+                  "notes": "war nicht schön",
+                  "source": "SUBMITTED_BY_BUYER",
+                  "date": "2023-03-27T09:06:12.409Z",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "evidence_type": "OTHER",
+                  "notes": "Full refund to the customer.",
+                  "source": "SUBMITTED_BY_SELLER",
+                  "date": "2023-03-29T17:42:21.219Z",
+                  "action_info": {
+                      "action": "ACCEPT_CLAIM",
+                      "response_option": "REFUND"
+                  },
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              }
+          ],
+          "history": [
+              {
+                  "date": "2023-03-27T09:06:12.409Z",
+                  "actor": "BUYER",
+                  "event_type": "CREATED",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T09:07:38.283Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T09:08:12.330Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T09:16:33.552Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T09:18:15.332Z",
+                  "actor": "PAYPAL",
+                  "event_type": "WAITING_FOR_SELLER_RESPONSE",
+                  "dispute_life_cycle_stage": "INQUIRY"
+              },
+              {
+                  "date": "2023-03-27T09:19:33.588Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_BUYER"
+              },
+              {
+                  "date": "2023-03-27T09:19:33.588Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_SELLER"
+              },
+              {
+                  "date": "2023-03-27T10:21:24.228Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "INQUIRY"
+              },
+              {
+                  "date": "2023-03-27T10:21:24.810Z",
+                  "actor": "PAYPAL",
+                  "event_type": "WAITING_FOR_BUYER_RESPONSE",
+                  "dispute_life_cycle_stage": "INQUIRY"
+              },
+              {
+                  "date": "2023-03-27T10:24:04.191Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_SELLER"
+              },
+              {
+                  "date": "2023-03-27T10:24:04.386Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_BUYER"
+              },
+              {
+                  "date": "2023-03-27T10:34:52.841Z",
+                  "actor": "BUYER",
+                  "event_type": "CREATED",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T10:34:52.841Z",
+                  "actor": "BUYER",
+                  "event_type": "REASON_CHANGED",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T10:36:03.432Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_BUYER"
+              },
+              {
+                  "date": "2023-03-27T10:36:19.052Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T10:36:52.847Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T10:45:56.358Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T10:47:38.940Z",
+                  "actor": "PAYPAL",
+                  "event_type": "WAITING_FOR_SELLER_RESPONSE",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-27T10:49:03.642Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_SELLER"
+              },
+              {
+                  "date": "2023-03-29T17:42:21.219Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-29T17:42:21.219Z",
+                  "actor": "SELLER",
+                  "event_type": "ACCEPTED_CLAIM",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-29T17:42:39.451Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-29T17:43:34.234Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_SELLER"
+              },
+              {
+                  "date": "2023-03-29T17:44:03.843Z",
+                  "actor": "PAYPAL",
+                  "event_type": "UNDER_REVIEW",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-29T17:45:30.974Z",
+                  "actor": "PAYPAL",
+                  "event_type": "RESOLVED",
+                  "dispute_life_cycle_stage": "CHARGEBACK"
+              },
+              {
+                  "date": "2023-03-29T17:45:34.459Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_SELLER"
+              },
+              {
+                  "date": "2023-03-29T17:47:03.728Z",
+                  "actor": "PAYPAL",
+                  "event_type": "EMAIL_SENT_TO_BUYER"
+              }
+          ],
+          "offer": {
+              "buyer_requested_amount": {
+                  "currency_code": "EUR",
+                  "value": "10.00"
+              },
+              "seller_offered_amount": {
+                  "currency_code": "EUR",
+                  "value": "3.00"
+              },
+              "offer_type": "REFUND",
+              "history": [
+                  {
+                      "offer_time": "2023-03-27T10:21:24.228Z",
+                      "actor": "SELLER",
+                      "event_type": "PROPOSED",
+                      "offer_type": "REFUND",
+                      "offer_amount": {
+                          "currency_code": "EUR",
+                          "value": "3.00"
+                      }
+                  }
+              ]
+          },
+          "refund_details": {
+              "allowed_refund_amount": {
+                  "currency_code": "EUR",
+                  "value": "10.00"
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v1/customer/disputes/PP-R-GSS-10059837",
+                  "rel": "self",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

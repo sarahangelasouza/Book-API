@@ -1,0 +1,10 @@
+$kind: http-request
+url: "{{baseUrl}}/breeds?limit=14003335"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: limit
+    value: "14003335"
+    description: This is a description
+order: 1000

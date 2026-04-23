@@ -1,0 +1,563 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: The Accept header field is used to specify the form of response that can be understand and processed
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: (Optional)The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the account_id, external_id, and HATEOAS links.
+    - key: Prefer
+      value: return=representation
+      disabled: true
+    - key: Prefer
+      value: return=representation, views=process_view
+    - key: Prefer
+      value: views=process_view
+      disabled: true
+  body:
+    type: json
+    content: |-
+      {
+          "external_id": "EXT-{{$timestamp}}",
+          "legal_country_code": "US",
+          "organization": "{{managed_path_organization}}",
+          "user_id": "{{$timestamp}}",
+          "primary_currency_code": "USD",
+          "individual_owners": [
+              {
+                  "names": [
+                      {
+                          "given_name": "TONY",
+                          "surname": "STARK",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "addresses": [
+                      {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                          "postal_code": "95014",
+                          "country_code": "US",
+                          "type": "HOME"
+                      }
+                  ]
+              }
+          ],
+          "business_entity": {
+              "type": "CORPORATION",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "STARK INDUSTRY.",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                  "postal_code": "95014",
+                  "country_code": "US"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "identification_documents": [
+                  {
+                      "identification_number": "32-2124444",
+                      "issuing_country_code": "US",
+                      "type": "EMPLOYER_IDENTIFICATION_NUMBER"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "names": [
+                              {
+                                  "given_name": "Tom",
+                                  "surname": "Norman",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "identification_number": "123-44-6789",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "26",
+                          "controlling_influence": false
+                      },
+                      {
+                          "names": [
+                              {
+                                  "given_name": "Mary",
+                                  "surname": "Smoth",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "identification_number": "123-54-6789",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "35",
+                          "controlling_influence": false
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "names": [
+                          {
+                              "given_name": "Katy",
+                              "surname": "Collins",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                              "postal_code": "22903",
+                              "country_code": "US",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1990-01-01"
+                      },
+                      "role": "CHAIRMAN"
+                  },
+                  {
+                      "names": [
+                          {
+                              "given_name": "Donald",
+                              "surname": "TREASWILLIAMSON",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                              "postal_code": "29212",
+                              "country_code": "US",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1991-05-30"
+                      },
+                      "identification_documents": [
+                          {
+                              "identification_number": "123-45-6789",
+                              "issuing_country_code": "US",
+                              "type": "SOCIAL_SECURITY_NUMBER"
+                          }
+                      ]
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "mandate": {
+                          "consent_to_debit": true
+                      },
+                      "account_number": "59010882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "branch_code": "08501",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "bank_name": "Key Bank National Association"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "major_version": 3,
+                  "minor_version": 3,
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              },
+              {
+                  "type": "PERSONAL_INFORMATION_COLLECTION_CONSENT",
+                  "major_version": 1,
+                  "minor_version": 1,
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              }
+          ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Connection: keep-alive
+    Content-Length: "4344"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 5a5f7bd98da36
+    Server-Timing: traceparent;desc="00-00000000000000000005a5f7bd98da36-69c8dd98434a8fdd-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Fri, 21 Apr 2023 02:47:27 GMT
+    X-Served-By: cache-hnd18723-HND, cache-nrt-rjtf7700067-NRT
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1682045234.190659,VS0,VE12904
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "WCFPN4TSJG6L8",
+          "legal_country_code": "US",
+          "individual_owners": [
+              {
+                  "id": "WCFPN4TSJG6L8",
+                  "names": [
+                      {
+                          "given_name": "TONY",
+                          "surname": "STARK",
+                          "id": "NJZNRF4WCEDK8",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "primary_residence": {
+                      "address_line_1": "W 294 STR",
+                      "admin_area_2": "New York",
+                      "postal_code": "95014",
+                      "country_code": "US"
+                  }
+              }
+          ],
+          "business_entity": {
+              "type": "CORPORATION",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "STARK INDUSTRY.",
+                      "id": "PDQ5ALWYDGN72",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                  "address_line_1": "W 294 STR",
+                  "admin_area_2": "New York",
+                  "postal_code": "95014",
+                  "country_code": "US"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "id": "8X8R3PJKLL248",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "identification_documents": [
+                  {
+                      "id": "YQMC8E4KWPDTN",
+                      "identification_number": "****",
+                      "issuing_country_code": "US",
+                      "type": "EMPLOYER_IDENTIFICATION_NUMBER"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "id": "H6M8DTKK4EPVQ",
+                          "names": [
+                              {
+                                  "given_name": "Tom",
+                                  "surname": "Norman",
+                                  "id": "GRS7Q7F537S3N",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                                  "address_line_1": "W 294 STR",
+                                  "admin_area_2": "New York",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "id": "6ZEHZAFBV9KY4",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "id": "DVLF9C5Q2NXRQ",
+                                  "identification_number": "****",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "26",
+                          "controlling_influence": false
+                      },
+                      {
+                          "id": "CSLV8CML2A6B2",
+                          "names": [
+                              {
+                                  "given_name": "Mary",
+                                  "surname": "Smoth",
+                                  "id": "SJTSKNT6RRAX4",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                                  "address_line_1": "W 294 STR",
+                                  "admin_area_2": "New York",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "id": "Q8XVYQAV9UVQJ",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "id": "PM98FKLGMTDEW",
+                                  "identification_number": "****",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "35",
+                          "controlling_influence": false
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "id": "H25V3PXWLYMAW",
+                      "names": [
+                          {
+                              "given_name": "Katy",
+                              "surname": "Collins",
+                              "id": "ZFM46E6KN4FHW",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                              "address_line_1": "W 294 STR",
+                              "admin_area_2": "New York",
+                              "postal_code": "22903",
+                              "country_code": "US",
+                              "id": "MG59R54AEPVDC",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1990-01-01"
+                      },
+                      "role": "CHAIRMAN"
+                  },
+                  {
+                      "id": "QLBY4RAYCSSFS",
+                      "names": [
+                          {
+                              "given_name": "Donald",
+                              "surname": "TREASWILLIAMSON",
+                              "id": "CHEXASTTXQFV2",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                              "address_line_1": "W 294 STR",
+                              "admin_area_2": "New York",
+                              "postal_code": "29212",
+                              "country_code": "US",
+                              "id": "DRL3WMZLFRKPN",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1991-05-30"
+                      },
+                      "identification_documents": [
+                          {
+                              "id": "MUWYQQTZ2U396",
+                              "identification_number": "****",
+                              "issuing_country_code": "US",
+                              "type": "SOCIAL_SECURITY_NUMBER"
+                          }
+                      ]
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              },
+              {
+                  "type": "PERSONAL_INFORMATION_COLLECTION_CONSENT",
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              }
+          ],
+          "external_id": "EXT-1682045234",
+          "organization": "us",
+          "user_id": "1682045234",
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "id": "BA-QM4CAYLKZL8SA",
+                      "last_4_digits": "0882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "account_holder_details": {
+                          "name": "STARK INDUSTRY."
+                      },
+                      "branch_code": "08501",
+                      "bank_name": "KEY BANK NATIONAL ASSOCIATION"
+                  }
+              ]
+          },
+          "primary_currency_code": "USD",
+          "soft_descriptor": "STARKINDUST",
+          "capabilities": [
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              }
+          ],
+          "process_view": {
+              "processes": [
+                  {
+                      "name": "MANAGED_PATH_KYC",
+                      "status": "NEED_MORE_DATA",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "name": "MANAGED_PATH_BO_VERIFICATION",
+                      "status": "NEED_MORE_DATA",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ]
+          },
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/WCFPN4TSJG6L8",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/WCFPN4TSJG6L8",
+                  "rel": "edit",
+                  "method": "PATCH"
+              }
+          ]
+      }
+order: 1000

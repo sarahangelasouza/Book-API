@@ -1,0 +1,40 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/payment-tokens/:payment_token_id"
+  method: DELETE
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  pathVariables:
+    payment_token_id: "{{payment_token_id}}"
+response:
+  statusCode: 400
+  statusText: Bad Request
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "37de135a0ae89",
+          "details": [
+              {
+                  "field": "id",
+                  "value": ":payment_token_id",
+                  "location": "path",
+                  "issue": "INVALID_PARAMETER_SYNTAX",
+                  "description": "the value of a field does not conform to the expected format."
+              }
+          ],
+          "links": []
+      }
+order: 2000

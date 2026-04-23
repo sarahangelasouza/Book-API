@@ -1,0 +1,31 @@
+$kind: http-request
+url: "{{baseUrl}}:/parts/:id#"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  id: "{{id}}"
+body:
+  type: text
+  content: ""
+scripts:
+  - type: afterResponse
+    code: |+
+      pm.test('Status code is 200', function () {
+          pm.response.to.have.status(200);
+      })
+
+
+      pm.test('Status code is 200', function () {
+          pm.response.to.have.status(200);
+      })
+
+      pm.test('ID matches the requested ID from path variable', function () {
+          const jsonData = pm.response.json();
+          const requestedId = pm.request.url.variables.get('id');
+          pm.expect(jsonData.id).to.equal(requestedId);
+      })
+
+    language: text/javascript
+examples: ./.resources/Get Part.resources/examples
+order: 1000

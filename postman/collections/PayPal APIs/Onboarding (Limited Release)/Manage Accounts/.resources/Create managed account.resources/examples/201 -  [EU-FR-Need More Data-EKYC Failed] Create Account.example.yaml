@@ -1,0 +1,505 @@
+$kind: http-example
+name: 201 -  [EU/FR/Need More Data/EKYC Failed] Create Account
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: The Accept header field is used to specify the form of response that can be understand and processed
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: (Optional)The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the account_id, external_id, and HATEOAS links.
+    - key: Prefer
+      value: return=representation
+      disabled: true
+      description: (Optional) The server returns a complete resource representation without process_view
+    - key: Prefer
+      value: return=representation, views=process_view
+      disabled: true
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+    - key: Prefer
+      value: views=process_view
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+  body:
+    type: json
+    content: |-
+      {
+          "external_id": "EXT-{{$timestamp}}",
+          "legal_country_code": "FR",
+          "organization": "{{managed_path_organization}}",
+          "user_id": "{{$timestamp}}",
+          "primary_currency_code": "EUR",
+          "individual_owners": [
+              {
+                  "names": [
+                      {
+                          "type": "LEGAL",
+                          "given_name": "LMTNREVIEW",
+                          "surname": "STARK"
+                      }
+                  ],
+                  "citizenship": "FR",
+                  "addresses": [
+                      {
+                          "address_line_1": "100 W STREET",
+                          "admin_area_2": "Paris ",
+                          "postal_code": "75012",
+                          "country_code": "FR",
+                          "type": "HOME"
+                      }
+                  ],
+                  "birth_details": {
+                      "date_of_birth": "1990-01-01"
+                  }
+              }
+          ],
+          "business_entity": {
+              "type": "PRIVATE_CORPORATION",
+              "names": [
+                  {
+                      "type": "LEGAL",
+                      "business_name": "DECLINED"
+                  }
+              ],
+              "merchant_category_code": "7929",
+              "incorporation_details": {
+                  "incorporation_country_code" : "FR"
+              },
+              "phone_numbers": [
+                  {
+                      "type": "BUSINESS",
+                      "country_code": "1",
+                      "national_number": "1"
+                  }
+              ],
+              "addresses": [
+                  {
+                      "type": "BUSINESS",
+                      "address_line_1": "W 100 STR",
+                      "address_line_2": "321",
+                      "admin_area_2": "100",
+                      "postal_code": "64600",
+                      "country_code": "FR"
+                  }
+              ],
+              "identification_documents": [
+                  {
+                      "identification_number": "RCSPARIS123456789",
+                      "issuing_country_code": "FR",
+                      "type": "BUSINESS_REGISTRATION_NUMBER"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "percentage_of_ownership": "15",
+                          "names": [
+                              {
+                                  "type": "LEGAL",
+                                  "given_name": "BillAPPROVED",
+                                  "surname": "Smoth"
+                              }
+                          ],
+                          "addresses": [
+                              {
+                                  "type": "HOME",
+                                  "address_line_1": "APPROVED Street",
+                                  "admin_area_2": "100",
+                                  "postal_code": "95148",
+                                  "country_code": "FR"
+                              }
+                          ],
+                          "citizenship": "FR",
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          }
+                      },
+                      {
+                          "percentage_of_ownership": "25",
+                          "names": [
+                              {
+                                  "type": "LEGAL",
+                                  "given_name": "BillAPPROVED",
+                                  "surname": "Smoth"
+                              }
+                          ],
+                          "addresses": [
+                              {
+                                  "type": "HOME",
+                                  "address_line_1": "APPROVED Street",
+                                  "admin_area_2": "100",
+                                  "postal_code": "95148",
+                                  "country_code": "US"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "type": "SOCIAL_SECURITY_NUMBER",
+                                  "identification_number": "729265100",
+                                  "issuing_country_code": "US"
+                              }
+                          ]
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "percentage_of_ownership": "15",
+                      "names": [
+                          {
+                              "type": "LEGAL",
+                              "given_name": "APPROVED",
+                              "surname": "TREASWILLIAMSON"
+                          }
+                      ],
+                      "addresses": [
+                          {
+                              "type": "HOME",
+                              "address_line_1": "APPROVED 644 N 100 E",
+                              "admin_area_2": "100",
+                              "postal_code": "29212",
+                              "country_code": "US"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "role": "DIRECTOR",
+                      "birth_details": {
+                          "date_of_birth": "1995-05-30"
+                      },
+                      "identification_documents": [
+                          {
+                              "type": "SOCIAL_SECURITY_NUMBER",
+                              "identification_number": "111222343",
+                              "issuing_country_code": "US"
+                          }
+                      ]
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "RV2KXJQFJP634",
+          "legal_country_code": "FR",
+          "individual_owners": [
+              {
+                  "id": "RV2KXJQFJP634",
+                  "names": [
+                      {
+                          "given_name": "LMTNREVIEW",
+                          "surname": "STARK",
+                          "id": "FUNKKYE6MW5B6",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "citizenship": "FR",
+                  "primary_residence": {
+                      "address_line_1": "100 W STREET",
+                      "admin_area_2": "Paris ",
+                      "postal_code": "75012",
+                      "country_code": "FR"
+                  },
+                  "birth_details": {
+                      "date_of_birth": "1990-01-01"
+                  }
+              }
+          ],
+          "business_entity": {
+              "type": "PRIVATE_CORPORATION",
+              "merchant_category_code": "7929",
+              "incorporation_details": {
+                  "incorporation_country_code": "FR"
+              },
+              "names": [
+                  {
+                      "business_name": "DECLINED",
+                      "id": "CWG8Q3XPMJXM8",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                  "address_line_1": "W 100 STR",
+                  "address_line_2": "321",
+                  "admin_area_2": "100",
+                  "postal_code": "64600",
+                  "country_code": "FR"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "id": "JEDPGTBDJ8VCQ",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "identification_documents": [
+                  {
+                      "id": "GNC5VD4GGMLSG",
+                      "identification_number": "****",
+                      "issuing_country_code": "FR",
+                      "type": "BUSINESS_REGISTRATION_NUMBER"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "id": "Y6QP6PKDFP73Y",
+                          "names": [
+                              {
+                                  "given_name": "BillAPPROVED",
+                                  "surname": "Smoth",
+                                  "id": "9PKPCNYCJB562",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "FR",
+                          "addresses": [
+                              {
+                                  "address_line_1": "APPROVED Street",
+                                  "admin_area_2": "100",
+                                  "postal_code": "95148",
+                                  "country_code": "FR",
+                                  "id": "36F5NB5GSZGFA",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "percentage_of_ownership": "15",
+                          "controlling_influence": false
+                      },
+                      {
+                          "id": "BFEQDSLHMJKGW",
+                          "names": [
+                              {
+                                  "given_name": "BillAPPROVED",
+                                  "surname": "Smoth",
+                                  "id": "5EFZZNSMCBUEY",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                                  "address_line_1": "APPROVED Street",
+                                  "admin_area_2": "100",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "id": "4TWL5LMWFA228",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "id": "69W6XNXWUWQBC",
+                                  "identification_number": "****",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "25",
+                          "controlling_influence": false
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "id": "Y79X3KEBSBX6N",
+                      "names": [
+                          {
+                              "given_name": "APPROVED",
+                              "surname": "TREASWILLIAMSON",
+                              "id": "C4HNTMBDDWV62",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                              "address_line_1": "APPROVED 644 N 100 E",
+                              "admin_area_2": "100",
+                              "postal_code": "29212",
+                              "country_code": "US",
+                              "id": "F48BBLGEXGVUA",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1995-05-30"
+                      },
+                      "identification_documents": [
+                          {
+                              "id": "GKWBGUJVM2CJW",
+                              "identification_number": "****",
+                              "issuing_country_code": "US",
+                              "type": "SOCIAL_SECURITY_NUMBER"
+                          }
+                      ],
+                      "role": "DIRECTOR"
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ],
+          "external_id": "EXT-1698222172",
+          "organization": "us",
+          "user_id": "1698222172",
+          "primary_currency_code": "EUR",
+          "soft_descriptor": "DECLINED",
+          "capabilities": [
+              {
+                  "name": "APPLE_PAY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "EUR",
+                          "value": "1000.00",
+                          "remaining_value": "1000.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "CUSTOM_CARD_PROCESSING",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "EUR",
+                          "value": "1000.00",
+                          "remaining_value": "1000.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "EUR",
+                          "value": "1000.00",
+                          "remaining_value": "1000.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              }
+          ],
+          "process_view": {
+              "processes": [
+                  {
+                      "name": "MANAGED_PATH_CIP_COLLECTION",
+                      "status": "COMPLETED",
+                      "capabilities": [
+                          {
+                              "name": "APPLE_PAY"
+                          },
+                          {
+                              "name": "RECEIVE_MONEY"
+                          },
+                          {
+                              "name": "CUSTOM_CARD_PROCESSING"
+                          },
+                          {
+                              "name": "WITHDRAW_MONEY"
+                          }
+                      ]
+                  },
+                  {
+                      "name": "MANAGED_PATH_KYC",
+                      "status": "NEED_MORE_DATA",
+                      "capabilities": [
+                          {
+                              "name": "CUSTOM_CARD_PROCESSING",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "EUR",
+                                      "value": "1000.00",
+                                      "remaining_value": "1000.00"
+                                  }
+                              ]
+                          },
+                          {
+                              "name": "APPLE_PAY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "EUR",
+                                      "value": "1000.00",
+                                      "remaining_value": "1000.00"
+                                  }
+                              ]
+                          },
+                          {
+                              "name": "WITHDRAW_MONEY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "EUR",
+                                      "value": "1000.00",
+                                      "remaining_value": "1000.00"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              ]
+          },
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/RV2KXJQFJP634",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/RV2KXJQFJP634",
+                  "rel": "edit",
+                  "method": "PATCH"
+              }
+          ]
+      }
+order: 7000

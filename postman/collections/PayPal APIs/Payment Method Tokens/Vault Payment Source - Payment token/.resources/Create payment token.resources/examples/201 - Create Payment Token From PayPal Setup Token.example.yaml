@@ -1,0 +1,87 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/payment-tokens"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  body:
+    type: json
+    content: |-
+      {
+          "payment_source": {
+              "token": {
+                  "id": "{{setup_token_id}}",
+                  "type": "SETUP_TOKEN"
+              }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: json
+    content: |-
+      {
+          "id": "4j4mb9b3",
+          "customer": {
+              "id": "paypal_on_approve"
+          },
+          "payment_source": {
+              "paypal": {
+                  "shipping": {
+                      "name": {
+                          "full_name": "Patrick Kevin"
+                      },
+                      "address": {
+                          "address_line_1": "1119 Maple Court #3",
+                          "address_line_2": "689129 Dodd Street",
+                          "admin_area_2": "Pensacola",
+                          "admin_area_1": "FL",
+                          "postal_code": "32591",
+                          "country_code": "US"
+                      }
+                  },
+                  "usage_type": "MERCHANT",
+                  "customer_type": "CONSUMER",
+                  "email_address": "_sys_aquarium-5247833870355135@paypal.com",
+                  "payer_id": "ZQ2V4N4ZQM9UE",
+                  "name": {
+                      "given_name": "Patrick",
+                      "surname": "Kevin",
+                      "full_name": "Patrick Kevin"
+                  },
+                  "phone": {
+                      "phone_number": {
+                          "country_code": "US",
+                          "national_number": "786-768-4763"
+                      }
+                  },
+                  "tenant": "PAYPAL"
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/4j4mb9b3",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/4j4mb9b3",
+                  "rel": "delete",
+                  "method": "DELETE",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 3000

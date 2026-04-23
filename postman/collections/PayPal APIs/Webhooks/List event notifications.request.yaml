@@ -1,0 +1,48 @@
+$kind: http-request
+description: Lists webhooks event notifications. Use query parameters to filter the response.
+url: "{{base_url}}/v1/notifications/webhooks-events"
+method: GET
+queryParams:
+  - key: page_size
+    value: "10"
+    disabled: true
+    description: The number of webhook event notifications to return in the response.
+  - key: start_time
+    value: 2022-02-01T00:00:00Z
+    disabled: true
+    description: "Filters the webhook event notifications in the response to those created on or after this date and time and on or before the `end_time` value. Both values are in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6) format. Example: `start_time=2013-03-06T11:00:00Z`."
+  - key: end_time
+    value: 2022-03-01T00:00:00Z
+    disabled: true
+    description: "Filters the webhook event notifications in the response to those created on or after the `start_time` and on or before this date and time. Both values are in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6) format. Example: `end_time=2013-03-06T11:00:00Z`."
+  - key: transaction_id
+    value: "{{capture_id}}"
+    disabled: true
+    description: Filters the response to a single transaction, by ID.
+  - key: event_type
+    value: PAYMENT.CAPTURE.COMPLETED
+    disabled: true
+    description: Filters the response to a single event.
+  - key: move_to
+    value: next
+    disabled: true
+  - key: offset
+    value: "10"
+    disabled: true
+  - key: prev_offset
+    value: "10"
+    disabled: true
+  - key: index_id
+    value: "1"
+    disabled: true
+scripts:
+  - type: afterResponse
+    code: |
+      pm.test("Extract resource_id", function() {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property('events');
+          pm.collectionVariables.set("event_id", jsonData.events[0].id);
+      });
+    language: text/javascript
+examples: ./.resources/List event notifications.resources/examples
+order: 5000

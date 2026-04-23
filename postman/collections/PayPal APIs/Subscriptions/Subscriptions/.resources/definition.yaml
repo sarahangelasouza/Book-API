@@ -1,0 +1,3 @@
+$kind: collection
+description: Use the `/billing/subscriptions` resource to create and manage subscriptions.
+order: 3000

@@ -1,0 +1,10 @@
+$kind: http-request
+description: Shows details for an invoice, by ID.
+url: "{{base_url}}/v2/invoicing/invoices/:invoice_id"
+method: GET
+pathVariables:
+  - key: invoice_id
+    value: "{{invoice_id}}"
+    description: (Required) The ID of the invoice for which to show details.
+examples: ./.resources/Show invoice details.resources/examples
+order: 3000

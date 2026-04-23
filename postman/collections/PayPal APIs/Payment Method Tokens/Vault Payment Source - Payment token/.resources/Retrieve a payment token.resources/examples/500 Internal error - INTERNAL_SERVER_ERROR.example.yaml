@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/payment-tokens/:payment_token_id"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  pathVariables:
+    payment_token_id: "{{payment_token_id}}"
+response:
+  statusCode: 500
+  statusText: Internal Server Error
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INTERNAL_SERVER_ERROR",
+          "message": "An internal server error has occurred.",
+          "debug_id": "a4568057f6bf2",
+          "details": [],
+          "links": []
+      }
+order: 5000

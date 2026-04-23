@@ -1,0 +1,83 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/plans/:billing_plan_id/update-pricing-schemes"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    billing_plan_id: P-ABCD0844AX2546419MQYHLVQ
+  body:
+    type: json
+    content: |-
+      {
+          "pricing_schemes": [
+              {
+                  "billing_cycle_sequence": 1,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "10",
+                          "currency_code": "USD"
+                      },
+                      "roll_out_strategy": {
+                          "effective_time": "2022-11-01T00:00:00Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              },
+              {
+                  "billing_cycle_sequence": 2,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "50",
+                          "currency_code": "USD"
+                      },
+                      "roll_out_strategy": {
+                          "effective_time": "2022-11-01T00:00:00Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              }
+          ]
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "325"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 62cefda9b9320
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Fri, 07 Apr 2023 20:37:30 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100038-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680899850.034974,VS0,VE269
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "message": "The specified resource does not exist.",
+          "debug_id": "62cefda9b9320",
+          "details": [
+              {
+                  "issue": "INVALID_RESOURCE_ID",
+                  "description": "Invalid planId"
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#RESOURCE_NOT_FOUND",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 3000

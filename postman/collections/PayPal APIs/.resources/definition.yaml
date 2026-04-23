@@ -1,0 +1,166 @@
+$kind: collection
+description: |-
+  # Getting Started
+
+  ## Step 1: Fork the collection using Run in Postman
+
+  [](https://god.gw.postman.com/run-collection/19024122-92a85d0e-51e7-47da-9f83-c45dcb1cdf24?action=collection/fork&collection-url=entityId=19024122-92a85d0e-51e7-47da-9f83-c45dcb1cdf24&entityType=collection&workspaceId=345300e6-346e-42e0-aed1-53717919aef0#?env%5BPayPal%20Override%20Env%5D=W3sia2V5IjoiUGxlYXNlIE5vdGUgLS0+IiwidmFsdWUiOiI8IFBheVBhbCBQdWJsaWMgQ29sbGVjdGlvbiBjb21lcyB3aXRoIGRlZmF1bHQgcHVibGljIHNldCBvZiBjcmVkZW50aWFscyBzdG9yZWQgYXQgdGhlIENvbGxlY3Rpb24gbGV2ZWwuIFxuVGhpcyBlbnZpcm9ubWVudCBvdmVycmlkZXMgdGhvc2UgZGVmYXVsdCB2YXJpYWJsZXMuIFlvdSBtYXkgYnJpbmcgeW91ciBvd24gY3JlZGVudGlhbHMgZnJvbSBQYXlQYWwgRGV2ZWxvcGVyIERhc2hib2FyZCBhbmQgcGFzdGUgdGhlbSBoZXJlLiBEbyBub3QgZm9yZ290IHRvIGVuYWJsZSB0aGUgdmFpYWJsZSBieSBjaGVja2luZyB0aGUgYm94IGFuZCBoaXQgXCJTYXZlXCIgYmVmb3JlIGludm9raW5nIHRoZSBQYXlQYWwgQVBJcy4gPiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiY2xpZW50X2lkIiwidmFsdWUiOiI8IGNvcHkgY3JlZGVudGlhbHMgZnJvbSB5b3VyIGRldmVsb3Blci5wYXlwYWwuY29tIGFuZCBwYXN0ZSB0aGVtIGhlcmUgPiIsImVuYWJsZWQiOmZhbHNlfSx7ImtleSI6ImNsaWVudF9zZWNyZXQiLCJ2YWx1ZSI6IjwgY29weSBjcmVkZW50aWFscyBmcm9tIHlvdXIgZGV2ZWxvcGVyLnBheXBhbC5jb20gYW5kIHBhc3RlIHRoZW0gaGVyZSA+IiwiZW5hYmxlZCI6ZmFsc2V9XQ==)
+
+  [<img src="https://run.pstmn.io/button.svg">](https://god.gw.postman.com/run-collection/19024122-92a85d0e-51e7-47da-9f83-c45dcb1cdf24?action=collection/fork&collection-url=entityId=19024122-92a85d0e-51e7-47da-9f83-c45dcb1cdf24&entityType=collection&workspaceId=345300e6-346e-42e0-aed1-53717919aef0#?env%5BPayPal%20Override%20Env%5D=W3sia2V5IjoiUGxlYXNlIE5vdGUgLS0+IiwidmFsdWUiOiI8IFBheVBhbCBQdWJsaWMgQ29sbGVjdGlvbiBjb21lcyB3aXRoIGRlZmF1bHQgcHVibGljIHNldCBvZiBjcmVkZW50aWFscyBzdG9yZWQgYXQgdGhlIENvbGxlY3Rpb24gbGV2ZWwuIFxuVGhpcyBlbnZpcm9ubWVudCBvdmVycmlkZXMgdGhvc2UgZGVmYXVsdCB2YXJpYWJsZXMuIFlvdSBtYXkgYnJpbmcgeW91ciBvd24gY3JlZGVudGlhbHMgZnJvbSBQYXlQYWwgRGV2ZWxvcGVyIERhc2hib2FyZCBhbmQgcGFzdGUgdGhlbSBoZXJlLiBEbyBub3QgZm9yZ290IHRvIGVuYWJsZSB0aGUgdmFpYWJsZSBieSBjaGVja2luZyB0aGUgYm94IGFuZCBoaXQgXCJTYXZlXCIgYmVmb3JlIGludm9raW5nIHRoZSBQYXlQYWwgQVBJcy4gPiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiY2xpZW50X2lkIiwidmFsdWUiOiI8IGNvcHkgY3JlZGVudGlhbHMgZnJvbSB5b3VyIGRldmVsb3Blci5wYXlwYWwuY29tIGFuZCBwYXN0ZSB0aGVtIGhlcmUgPiIsImVuYWJsZWQiOmZhbHNlfSx7ImtleSI6ImNsaWVudF9zZWNyZXQiLCJ2YWx1ZSI6IjwgY29weSBjcmVkZW50aWFscyBmcm9tIHlvdXIgZGV2ZWxvcGVyLnBheXBhbC5jb20gYW5kIHBhc3RlIHRoZW0gaGVyZSA+IiwiZW5hYmxlZCI6ZmFsc2V9XQ==)
+
+  ## Step 2: Get your access token
+
+  An access token is automatically generated using a default `client_id` and `secret`. PayPal recommends using your own `client_id` and `secret` from the [Developer Dashboard](https://www.paypal.com/signin?intent=developer&returnUri=https%3A%2F%2Fdeveloper.paypal.com%2Fdeveloper%2Fapplication) by entering the values under the **Variables** tab. A pre-request script will generate and manage the `access_token` automatically.
+
+  > **Note:** Your developer account `client_id` and `secret` may have a different scope than the default `client_id` and `secret`. 
+    
+
+  ## Step 3: Make your first API call
+
+  PayPal recommends starting with the Orders API. These steps will use the Orders API to create an order and capture payment using [sandbox accounts](https://developer.paypal.com/developer/accounts) linked to your Developer Dashboard account.
+
+  To create an order:
+
+  1. In your workspace, navigate to your fork of the PayPal collection.
+      
+  2. Select **Orders > Create Order**.
+      
+  3. Select the **Send** button to create the order. On a successful call, the API returns a 201 order created response code.
+      
+  4. In the response, find the **payer-action** link if you created an order with `payment_source.paypal` or **approve** link if you created an order without payment source.
+      
+  5. Open the **approve** or **payer-action** link in a browser.
+      
+  6. Log in with your Developer Dashboard Sandbox Personal Account credentials. You can find those credentials by logging into the Developer Dashboard and selecting **Sandbox > Account**.
+      
+  7. Select the **Continue** button. Payment has now been made.
+      
+
+  To capture payment:
+
+  1. In the response of the order you created, find the `order_id`.
+      
+  2. In the **Variables** tab, enter the `order_id` number.
+      
+  3. Select **Orders > Capture payment for order**.
+      
+  4. Select **Send**. On a successful call, the API returns a 201 order created response code.
+      
+
+  Your order has been created and payment has been captured. You can verify the transaction in both the sandbox personal account and the sandbox business account.
+
+  <img src="https://www.paypalobjects.com/devdoc/transaction-details-buyer.png" alt="Buyer Payment Verification">
+
+  <img src="https://www.paypalobjects.com/devdoc/transaction-details-seller.png" alt="Seller Payment Verification">
+variables:
+  PLEASE NOTE -->: |-
+    < PayPal Public Collection comes with following default public set of credentials stored at the Collection level. 
+    You may choose to override these values via environment level variables. You may bring your own credentials from PayPal Developer Dashboard there.
+  base_url: https://api-m.sandbox.paypal.com
+  client_id: AUv8rrc_P-EbP2E0mpb49BV7rFt3Usr-vdUZO8VGOnjRehGHBXkSzchr37SYF2GNdQFYSp72jh5QUhzG
+  client_secret: EMnAWe06ioGtouJs7gLYT9chK9-2jJ--7MKRXpI8FesmY_2Kp-d_7aCqff7M9moEJBvuXoBO4clKtY0v
+  managed_path_client_id: ASJ7ZDtuc9fT8cDWY-EEt6xtnUCe0QiJa9Zn5Eme_rb3SfVIlbWZlu4KU87hKKFl8wxUCMRZ-HP49FTd
+  managed_path_client_secret: EN3AlrRVld1MnsZwYK1o2RJAxSAdv9DnrwNQCo3s3HOm45NAFQtzQhc4U5HsmwBpikVfX8uXUF7Ajb3t
+  access_token: ""
+  access_token_expiry: ""
+  access_token_for: ""
+  authorization_id: ""
+  billing_plan_id: ""
+  capture_id: ""
+  dispute_id: ""
+  event_auth_algo: ""
+  event_cert_url: ""
+  event_id: ""
+  event_transmission_id: ""
+  event_transmission_sig: ""
+  event_transmission_time: ""
+  event_webhook_payload: ""
+  exchange_rate_quotes.0.fx_id: ""
+  fx_id: ""
+  invoice_id: ""
+  invoice_payment_id: ""
+  invoice_template_id: ""
+  managed_path_access_token: ""
+  managed_path_access_token_expiry: ""
+  managed_path_access_token_for: ""
+  managed_path_account_id: ""
+  managed_path_external_id: ""
+  managed_path_organization: us
+  managed_path_person_id: ""
+  order_id: ""
+  order_intent: CAPTURE
+  payment_token_id: ""
+  payout_batch_id: ""
+  payout_item_id: ""
+  paypal_auth_assertion: ""
+  paypal_client_metadata_Id: ""
+  paypal_partner_attribution_id: TEST_ATTRIBUTION_ID
+  prefer_representation_detailed: return=representation
+  prefer_representation_min: return=minimal
+  product_id: "1645840190"
+  refund_id: ""
+  setup_token_id: ""
+  subscription_id: ""
+  todays_date: ""
+  tracking_id: ""
+  tracking_number: ""
+  vault_customer_id: ""
+  web_profile_id: ""
+  webhook_id: ""
+  webhook_site_token: ""
+  webhook_url: ""
+  paypal_postman_scripts: '!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t():"function"==typeof define&&define.amd?define([],t):"object"==typeof exports?exports.PayPalPostmanUtils=t():e.PayPalPostmanUtils=t()}(this,()=>(()=>{"use strict";var e={d:(t,o)=>{for(var n in o)e.o(o,n)&&!e.o(t,n)&&Object.defineProperty(t,n,{enumerable:!0,get:o[n]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t)},t={};function o(e,t,o,a){const s={alg:o},r={iss:e,...t},c=`${n(JSON.stringify(s))}.${n(JSON.stringify(r))}`;return`${c}.${o&&"none"!==o?n(CryptoJS.HmacSHA256(c,a||"").toString()):""}`}function n(e){return Buffer.from(e).toString("base64").replace(/=+$/,"").replace(/\+/g,"-").replace(/\//g,"_")}e.d(t,{default:()=>a});const a={needsNewAccessToken:function({accessTokenVar:e,accessTokenExpiryVar:t,forClientIdVar:o,clientIdVar:n}){const a=pm.collectionVariables.get(t),s=pm.collectionVariables.get(e),r=pm.variables.get(n),c=pm.collectionVariables.get(o),i=a?parseInt(a,10):0,l=!a||i<=Date.now(),p=!s||!c||c!==r;return!pm.request.url.path.join("/").includes("/oauth2/token")&&(l||p)},refreshAccessToken:function(e,t){const{accessTokenVar:o,accessTokenExpiryVar:n,forClientIdVar:a,clientIdVar:s,clientSecretVar:r,baseUrlVar:c}=e,i=pm.variables.get(s),l=pm.variables.get(r),p={url:pm.variables.get(c)+"/v1/oauth2/token",method:"POST",header:{"content-type":"application/x-www-form-urlencoded",authorization:"Basic "+Buffer.from(i+":"+l).toString("base64")},body:{mode:"urlencoded",urlencoded:[{key:"grant_type",value:"client_credentials"}]}};pm.collectionVariables.unset(o),pm.collectionVariables.unset(n),pm.collectionVariables.unset(a),pm.sendRequest(p,function(e,s){if(200===s.code){const e=s.json();console.log("Saving the access_token"),pm.collectionVariables.set(o,e.access_token);const t=new Date;t.setSeconds(t.getSeconds()+e.expires_in),pm.collectionVariables.set(n,t.getTime()),pm.collectionVariables.set(a,i)}else console.error("Failed to obtain access_token",e,s.code,s.headers.get("Paypal-Debug-Id"),s.json());t&&t()})},storeAccessToken:function(e,t){var o;const{accessTokenVar:n,accessTokenExpiryVar:a,forClientIdVar:s,clientIdVar:r}=t,c=pm.variables.get(r);pm.collectionVariables.set(n,e.access_token);const i=new Date;i.setSeconds(i.getSeconds()+e.expires_in),pm.collectionVariables.set(a,i.getTime()),pm.collectionVariables.set(s,c),(null===(o=e.client_metadata)||void 0===o?void 0:o.display_name)&&console.log("Logged in using App =",e.client_metadata.display_name)},isSandbox:function(){return pm.variables.get("base_url").includes("sandbox.paypal.com")},getPayPalDebugId:function(){if(pm&&pm.response&&pm.response.headers)return pm.response.headers.get("Paypal-Debug-Id")},base64Url:n,getJWT:o,getAuthAssertionFor:function(e,t){return o(e,{payer_id:t},"none")}};return t.default})());'
+scripts:
+  - type: http:beforeRequest
+    code: |+
+      // import functions from collection variables
+      eval(pm.collectionVariables.get("paypal_postman_scripts"));
+
+
+      // Check if access token needs refresh
+      if (this.PayPalPostmanUtils.needsNewAccessToken({
+        accessTokenVar: 'access_token',
+        accessTokenExpiryVar: 'access_token_expiry', 
+        forClientIdVar: 'access_token_for',
+        clientIdVar: 'client_id'
+      })) {
+        // Refresh the token
+        this.PayPalPostmanUtils.refreshAccessToken({
+          accessTokenVar: 'access_token',
+          accessTokenExpiryVar: 'access_token_expiry',
+          forClientIdVar: 'access_token_for', 
+          clientIdVar: 'client_id',
+          clientSecretVar: 'client_secret',
+          baseUrlVar: 'base_url'
+        });
+      }
+
+    language: text/javascript
+  - type: http:afterResponse
+    code: |-
+      // import functions from collection variables
+      eval(pm.collectionVariables.get("paypal_postman_scripts"));
+
+      let successHttpStatuses = [200, 201, 202, 204];
+      let message = pm.response.code +", Paypal-Debug-Id="+this.PayPalPostmanUtils.getPayPalDebugId();
+
+      if(!isSuccessful()) {
+          console.error("Unexpected HTTP Status Code: ", message, pm.response.text());
+          console.error("https://developer.paypal.com/developer/dashboard/sandbox?Paypal-Debug-Id="+this.PayPalPostmanUtils.getPayPalDebugId());
+          message = message + ", "+pm.response.text();
+      }
+
+      pm.test("HTTP Status Code must be one of "+successHttpStatuses+", actual is "+message, function () {
+          pm.expect(pm.response.code).to.be.oneOf(successHttpStatuses);
+      });
+
+      function isSuccessful() {
+          return successHttpStatuses.includes(pm.response.code);
+      }
+    language: text/javascript
+auth:
+  - id: 65d903dc-aaa8-4e57-b70c-d2e2b277a2a1
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{access_token}}"

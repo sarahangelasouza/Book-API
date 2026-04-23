@@ -1,0 +1,14 @@
+$kind: http-request
+description: The customer accepts the offer from merchant to resolve a dispute, by ID. PayPal automatically refunds the amount proposed by merchant to the customer.
+url: "{{base_url}}/v1/customer/disputes/:dispute_id/accept-offer"
+method: POST
+pathVariables:
+  dispute_id: "{{dispute_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "note": "I am ok with the refund offered."
+    }
+examples: ./.resources/Accept offer to resolve dispute.resources/examples
+order: 12000

@@ -1,0 +1,50 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/send-message"
+  method: POST
+  pathVariables:
+    dispute_id: PP-R-GSS-123456789
+  body:
+    type: json
+    content: |-
+      {
+          "message": "Shipment is in progress."
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "249"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 9b72c523d9e32
+    Server-Timing: traceparent;desc="00-00000000000000000009b72c523d9e32-f3e2f9fd3e47a2a8-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Tue, 11 Apr 2023 20:07:49 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000136-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681243669.256147,VS0,VE310
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "message": "The specified resource does not exist.",
+          "debug_id": "9b72c523d9e32",
+          "information_link": "https://developer.paypal.com/docs/api/customer-disputes/v1/#errors",
+          "details": [
+              {
+                  "issue": "RESOURCE_NOT_FOUND"
+              }
+          ],
+          "links": []
+      }
+order: 4000

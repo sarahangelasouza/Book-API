@@ -1,0 +1,35 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/payments/refunds/:refund_id"
+  method: GET
+  pathVariables:
+    - key: refund_id
+      value: "{{refund_id}}"
+      description: (Required) The PayPal-generated ID for the refund for which to show details.
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 6edbff53ffb3
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 06 Apr 2023 20:41:03 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100053-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680813663.167312,VS0,VE304
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 2000

@@ -1,0 +1,46 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders/:order_id"
+  method: GET
+  pathVariables:
+    order_id: "{{order_id}}"
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    Connection: keep-alive
+    Content-Length: "372"
+    Content-Type: application/json
+    Server: nginx/1.18.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: efc6b748e1cd0
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Tue, 01 Mar 2022 01:23:41 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-sjc10035-SJC
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1646097821.274640,VS0,VE165
+  body:
+    type: json
+    content: |-
+      {
+          "name": "NOT_AUTHORIZED",
+          "details": [
+              {
+                  "issue": "PERMISSION_DENIED",
+                  "description": "You do not have permission to access or perform operations on this resource."
+              }
+          ],
+          "message": "Authorization failed due to insufficient permissions.",
+          "debug_id": "efc6b748e1cd0",
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/orders/v2/#error-PERMISSION_DENIED",
+                  "rel": "information_link"
+              }
+          ]
+      }
+order: 3000

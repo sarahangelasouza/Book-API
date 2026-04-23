@@ -1,0 +1,43 @@
+$kind: http-request
+description: Updates pricing for a plan. For example, you can update a regular billing cycle from $5 per month to $7 per month.
+url: "{{base_url}}/v1/billing/plans/:billing_plan_id/update-pricing-schemes"
+method: POST
+headers:
+  Content-Type: application/json
+pathVariables:
+  billing_plan_id: "{{billing_plan_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "pricing_schemes": [
+            {
+                "billing_cycle_sequence": 1,
+                "pricing_scheme": {
+                    "fixed_price": {
+                        "value": "10",
+                        "currency_code": "USD"
+                    },
+                    "roll_out_strategy": {
+                        "effective_time": "2022-11-01T00:00:00Z",
+                        "process_change_from": "NEXT_PAYMENT"
+                    }
+                }
+            },
+            {
+                "billing_cycle_sequence": 2,
+                "pricing_scheme": {
+                    "fixed_price": {
+                        "value": "50",
+                        "currency_code": "USD"
+                    },
+                    "roll_out_strategy": {
+                        "effective_time": "2022-11-01T00:00:00Z",
+                        "process_change_from": "NEXT_PAYMENT"
+                    }
+                }
+            }
+        ]
+    }
+examples: ./.resources/Update pricing.resources/examples
+order: 7000

@@ -1,0 +1,52 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/deny-offer"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    dispute_id: PP-R-GSS-123456789
+  body:
+    type: text
+    content: |-
+      {
+          "note": "refund offer is very low."
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "249"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 7d08eb5aa77e6
+    Server-Timing: traceparent;desc="00-00000000000000000007d08eb5aa77e6-a99fb4fbab1ccd30-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Tue, 11 Apr 2023 20:06:31 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000136-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681243592.734796,VS0,VE212
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "message": "The specified resource does not exist.",
+          "debug_id": "7d08eb5aa77e6",
+          "information_link": "https://developer.paypal.com/docs/api/customer-disputes/v1/#errors",
+          "details": [
+              {
+                  "issue": "RESOURCE_NOT_FOUND"
+              }
+          ],
+          "links": []
+      }
+order: 3000

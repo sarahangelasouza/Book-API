@@ -1,0 +1,281 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |+
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+
+  body:
+    type: json
+    content: |-
+      {
+          "intent": "CAPTURE",
+          "payment_source": {
+              "paypal": {
+                  "experience_context": {
+                      "return_url": "https://example.com/return",
+                      "cancel_url": "https://example.com/cancel",
+                      "brand_name": "EXAMPLE INC",
+                      "locale": "en-US",
+                      "landing_page": "BILLING",
+                      "shipping_preference": "SET_PROVIDED_ADDRESS",
+                      "user_action": "PAY_NOW",
+                      "payment_method": {
+                          "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED",
+                          "standard_entry_class_code": "TEL"
+                      },
+                      "preferred_payment_source": {
+                          "token": {
+                              "type": "BILLING_AGREEMENT",
+                              "id": "B-30983582ES210193W"
+                          }
+                      }
+                  }
+              }
+          },
+          "purchase_units": [
+              {
+                  "reference_id": "PUHF",
+                  "description": "Sporting Goods",
+                  "invoice_id": {{$timestamp}},
+                  "custom_id": "CUST-HighFashions",
+                  "soft_descriptor": "HighFashions",
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "225.00",
+                      "breakdown": {
+                          "item_total": {
+                              "currency_code": "USD",
+                              "value": "200.00"
+                          },
+                          "shipping": {
+                              "currency_code": "USD",
+                              "value": "0.00"
+                          },
+                          "handling": {
+                              "currency_code": "USD",
+                              "value": "10.00"
+                          },
+                          "tax_total": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "shipping_discount": {
+                              "currency_code": "USD",
+                              "value": "0.00"
+                          },
+                          "discount": {
+                              "currency_code": "USD",
+                              "value": "5.00"
+                          }
+                      }
+                  },
+                  "payee": {
+                      "email_address": "sb-jgbqn12111212@business.example.com",
+                      "merchant_id": "65MXV4T2ZV6KY",
+                      "display_data": {
+                          "business_email": "support@example.com",
+                          "business_phone": {
+                              "country_code": "1",
+                              "national_number": "18882211161",
+                              "extension_number": "9"
+                          },
+                          "brand_name": "Example Business"
+                      }
+                  },
+                  "items": [
+                      {
+                          "name": "Flight Ticket",
+                          "description": "From SFO to MAA",
+                          "sku": "sku01",
+                          "unit_amount": {
+                              "currency_code": "USD",
+                              "value": "200.00"
+                          },
+                          "tax": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "quantity": "1",
+                          "category": "DIGITAL_GOODS"
+                      }
+                  ],
+                  "supplementary_data": {
+                      "airline": [
+                          {
+                              "ticket": {
+                                  "number": "045-2135145561",
+                                  "issue_date": "2018-01-19",
+                                  "issuing_carrier_code": "AI",
+                                  "travel_agency_name": "World Tours",
+                                  "travel_agency_code": "01"
+                              },
+                              "passenger": {
+                                  "name": {
+                                      "full_name": "Trini George"
+                                  },
+                                  "date_of_birth": "1981-05-31",
+                                  "country_code": "US"
+                              },
+                              "flight_leg_details": [
+                                  {
+                                      "flight_number": 101,
+                                      "carrier_code": "AI",
+                                      "service_class": "J",
+                                      "departure_date": "2018-02-15",
+                                      "departure_time": "15:30",
+                                      "departure_airport": "SFO",
+                                      "arrival_airport": "DBX",
+                                      "stopover_code": "X",
+                                      "fare_basis_code": "SPRSVR"
+                                  },
+                                  {
+                                      "flight_number": 102,
+                                      "carrier_code": "AI",
+                                      "service_class": "J",
+                                      "departure_date": "2018-02-15",
+                                      "departure_time": "19:05",
+                                      "departure_airport": "DBX",
+                                      "arrival_airport": "MAA",
+                                      "stopover_code": "O",
+                                      "fare_basis_code": "SPRSVR"
+                                  }
+                              ]
+                          }
+                      ]
+                  }
+              }
+          ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Length: "2173"
+    Content-Type: application/json
+    Server: nginx/1.18.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 1792db577969c
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Fri, 21 Jan 2022 00:10:54 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-sjc10048-SJC
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1642723846.262727,VS0,VE8389
+  body:
+    type: json
+    content: |-
+      {
+          "id": "7NK74838L4813105R",
+          "intent": "CAPTURE",
+          "status": "PAYER_ACTION_REQUIRED",
+          "payment_source": {
+              "paypal": {}
+          },
+          "purchase_units": [
+              {
+                  "reference_id": "PUHF",
+                   "amount": {
+                      "currency_code": "USD",
+                      "value": "225.00",
+                      "breakdown": {
+                          "item_total": {
+                              "currency_code": "USD",
+                              "value": "200.00"
+                          },
+                          "shipping": {
+                              "currency_code": "USD",
+                              "value": "0.00"
+                          },
+                          "handling": {
+                              "currency_code": "USD",
+                              "value": "10.00"
+                          },
+                          "tax_total": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "shipping_discount": {
+                              "currency_code": "USD",
+                              "value": "0.00"
+                          },
+                          "discount": {
+                              "currency_code": "USD",
+                              "value": "5.00"
+                          }
+                      }
+                  },
+                  "payee": {
+                      "email_address": "sb-jgbqn12111212@business.example.com",
+                      "merchant_id": "65MXV4T2ZV6KY",
+                      "display_data": {
+                          "business_email": "support@example.com",
+                          "business_phone": {
+                              "national_number": "18882211161"
+                          },
+                          "brand_name": "Example Business"
+                      }
+                  },
+                  "description": "Sporting Goods",
+                  "custom_id": "CUST-HighFashions",
+                  "invoice_id": "1722456569",
+                  "soft_descriptor": "HighFashions",
+                  "items": [
+                      {
+                          "name": "Flight Ticket",
+                          "description": "From SFO to MAA",
+                          "sku": "sku01",
+                          "unit_amount": {
+                              "currency_code": "USD",
+                              "value": "200.00"
+                          },
+                          "tax": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "quantity": "1",
+                          "category": "DIGITAL_GOODS"
+                      }
+                  ]
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/7NK74838L4813105R",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://www.sandbox.paypal.com/checkoutnow?token=7NK74838L4813105R",
+                  "rel": "payer-action",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

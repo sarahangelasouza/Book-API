@@ -1,0 +1,13 @@
+$kind: http-request
+description: Shows details for an order, by ID.<blockquote><strong>Note:</strong> For error handling and troubleshooting, see <a href="https://developer.paypal.com/api/rest/reference/orders/v2/errors/#get-order">Orders v2 errors</a>.</blockquote>
+url: "{{base_url}}/v2/checkout/orders/:order_id"
+method: GET
+headers:
+  - key: PayPal-Mock-Response
+    value: '{ "mock_application_codes": "{{mock_issue}}" }'
+    disabled: true
+    description: For a list of error codes to test for see https://developer.paypal.com/api/rest/reference/orders/v2/errors/#link-getorder
+pathVariables:
+  order_id: "{{order_id}}"
+examples: ./.resources/Show order details.resources/examples
+order: 3000

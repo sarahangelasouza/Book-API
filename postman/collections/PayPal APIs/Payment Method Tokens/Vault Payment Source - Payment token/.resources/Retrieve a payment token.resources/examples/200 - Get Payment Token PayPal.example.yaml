@@ -1,0 +1,78 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/payment-tokens/:payment_token_id"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  pathVariables:
+    payment_token_id: "{{payment_token_id}}"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+          "id": "mcmjs1ns",
+          "customer": {
+              "id": "2pQ17id"
+          },
+          "payment_source": {
+              "paypal": {
+                  "shipping": {
+                      "name": {
+                          "full_name": "John Doe"
+                      },
+                      "address": {
+                          "address_line_1": "2211 N First Street",
+                          "address_line_2": "Building 17",
+                          "admin_area_2": "San Jose",
+                          "admin_area_1": "CA",
+                          "postal_code": "95131",
+                          "country_code": "US"
+                      }
+                  },
+                  "usage_type": "MERCHANT",
+                  "customer_type": "CONSUMER",
+                  "email_address": "_sys_aquarium-8269378280518314@paypal.com",
+                  "payer_id": "P9877T8XD5ZZL",
+                  "name": {
+                      "given_name": "Brian",
+                      "surname": "Lesley",
+                      "full_name": "Brian Lesley"
+                  },
+                  "phone": {
+                      "phone_number": {
+                          "country_code": "US",
+                          "national_number": "405-352-4616"
+                      }
+                  },
+                  "tenant": "PAYPAL"
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/mcmjs1ns",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/mcmjs1ns",
+                  "rel": "delete",
+                  "method": "DELETE",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 3000

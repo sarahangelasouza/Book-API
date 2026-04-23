@@ -1,0 +1,68 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/plans/:billing_plan_id/update-pricing-schemes"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    billing_plan_id: "{{billing_plan_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "pricing_schemes": [
+              {
+                  "billing_cycle_sequence": 1,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "10",
+                          "currency_code": "USD"
+                      },
+                      "roll_out_strategy": {
+                          "effective_time": "2022-11-01T00:00:00Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              },
+              {
+                  "billing_cycle_sequence": 2,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "50",
+                          "currency_code": "USD"
+                      },
+                      "roll_out_strategy": {
+                          "effective_time": "2022-11-01T00:00:00Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              }
+          ]
+      }
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 291822e3466f1
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Fri, 07 Apr 2023 20:24:32 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100038-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680899072.204873,VS0,VE162
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 2000

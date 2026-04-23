@@ -1,0 +1,51 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/deny-offer"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: text
+    content: |-
+      {
+          "note": "refund offer is very low."
+      }
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    Connection: keep-alive
+    Content-Length: "260"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 3155b8f3ed189
+    Server-Timing: traceparent;desc="00-00000000000000000003155b8f3ed189-9632a146f03dbdeb-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Tue, 11 Apr 2023 20:05:30 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000136-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681243530.275127,VS0,VE315
+  body:
+    type: json
+    content: |-
+      {
+          "name": "NOT_AUTHORIZED",
+          "message": "Authorization failed due to insufficient permissions.",
+          "debug_id": "3155b8f3ed189",
+          "information_link": "https://developer.paypal.com/docs/api/customer-disputes/v1/#errors",
+          "details": [
+              {
+                  "issue": "ACTION_NOT_ALLOWED"
+              }
+          ],
+          "links": []
+      }
+order: 2000

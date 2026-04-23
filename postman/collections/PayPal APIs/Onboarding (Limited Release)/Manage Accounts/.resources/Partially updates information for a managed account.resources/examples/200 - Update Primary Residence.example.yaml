@@ -1,0 +1,324 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: |
+        The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: |
+        The Accept header field is used to specify the form of response that can be understand and processed
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: (Optional)The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the account_id, external_id, and HATEOAS links.
+    - key: Prefer
+      value: return=representation
+      disabled: true
+      description: (Optional) The server returns a complete resource representation without process_view
+    - key: Prefer
+      value: return=representation, views=process_view
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+    - key: Prefer
+      value: views=process_view
+      disabled: true
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+  pathVariables:
+    - key: id
+      value: "{{managed_path_account_id}}"
+      description: The ID of the seller.
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "op": "replace",
+              "path": "/individual_owners/@id=='{{managed_path_account_id}}'/primary_residence",
+              "value": {
+                  "type": "HOME",
+                  "address_line_1": "APPROVED address44",
+                  "admin_area_2": "LENCHWICK",
+                  "postal_code": "95014",
+                  "country_code": "US"
+              }
+          }
+      ]
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: c9b9ddb6d476
+    Server-Timing: traceparent;desc="00-00000000000000000000c9b9ddb6d476-1d2079336aed24fb-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: br
+    Edge-Control: max-age=0
+    Date: Mon, 17 Apr 2023 01:57:31 GMT
+    X-Served-By: cache-hnd18727-HND, cache-nrt-rjtf7700032-NRT
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681696645.434946,VS0,VE6258
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "TSGG44MKNFGXU",
+          "legal_country_code": "US",
+          "individual_owners": [
+              {
+                  "id": "TSGG44MKNFGXU",
+                  "names": [
+                      {
+                          "given_name": "TONYAPPROVED",
+                          "surname": "STARKAPPROVED",
+                          "id": "PPMTPAH9QN9WN",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "primary_residence": {
+                      "address_line_1": "APPROVED address44",
+                      "admin_area_2": "LENCHWICK",
+                      "postal_code": "95014",
+                      "country_code": "US"
+                  },
+                  "phone_numbers": [
+                      {
+                          "country_code": "27",
+                          "national_number": "6151174",
+                          "id": "GSZ5FMCBF38KG",
+                          "type": "MOBILE"
+                      }
+                  ],
+                  "identification_documents": [
+                      {
+                          "id": "E9V2SFKQXACDJ",
+                          "identification_number": "****",
+                          "issuing_country_code": "US",
+                          "type": "SOCIAL_SECURITY_NUMBER"
+                      }
+                  ]
+              }
+          ],
+          "business_entity": {
+              "type": "CORPORATION",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "STARK INDUSTRY.",
+                      "id": "DELE8Q247BFB4",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                  "address_line_1": "APPROVED 100",
+                  "admin_area_2": "100",
+                  "postal_code": "95014",
+                  "country_code": "US"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "id": "DRYHXJMFA3T24",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "id": "CZVGML4J6F7V8",
+                          "names": [
+                              {
+                                  "given_name": "APPROVED",
+                                  "surname": "NormanAPPROVED",
+                                  "id": "X7VBTTB9A9JNG",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                                  "address_line_1": "APPROVED 100",
+                                  "admin_area_2": "100",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "id": "5K83QYFCB3MAY",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "id": "9K284PJYDMYG6",
+                                  "identification_number": "****",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "26",
+                          "controlling_influence": false
+                      },
+                      {
+                          "id": "TW73L8XUHM4GW",
+                          "names": [
+                              {
+                                  "given_name": "APPROVED",
+                                  "surname": "SmothAPPROVED",
+                                  "id": "WTU2VNTF8BCGU",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                                  "address_line_1": "APPROVED 100",
+                                  "admin_area_2": "100",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "id": "8WLRCHMFFYL3G",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "id": "R452LBZZENUM2",
+                                  "identification_number": "****",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "35",
+                          "controlling_influence": false
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "id": "V8H2VCB2H3NNW",
+                      "names": [
+                          {
+                              "given_name": "APPROVED",
+                              "surname": "CollinsAPPROVED",
+                              "id": "GBNNG7KPV7NPE",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                              "address_line_1": "100",
+                              "admin_area_2": "100",
+                              "postal_code": "22903",
+                              "country_code": "US",
+                              "id": "JA4Q8GYDWVVZ6",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1990-01-01"
+                      },
+                      "role": "CHAIRMAN"
+                  },
+                  {
+                      "id": "E9RSWUZXK3Y34",
+                      "names": [
+                          {
+                              "given_name": "APPROVED",
+                              "surname": "TREASWILLIAMSONAPPROVED",
+                              "id": "KSZECFVEYTQ34",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                              "address_line_1": "APPROVED 100",
+                              "admin_area_2": "100",
+                              "postal_code": "29212",
+                              "country_code": "US",
+                              "id": "ERFYT43B3ATMA",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1991-05-30"
+                      },
+                      "identification_documents": [
+                          {
+                              "id": "82LB389H9PVHN",
+                              "identification_number": "****",
+                              "issuing_country_code": "US",
+                              "type": "SOCIAL_SECURITY_NUMBER"
+                          }
+                      ]
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              },
+              {
+                  "type": "PERSONAL_INFORMATION_COLLECTION_CONSENT",
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              }
+          ],
+          "external_id": "EXT-1681438586",
+          "user_id": "1681438586",
+          "primary_currency_code": "USD",
+          "soft_descriptor": "STARKINDUST",
+          "capabilities": [
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/TSGG44MKNFGXU",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/TSGG44MKNFGXU",
+                  "rel": "edit",
+                  "method": "PATCH"
+              }
+          ]
+      }
+order: 11000

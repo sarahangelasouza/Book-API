@@ -1,0 +1,102 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/plans/:billing_plan_id/update-pricing-schemes"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    billing_plan_id: "{{billing_plan_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "pricing_schemes": [
+              {
+                  "billing_cycle_sequence": 1,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "10",
+                          "currency_code": "USD"
+                      },
+                      "roll_out_strategy": {
+                          "effective_time": "2019-02-10T21:20:49Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              },
+              {
+                  "billing_cycle_sequence": 2,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "50",
+                          "currency_code": "USD"
+                      },
+                      "pricing_model": "VOLUME",
+                      "tiers": [
+                          {
+                              "starting_quantity": "1",
+                              "ending_quantity": "1000",
+                              "amount": {
+                                  "value": "150",
+                                  "currency_code": "USD"
+                              }
+                          },
+                          {
+                              "starting_quantity": "1001",
+                              "amount": {
+                                  "value": "250",
+                                  "currency_code": "USD"
+                              }
+                          }
+                      ],
+                      "roll_out_strategy": {
+                          "effective_time": "2019-02-10T21:20:49Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              }
+          ]
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Content-Type: application/json
+    Content-Length: "713"
+    Connection: keep-alive
+    Date: Tue, 08 Feb 2022 22:10:51 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 5afc71434cfcf
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "name": "UNPROCESSABLE_ENTITY",
+          "message": "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          "debug_id": "5afc71434cfcf",
+          "details": [
+              {
+                  "field": "/pricing_schemes/1/pricing_scheme/pricing_model",
+                  "location": "body",
+                  "issue": "INVALID_PRICING_SCHEME",
+                  "description": "The new pricing scheme should be of the same type as that of the old one."
+              },
+              {
+                  "field": "/pricing_schemes/1/pricing_scheme/fixed_price",
+                  "location": "body",
+                  "issue": "FIXED_PRICE_NOT_SUPPORTED",
+                  "description": "Fixed price is not supported for tiered pricing schemes."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#UNPROCESSABLE_ENTITY",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 4000

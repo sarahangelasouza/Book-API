@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/adjudicate"
+  method: POST
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "adjudication_outcome": "BUYER_FAVOR"
+      }
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    Connection: keep-alive
+    Content-Length: "260"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 7c2f4ea3325b5
+    Server-Timing: traceparent;desc="00-00000000000000000007c2f4ea3325b5-5ef0b24a542c964f-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Wed, 12 Apr 2023 16:58:58 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100174-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681318738.889872,VS0,VE158
+  body:
+    type: json
+    content: |-
+      {
+          "name": "NOT_AUTHORIZED",
+          "message": "Authorization failed due to insufficient permissions.",
+          "debug_id": "7c2f4ea3325b5",
+          "information_link": "https://developer.paypal.com/docs/api/customer-disputes/v1/#errors",
+          "details": [
+              {
+                  "issue": "ACTION_NOT_ALLOWED"
+              }
+          ],
+          "links": []
+      }
+order: 3000

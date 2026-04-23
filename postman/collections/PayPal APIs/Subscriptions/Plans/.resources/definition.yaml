@@ -1,0 +1,3 @@
+$kind: collection
+description: Use the `/billing/plans` resource to create and manage plans.
+order: 2000

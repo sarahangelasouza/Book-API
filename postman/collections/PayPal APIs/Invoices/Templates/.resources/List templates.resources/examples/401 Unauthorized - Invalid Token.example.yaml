@@ -1,0 +1,41 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/templates?fields=all&page=1&page_size=10"
+  method: GET
+  queryParams:
+    - key: fields
+      value: all
+      description: The fields to return in the response. Value is `all` or `none`. To return only the template name, ID, and default attributes, specify `none`.
+    - key: page
+      value: "1"
+      description: The page number to be retrieved, for the list of templates. So, a combination of `page=1` and `page_size=20` returns the first 20 templates. A combination of `page=2` and `page_size=20` returns the next 20 templates.
+    - key: page_size
+      value: "10"
+      description: The maximum number of templates to return in the response.
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: a9e9dd36a86ff
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 06 Apr 2023 22:11:42 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100077-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680819102.972646,VS0,VE160
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 2000

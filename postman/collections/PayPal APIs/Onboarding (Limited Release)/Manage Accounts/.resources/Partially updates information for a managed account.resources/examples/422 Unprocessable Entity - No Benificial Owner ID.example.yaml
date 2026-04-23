@@ -1,0 +1,90 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id"
+  method: PATCH
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: |
+        The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: |
+        The Accept header field is used to specify the form of response that can be understand and processed
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: (Optional)The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the account_id, external_id, and HATEOAS links.
+    - key: Prefer
+      value: return=representation
+      disabled: true
+      description: (Optional) The server returns a complete resource representation without process_view
+    - key: Prefer
+      value: return=representation, views=process_view
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+    - key: Prefer
+      value: views=process_view
+      disabled: true
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+  pathVariables:
+    - key: id
+      value: "{{managed_path_account_id}}"
+      description: The ID of the seller.
+  body:
+    type: json
+    content: |-
+      [
+          {
+              "op": "remove",
+              "path": "/business_entity/beneficial_owners/individuals/@id=='NJL93YMSG3MQ2'"
+          }
+      ]
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Connection: keep-alive
+    Content-Length: "549"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 78924550934bd
+    Server-Timing: traceparent;desc="00-000000000000000000078924550934bd-5782c44e9bb18a9b-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Mon, 17 Apr 2023 05:17:50 GMT
+    X-Served-By: cache-hnd18722-HND, cache-tyo11953-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681708669.381570,VS0,VE926
+  body:
+    type: json
+    content: |-
+      {
+          "name": "UNPROCESSABLE_ENTITY",
+          "message": "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          "debug_id": "78924550934bd",
+          "details": [
+              {
+                  "field": "/0/path",
+                  "issue": "PATCH_INVALID_ID",
+                  "description": "An invalid beneficial owner id provided in patch path."
+              },
+              {
+                  "location": "body",
+                  "issue": "UNPROCESSABLE_OPERATION",
+                  "description": "The operation is not processable on this path with given value"
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/managed-accounts",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 17000

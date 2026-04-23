@@ -1,0 +1,10 @@
+$kind: http-request
+description: Shows details for a payout item, by ID. A <code>payout_item_id</code> helps you identify denied payments. If a payment is denied, you can use the <code>payout_item_id</code> to identify the payment even if it lacks a <code>transaction_id</code>.
+url: "{{base_url}}/v1/payments/payouts-item/:payout_item_id"
+method: GET
+pathVariables:
+  - key: payout_item_id
+    value: "{{payout_item_id}}"
+    description: (Required) The ID of the payout item for which to show details.
+examples: ./.resources/Show payout item details.resources/examples
+order: 3000

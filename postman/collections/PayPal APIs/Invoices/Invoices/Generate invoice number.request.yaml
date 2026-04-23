@@ -1,0 +1,22 @@
+$kind: http-request
+description: Generates the next invoice number that is available to the merchant. The next invoice number uses the prefix and suffix from the last invoice number and increments the number by one. For example, the next invoice number after `INVOICE-1234` is `INVOICE-1235`.
+url: "{{base_url}}/v2/invoicing/generate-next-invoice-number"
+method: POST
+headers:
+  Content-Type: application/json
+scripts:
+  - type: beforeRequest
+    code: |-
+      // first API in the folder enable delay subsequent APIs only during folder/collection run.
+      pm.variables.set('delayed_run', 'true');
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test("Extract invoice_number", function() {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property('invoice_number');
+          pm.collectionVariables.set("draft_invoice_number", jsonData.invoice_number);
+      });
+    language: text/javascript
+examples: ./.resources/Generate invoice number.resources/examples
+order: 1000

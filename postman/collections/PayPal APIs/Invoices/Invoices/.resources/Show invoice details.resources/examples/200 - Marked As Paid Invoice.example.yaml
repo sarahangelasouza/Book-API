@@ -1,0 +1,304 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/invoices/:invoice_id"
+  method: GET
+  pathVariables:
+    - key: invoice_id
+      value: "{{invoice_id}}"
+      description: (Required) The ID of the invoice for which to show details.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "5062"
+    Connection: keep-alive
+    Date: Mon, 07 Feb 2022 20:19:27 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: df0f506cece37
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "id": "INV2-BR7N-4HVF-WKCQ-3KWL",
+          "status": "MARKED_AS_PAID",
+          "detail": {
+              "reference": "<The reference data. Includes a post office (PO) number.>",
+              "currency_code": "USD",
+              "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+              "terms_and_conditions": "<The general terms of the invoice. Can include return or cancellation policy and other terms and conditions.>",
+              "memo": "<A private bookkeeping note for merchant.>",
+              "additional_data": "<Any additional information. Includes business hours.>",
+              "category_code": "SHIPPABLE",
+              "invoice_number": "1644264943",
+              "invoice_date": "2022-01-04",
+              "payment_term": {
+                  "term_type": "NET_10",
+                  "due_date": "2022-01-14"
+              },
+              "viewed_by_recipient": false,
+              "group_draft": false,
+              "metadata": {
+                  "create_time": "2022-02-07T20:15:43Z",
+                  "last_update_time": "2022-02-07T20:19:24Z",
+                  "created_by_flow": "REGULAR_SINGLE",
+                  "recipient_view_url": "https://www.sandbox.paypal.com/invoice/p/#BR7N4HVFWKCQ3KWL",
+                  "invoicer_view_url": "https://www.sandbox.paypal.com/invoice/details/INV2-BR7N-4HVF-WKCQ-3KWL",
+                  "caller_type": "API_V2_INVOICE"
+              },
+              "archived": false
+          },
+          "invoicer": {
+              "name": {
+                  "given_name": "David",
+                  "surname": "Larusso",
+                  "full_name": "David Larusso"
+              },
+              "address": {
+                  "address_line_1": "1234 First Street",
+                  "address_line_2": "337673 Hillside Court",
+                  "admin_area_2": "Anytown",
+                  "admin_area_1": "CA",
+                  "postal_code": "98765",
+                  "country_code": "US"
+              },
+              "phones": [
+                  {
+                      "country_code": "001",
+                      "national_number": "4085551234",
+                      "phone_type": "MOBILE"
+                  }
+              ],
+              "website": "www.example.com",
+              "tax_id": "XX-XXXXXXX",
+              "additional_notes": "<Any additional information. Includes business hours.>",
+              "logo_url": "https://example.com/logo.png"
+          },
+          "primary_recipients": [
+              {
+                  "billing_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers",
+                          "full_name": "Stephanie Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      },
+                      "email_address": "foobuyer@gmail.com"
+                  },
+                  "shipping_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers",
+                          "full_name": "Stephanie Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      }
+                  }
+              }
+          ],
+          "items": [
+              {
+                  "id": "ITEM-43U94872T4261822E",
+                  "name": "Yoga Mat",
+                  "description": "Elastic mat to practice yoga.",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "50.00"
+                  },
+                  "tax": {
+                      "id": "TAX-0N0416338A793061R",
+                      "name": "Sales Tax",
+                      "percent": "7.25",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "3.27"
+                      }
+                  },
+                  "discount": {
+                      "percent": "5",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "-2.50"
+                      }
+                  },
+                  "unit_of_measure": "QUANTITY"
+              },
+              {
+                  "id": "ITEM-3L635214TD284621C",
+                  "name": "Yoga t-shirt",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "10.00"
+                  },
+                  "tax": {
+                      "id": "TAX-0N0416338A793061R",
+                      "name": "Sales Tax",
+                      "percent": "7.25",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "0.34"
+                      }
+                  },
+                  "discount": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "-5.00"
+                      }
+                  },
+                  "unit_of_measure": "QUANTITY"
+              }
+          ],
+          "configuration": {
+              "tax_calculated_after_discount": true,
+              "tax_inclusive": false,
+              "allow_tip": true,
+              "partial_payment": {
+                  "allow_partial_payment": true,
+                  "minimum_amount_due": {
+                      "currency_code": "USD",
+                      "value": "20.00"
+                  }
+              },
+              "template_id": "TEMP-8LK05440PT816351U"
+          },
+          "amount": {
+              "breakdown": {
+                  "item_total": {
+                      "currency_code": "USD",
+                      "value": "60.00"
+                  },
+                  "discount": {
+                      "invoice_discount": {
+                          "percent": "5",
+                          "amount": {
+                              "currency_code": "USD",
+                              "value": "-2.63"
+                          }
+                      },
+                      "item_discount": {
+                          "currency_code": "USD",
+                          "value": "-7.50"
+                      }
+                  },
+                  "tax_total": {
+                      "currency_code": "USD",
+                      "value": "4.34"
+                  },
+                  "shipping": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      },
+                      "tax": {
+                          "id": "TAX-46E19248R5515835U",
+                          "name": "Sales Tax",
+                          "percent": "7.25",
+                          "amount": {
+                              "currency_code": "USD",
+                              "value": "0.73"
+                          }
+                      }
+                  },
+                  "custom": {
+                      "label": "Packing Charges",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  }
+              },
+              "currency_code": "USD",
+              "value": "74.21"
+          },
+          "due_amount": {
+              "currency_code": "USD",
+              "value": "0.00"
+          },
+          "payments": {
+              "paid_amount": {
+                  "currency_code": "USD",
+                  "value": "74.21"
+              },
+              "transactions": [
+                  {
+                      "type": "EXTERNAL",
+                      "payment_id": "EXTR-2FD55303HE601691M",
+                      "payment_date": "2022-02-07",
+                      "method": "PAYPAL",
+                      "note": "<A note associated with an external cash or check payment.>",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  },
+                  {
+                      "type": "EXTERNAL",
+                      "payment_id": "EXTR-6TS47034XF430740H",
+                      "payment_date": "2022-02-07",
+                      "method": "CASH",
+                      "note": "<A note associated with an external cash or check payment.>",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "34.21"
+                      }
+                  },
+                  {
+                      "type": "EXTERNAL",
+                      "payment_id": "EXTR-34346363KY6307914",
+                      "payment_date": "2022-12-07",
+                      "method": "PAYPAL",
+                      "note": "<A note associated with an external cash or check payment.>",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  },
+                  {
+                      "type": "EXTERNAL",
+                      "payment_id": "EXTR-8FJ0900441864545R",
+                      "payment_date": "2022-12-07",
+                      "method": "PAYPAL",
+                      "note": "<A note associated with an external cash or check payment.>",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  },
+                  {
+                      "type": "EXTERNAL",
+                      "payment_id": "EXTR-17Y90008MD772900U",
+                      "payment_date": "2022-12-07",
+                      "method": "PAYPAL",
+                      "note": "<A note associated with an external cash or check payment.>",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  }
+              ]
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-BR7N-4HVF-WKCQ-3KWL",
+                  "rel": "self",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 4000

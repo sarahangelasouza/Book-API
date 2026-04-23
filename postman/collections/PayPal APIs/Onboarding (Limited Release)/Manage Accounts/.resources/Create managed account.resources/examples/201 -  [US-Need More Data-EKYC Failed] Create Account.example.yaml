@@ -1,0 +1,312 @@
+$kind: http-example
+name: 201 -  [US/Need More Data/EKYC Failed] Create Account
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: The Accept header field is used to specify the form of response that can be understand and processed
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: (Optional)The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the account_id, external_id, and HATEOAS links.
+    - key: Prefer
+      value: return=representation
+      disabled: true
+      description: (Optional) The server returns a complete resource representation without process_view
+    - key: Prefer
+      value: return=representation, views=process_view
+      disabled: true
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+    - key: Prefer
+      value: views=process_view
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+  body:
+    type: json
+    content: |-
+      {
+          "external_id": "EXT-{{$timestamp}}",
+          "legal_country_code": "US",
+          "organization": "{{managed_path_organization}}",
+          "user_id": "{{$timestamp}}",
+          "primary_currency_code": "USD",
+          "individual_owners": [
+              {
+                  "names": [
+                      {
+                          "type": "LEGAL",
+                          "given_name": "LMTNREVIEW",
+                          "surname": "STARK"
+                      }
+                  ],
+                  "addresses": [
+                      {
+                          "address_line_1": "W 294 STR",
+                          "address_line_2": "300",
+                          "admin_area_2": "New York",
+                          "postal_code": "95014",
+                          "country_code": "US",
+                          "type": "HOME"
+                      }
+                  ],
+                  "birth_details": {
+                      "date_of_birth": "1995-05-30"
+                  },
+                  "identification_documents": [
+                      {
+                          "type": "SOCIAL_SECURITY_NUMBER",
+                          "identification_number": "111222333",
+                          "issuing_country_code": "US"
+                      }
+                  ]
+              }
+          ],
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "account_number": "59010882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "branch_code": "08501",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "bank_name": "Key Bank National Association"
+                  }
+              ]
+          },
+          "business_entity": {
+              "type": "PROPRIETORSHIP",
+              "names": [
+                  {
+                      "business_name": "STARK INDUSTRY.",
+                      "type": "LEGAL"
+                  }
+              ],
+              "phone_numbers": [
+                  {
+                      "type": "BUSINESS",
+                      "country_code": "1",
+                      "national_number": "1"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "QPQQHRSZH7Y44",
+          "legal_country_code": "US",
+          "individual_owners": [
+              {
+                  "id": "QPQQHRSZH7Y44",
+                  "names": [
+                      {
+                          "given_name": "LMTNREVIEW",
+                          "surname": "STARK",
+                          "id": "6KZNXFKGYHC6E",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "primary_residence": {
+                      "address_line_1": "W 294 STR",
+                      "address_line_2": "300",
+                      "admin_area_2": "New York",
+                      "postal_code": "95014",
+                      "country_code": "US"
+                  },
+                  "birth_details": {
+                      "date_of_birth": "1995-05-30"
+                  },
+                  "identification_documents": [
+                      {
+                          "id": "T73W8M2WGYPH8",
+                          "identification_number": "****",
+                          "issuing_country_code": "US",
+                          "type": "SOCIAL_SECURITY_NUMBER"
+                      }
+                  ]
+              }
+          ],
+          "business_entity": {
+              "type": "PROPRIETORSHIP",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "STARK INDUSTRY.",
+                      "id": "6DP2L66S69ELS",
+                      "type": "LEGAL"
+                  }
+              ],
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "id": "4QL9285CDMR5A",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "NO"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ],
+          "external_id": "EXT-1697770476",
+          "organization": "us",
+          "user_id": "1697770476",
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "id": "BA-FL78PZTKEAMUE",
+                      "last_4_digits": "0882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "account_holder_details": {
+                          "name": "STARK INDUSTRY."
+                      },
+                      "branch_code": "08501",
+                      "bank_name": "KEYBANK NATIONAL ASSOCIATION"
+                  }
+              ]
+          },
+          "primary_currency_code": "USD",
+          "soft_descriptor": "STARKINDUST",
+          "capabilities": [
+              {
+                  "name": "APPLE_PAY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "CUSTOM_CARD_PROCESSING",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              }
+          ],
+          "process_view": {
+              "processes": [
+                  {
+                      "name": "MANAGED_PATH_KYC",
+                      "status": "NEED_MORE_DATA",
+                      "capabilities": [
+                          {
+                              "name": "APPLE_PAY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          },
+                          {
+                              "name": "WITHDRAW_MONEY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          },
+                          {
+                              "name": "CUSTOM_CARD_PROCESSING",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "name": "MANAGED_PATH_BO_VERIFICATION",
+                      "status": "COMPLETED",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY"
+                          },
+                          {
+                              "name": "CUSTOM_CARD_PROCESSING"
+                          },
+                          {
+                              "name": "APPLE_PAY"
+                          }
+                      ]
+                  }
+              ]
+          },
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/QPQQHRSZH7Y44",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/QPQQHRSZH7Y44",
+                  "rel": "edit",
+                  "method": "PATCH"
+              }
+          ]
+      }
+order: 4000

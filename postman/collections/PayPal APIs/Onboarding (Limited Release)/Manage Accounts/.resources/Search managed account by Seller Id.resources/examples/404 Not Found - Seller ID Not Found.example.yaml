@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id?views=process_view"
+  method: GET
+  queryParams:
+    - key: views
+      value: process_view
+      description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response.
+  pathVariables:
+    - key: id
+      value: QTA74RYDFH72U
+      description: The ID of the seller.
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "204"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 849b12dc1962c
+    Server-Timing: traceparent;desc="00-0000000000000000000849b12dc1962c-620548d318e916af-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Tue, 25 Apr 2023 08:37:08 GMT
+    X-Served-By: cache-hnd18746-HND, cache-nrt-rjtf7700054-NRT
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1682411829.508727,VS0,VE465
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "message": "The specified resource does not exist.",
+          "debug_id": "849b12dc1962c",
+          "details": [
+              {
+                  "issue": "INVALID_RESOURCE_ID",
+                  "description": "Requested resource ID was not found."
+              }
+          ]
+      }
+order: 6000

@@ -1,0 +1,23 @@
+$kind: http-request
+url: "{{baseUrl}}:/parts/:id#"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  id: string
+body:
+  type: text
+  content: ""
+scripts:
+  - type: afterResponse
+    code: |+
+      pm.test('Status code is 200 or 204', function () {
+          pm.expect(pm.response.code).to.be.oneOf([
+              200,
+              204
+          ]);
+      })
+
+    language: text/javascript
+examples: ./.resources/Delete Part.resources/examples
+order: 2000

@@ -1,0 +1,106 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes"
+  method: GET
+  queryParams:
+    - key: start_time
+      value: Current date and time
+      disabled: true
+      description: Filters the disputes in the response by a creation date and time. The start time must be within the last 180 days. Value is in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.<br/><br/>You can specify either but not both the `start_time` and `disputed_transaction_id` query parameters.
+    - key: disputed_transaction_id
+      value: YX2Q7IUD6FF
+      disabled: true
+      description: Filters the disputes in the response by a transaction, by ID.<br/><br/>You can specify either but not both the `start_time` and `disputed_transaction_id` query parameter.
+    - key: page_size
+      value: "10"
+      disabled: true
+      description: Limits the number of disputes in the response to this value.
+    - key: next_page_token
+      value: The first page of data
+      disabled: true
+      description: The token that describes the next page of results to fetch. The <a href="/docs/api/customer-disputes/v1/#disputes_list">list disputes</a> call returns this token in the HATEOAS links in the response.
+    - key: dispute_state
+      value: 5QUU1K
+      disabled: true
+      description: Filters the disputes in the response by a state. Separate multiple values with a comma (`,`). When you specify more than one dispute_state, the response lists disputes that belong to any of the specified dispute_state.
+    - key: update_time_before
+      value: 9007-05-01,20:17:35.49z
+      disabled: true
+      description: The date and time when the dispute was last updated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`. update_time_before must be within the last 180 days and the default is the current time.
+    - key: update_time_after
+      value: 9007-05-01,20:17:35.49z
+      disabled: true
+      description: The date and time when the dispute was last updated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`. update_time_after must be within the last 180 days and the default is the maximum time (180 days) supported.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "1025"
+    Connection: keep-alive
+    Date: Wed, 02 Feb 2022 03:02:38 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: f41f91d033f88
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "items": [
+              {
+                  "dispute_id": "PP-D-59399",
+                  "create_time": "2021-11-15T19:38:40.000Z",
+                  "update_time": "2021-11-15T19:49:10.000Z",
+                  "reason": "MERCHANDISE_OR_SERVICE_NOT_RECEIVED",
+                  "status": "RESOLVED",
+                  "dispute_state": "RESOLVED",
+                  "dispute_amount": {
+                      "currency_code": "USD",
+                      "value": "100.00"
+                  },
+                  "dispute_life_cycle_stage": "INQUIRY",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/customer/disputes/PP-D-59399",
+                          "rel": "self",
+                          "method": "GET"
+                      }
+                  ]
+              },
+              {
+                  "dispute_id": "PP-D-59357",
+                  "create_time": "2021-11-15T06:05:55.000Z",
+                  "update_time": "2021-11-15T06:23:04.000Z",
+                  "reason": "MERCHANDISE_OR_SERVICE_NOT_RECEIVED",
+                  "status": "RESOLVED",
+                  "dispute_state": "RESOLVED",
+                  "dispute_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "dispute_life_cycle_stage": "INQUIRY",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/customer/disputes/PP-D-59357",
+                          "rel": "self",
+                          "method": "GET"
+                      }
+                  ]
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/customer/disputes",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/customer/disputes",
+                  "rel": "first",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 2000

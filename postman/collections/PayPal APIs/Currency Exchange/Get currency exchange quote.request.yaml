@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{base_url}}/v2/pricing/quote-exchange-rates/{{fx_id}}"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+    disabled: true
+body:
+  type: json
+  content: ""
+examples: ./.resources/Get currency exchange quote.resources/examples
+order: 2000

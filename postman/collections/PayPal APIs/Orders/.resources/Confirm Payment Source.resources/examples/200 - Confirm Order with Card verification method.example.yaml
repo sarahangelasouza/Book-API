@@ -1,0 +1,116 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders/:order_id/confirm-payment-source"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |+
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+
+  pathVariables:
+    order_id: "{{order_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "payment_source": {
+              "card": {
+                  "number": "4111111111111111",
+                  "expiry": "2035-12",
+                  "name": "John Doe",
+                  "billing_address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "17.3.160",
+                      "admin_area_1": "CA",
+                      "admin_area_2": "San Jose",
+                      "postal_code": "95131",
+                      "country_code": "US"
+                  },
+                  "attributes": {
+                      "verification": {
+                          "method": "{{card_verification_method}}"
+                      }
+                  }
+              }
+          }
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    traceparent: 00-0000000000000000000f51939861bd7e-48f1105f3b58e1eb-01
+    access-control-expose-headers: Server-Timing
+    strict-transport-security: max-age=31536000; includeSubDomains
+    server: nginx
+    cache-control: max-age=0, no-cache, no-store, must-revalidate
+    paypal-debug-id: f51939861bd7e
+    server-timing: traceparent;desc="00-0000000000000000000f51939861bd7e-f0075d81342d5a8b-01"
+    http_x_pp_az_locator: ccg18.slc
+    content-type: application/json
+    x-backend-info: v=1;name=2k1u3gOGb2cebCyZJujTUN--F_ccg18_wju_origin_api_m_2_sandbox_paypal_com;ip=34.106.111.220;port=443;ssl=1;max=200;ka_ns=0;tka_s=300;tki_s=10;tkp=3;host=api-m.sandbox.paypal.com;min_tls=;max_tls=;sni=edge.sandbox.paypal.com;cert_host=edge.sandbox.paypal.com;ciphers=;check_cert=1;no_reneg=1;to_ns=1000000000;fbto_ns=59000000000;bbto_ns=10000000000
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Tue, 13 Aug 2024 22:06:37 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-iad-kcgs7200129-IAD, cache-iad-kcgs7200073-IAD
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1723586796.698780,VS0,VE2205
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "id": "49K74902BG658273K",
+          "status": "PAYER_ACTION_REQUIRED",
+          "payment_source": {
+              "card": {
+                  "name": "John Doe",
+                  "last_digits": "1111",
+                  "expiry": "2035-12",
+                  "brand": "VISA",
+                  "type": "UNKNOWN",
+                  "bin_details": {}
+              }
+          },
+          "purchase_units": [
+              {
+                  "reference_id": "default"
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/49K74902BG658273K",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://www.sandbox.paypal.com/webapps/helios?action=verify&flow=3ds&cart_id=49K74902BG658273K",
+                  "rel": "payer-action",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 2000

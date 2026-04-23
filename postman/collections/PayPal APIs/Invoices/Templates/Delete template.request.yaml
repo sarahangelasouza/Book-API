@@ -1,0 +1,10 @@
+$kind: http-request
+description: Deletes a template, by ID.
+url: "{{base_url}}/v2/invoicing/templates/:template_id"
+method: DELETE
+pathVariables:
+  - key: template_id
+    value: "{{invoice_template_id}}"
+    description: (Required) The ID of the template to delete.
+examples: ./.resources/Delete template.resources/examples
+order: 5000

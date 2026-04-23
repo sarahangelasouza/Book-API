@@ -1,0 +1,881 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/plans?plan_ids={{billing_plan_id}}&page_size=10&page=1&total_required=true"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      disabled: true
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      disabled: true
+      description: The server stores keys for 72 hours.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  queryParams:
+    - key: product_id
+      value: "{{product_id}}"
+      disabled: true
+      description: Filters the response by a Product ID.
+    - key: plan_ids
+      value: "{{billing_plan_id}}"
+      description: Filters the response by list of plan IDs. Filter supports upto 10 plan IDs.
+    - key: page_size
+      value: "10"
+      description: The number of items to return in the response.
+    - key: page
+      value: "1"
+      description: A non-zero integer which is the start index of the entire list of items to return in the response. The combination of `page=1` and `page_size=20` returns the first 20 items. The combination of `page=2` and `page_size=20` returns the next 20 items.
+    - key: total_required
+      value: "true"
+      description: Indicates whether to show the total count in the response.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: da98378c06bb7
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Fri, 07 Apr 2023 19:33:33 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100119-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680896013.315677,VS0,VE398
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "plans": [
+              {
+                  "id": "P-25T26064UA453325XMIXNMZI",
+                  "version": 9,
+                  "product_id": "1647236710",
+                  "name": "Updated Raffle Name",
+                  "status": "ACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 9,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "20.0"
+                              },
+                              "create_time": "2023-04-05T13:41:48Z",
+                              "update_time": "2023-04-05T13:41:48Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 6,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2023-04-05T13:41:48Z",
+                              "update_time": "2023-04-05T13:41:48Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "220.8"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T05:45:09Z",
+                  "update_time": "2023-04-05T13:41:48Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-25T26064UA453325XMIXNMZI",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-8MW76720BC219260HMIXZMUY",
+                  "version": 2,
+                  "product_id": "1647285840",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "ACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T19:24:07Z",
+                              "update_time": "2022-03-14T19:24:07Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T19:24:07Z",
+                              "update_time": "2022-03-14T19:24:07Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T19:24:03Z",
+                  "update_time": "2023-03-31T22:50:36Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-8MW76720BC219260HMIXZMUY",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-50T91310MA993351VMIXZ7YY",
+                  "version": 2,
+                  "product_id": "1647288288",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "INACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T20:04:55Z",
+                              "update_time": "2022-03-14T20:04:55Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T20:04:55Z",
+                              "update_time": "2022-03-14T20:04:55Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T20:04:51Z",
+                  "update_time": "2022-04-29T12:43:45Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-50T91310MA993351VMIXZ7YY",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-1GK824494L7708027MIX2GFY",
+                  "version": 2,
+                  "product_id": "1647289108",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "INACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T20:18:36Z",
+                              "update_time": "2022-03-14T20:18:36Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T20:18:36Z",
+                              "update_time": "2022-03-14T20:18:36Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T20:18:31Z",
+                  "update_time": "2022-08-17T09:44:06Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1GK824494L7708027MIX2GFY",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-0T348152RT825535VMIX2H2Q",
+                  "version": 2,
+                  "product_id": "1647289319",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "INACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T20:22:07Z",
+                              "update_time": "2022-03-14T20:22:07Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T20:22:07Z",
+                              "update_time": "2022-03-14T20:22:07Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T20:22:02Z",
+                  "update_time": "2022-08-17T09:44:21Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-0T348152RT825535VMIX2H2Q",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-67J170850A790390TMIX3BJA",
+                  "version": 2,
+                  "product_id": "1647292577",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "INACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T21:16:25Z",
+                              "update_time": "2022-03-14T21:16:25Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T21:16:25Z",
+                              "update_time": "2022-03-14T21:16:25Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T21:16:20Z",
+                  "update_time": "2022-08-17T09:44:35Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-67J170850A790390TMIX3BJA",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-72K7849273852152FMIX3FHI",
+                  "version": 2,
+                  "product_id": "1647293082",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "INACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T21:24:50Z",
+                              "update_time": "2022-03-14T21:24:50Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T21:24:50Z",
+                              "update_time": "2022-03-14T21:24:50Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T21:24:45Z",
+                  "update_time": "2022-08-17T09:44:46Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-72K7849273852152FMIX3FHI",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-1NN80288AW4292250MIX3GNA",
+                  "version": 2,
+                  "product_id": "1647293233",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "INACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T21:27:21Z",
+                              "update_time": "2022-03-14T21:27:21Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T21:27:21Z",
+                              "update_time": "2022-03-14T21:27:21Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T21:27:16Z",
+                  "update_time": "2022-08-17T09:44:56Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-1NN80288AW4292250MIX3GNA",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-9C801630SY1456510MIX3WIY",
+                  "version": 2,
+                  "product_id": "1647295263",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "ACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "10.0"
+                              },
+                              "create_time": "2022-03-14T22:01:14Z",
+                              "update_time": "2022-03-14T22:01:14Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 2,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "50.0"
+                              },
+                              "create_time": "2022-03-14T22:01:14Z",
+                              "update_time": "2022-03-14T22:01:14Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T22:01:07Z",
+                  "update_time": "2023-01-19T04:57:41Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-9C801630SY1456510MIX3WIY",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              },
+              {
+                  "id": "P-84F11496JL438021VMIX3YGQ",
+                  "version": 3,
+                  "product_id": "1647295509",
+                  "name": "Fresh Clean Tees Plan",
+                  "status": "ACTIVE",
+                  "description": "Each shirt they send out to subscribers is designed with lots of attention to detail",
+                  "usage_type": "LICENSED",
+                  "billing_cycles": [
+                      {
+                          "pricing_scheme": {
+                              "version": 3,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "15.0"
+                              },
+                              "create_time": "2023-01-19T05:26:10Z",
+                              "update_time": "2023-01-19T05:26:10Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "TRIAL",
+                          "sequence": 1,
+                          "total_cycles": 1
+                      },
+                      {
+                          "pricing_scheme": {
+                              "version": 3,
+                              "fixed_price": {
+                                  "currency_code": "USD",
+                                  "value": "100.0"
+                              },
+                              "create_time": "2023-01-19T05:26:10Z",
+                              "update_time": "2023-01-19T05:26:10Z"
+                          },
+                          "frequency": {
+                              "interval_unit": "MONTH",
+                              "interval_count": 1
+                          },
+                          "tenure_type": "REGULAR",
+                          "sequence": 2,
+                          "total_cycles": 12
+                      }
+                  ],
+                  "payment_preferences": {
+                      "service_type": "PREPAID",
+                      "auto_bill_outstanding": true,
+                      "setup_fee": {
+                          "currency_code": "USD",
+                          "value": "10.0"
+                      },
+                      "setup_fee_failure_action": "CONTINUE",
+                      "payment_failure_threshold": 7
+                  },
+                  "taxes": {
+                      "percentage": "10.0",
+                      "inclusive": false
+                  },
+                  "quantity_supported": false,
+                  "payee": {
+                      "merchant_id": "C7CYMKZDG8D6E",
+                      "display_data": {
+                          "business_email": "john_merchant@example.com"
+                      }
+                  },
+                  "create_time": "2022-03-14T22:05:14Z",
+                  "update_time": "2023-01-19T05:26:10Z",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/billing/plans/P-84F11496JL438021VMIX3YGQ",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      }
+                  ]
+              }
+          ],
+          "total_items": 17145,
+          "total_pages": 1715,
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans?page_size=10&page=1",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans?page_size=10&page=2",
+                  "rel": "next",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/billing/plans?page_size=10&page=1715",
+                  "rel": "last",
+                  "method": "GET",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 2000

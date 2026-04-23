@@ -1,0 +1,83 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/payments/captures/:capture_id"
+  method: GET
+  pathVariables:
+    - key: capture_id
+      value: "{{capture_id}}"
+      description: (Required) The PayPal-generated ID for the captured payment for which to show details.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json;charset=UTF-8
+    Content-Length: "1021"
+    Connection: keep-alive
+    Date: Tue, 08 Feb 2022 00:31:37 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 74152aee6104
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "id": "8SA298979U639233U",
+          "amount": {
+              "currency_code": "USD",
+              "value": "10.99"
+          },
+          "final_capture": true,
+          "seller_protection": {
+              "status": "NOT_ELIGIBLE"
+          },
+          "disbursement_mode": "INSTANT",
+          "seller_receivable_breakdown": {
+              "gross_amount": {
+                  "currency_code": "USD",
+                  "value": "10.99"
+              },
+              "paypal_fee": {
+                  "currency_code": "USD",
+                  "value": "0.87"
+              },
+              "net_amount": {
+                  "currency_code": "USD",
+                  "value": "10.12"
+              }
+          },
+          "invoice_id": "1644280277",
+          "status": "COMPLETED",
+          "processor_response": {
+              "avs_code": "A",
+              "cvv_code": "M",
+              "response_code": "0000"
+          },
+          "supplementary_data": {
+              "related_ids": {
+                  "order_id": "7YR117309L4312735",
+                  "authorization_id": "23823392WE767335F"
+              }
+          },
+          "create_time": "2022-02-08T00:31:18Z",
+          "update_time": "2022-02-08T00:31:18Z",
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/captures/8SA298979U639233U",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/captures/8SA298979U639233U/refund",
+                  "rel": "refund",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/23823392WE767335F",
+                  "rel": "up",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

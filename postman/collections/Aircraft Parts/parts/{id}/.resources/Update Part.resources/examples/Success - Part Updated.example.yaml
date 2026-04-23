@@ -1,0 +1,43 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/parts/:id"
+  method: PATCH
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    id: 550e8400-e29b-41d4-a716-446655440000
+  body:
+    type: json
+    content: |-
+      {
+        "quantityOnHand": 10,
+        "status": "ACTIVE",
+        "notes": "Stock replenished - verified quality inspection complete"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440000",
+        "partNumber": "CFM56-7B-001",
+        "name": "CFM56-7B Fan Blade",
+        "description": "First-stage fan blade for CFM56-7B turbofan engine",
+        "category": "ENGINE",
+        "status": "ACTIVE",
+        "manufacturer": "CFM International",
+        "quantityOnHand": 10,
+        "reorderThreshold": 3,
+        "unitCost": 24500.00,
+        "location": "Warehouse A, Row 3, Bin 7",
+        "notes": "Stock replenished - verified quality inspection complete",
+        "createdAt": "2024-01-15T10:30:00.000Z",
+        "updatedAt": "2024-01-15T13:00:00.000Z"
+      }
+order: 1000

@@ -1,0 +1,15 @@
+$kind: http-request
+description: Shows details for a refund, by ID.
+url: "{{base_url}}/v2/payments/refunds/:refund_id"
+method: GET
+headers:
+  - key: PayPal-Mock-Response
+    value: '{ "mock_application_codes": "{{mock_issue}}" }'
+    disabled: true
+    description: For a list of error codes, see https://developer.paypal.com/docs/api/payments/v2/#errors
+pathVariables:
+  - key: refund_id
+    value: "{{refund_id}}"
+    description: (Required) The PayPal-generated ID for the refund for which to show details.
+examples: ./.resources/Show refund details.resources/examples
+order: 7000

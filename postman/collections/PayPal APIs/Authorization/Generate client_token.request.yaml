@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{base_url}}/v1/identity/generate-token"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "customer_id": "{{$timestamp}}"
+    }
+examples: ./.resources/Generate client_token.resources/examples
+order: 4000

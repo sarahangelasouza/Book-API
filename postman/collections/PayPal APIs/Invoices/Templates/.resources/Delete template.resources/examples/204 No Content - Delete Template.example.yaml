@@ -1,0 +1,23 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/templates/:template_id"
+  method: DELETE
+  pathVariables:
+    - key: template_id
+      value: "{{invoice_template_id}}"
+      description: (Required) The ID of the template to delete.
+response:
+  statusCode: 204
+  statusText: No Content
+  headers:
+    Connection: keep-alive
+    Date: Mon, 07 Feb 2022 23:39:57 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 843ecd9a2c088
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: text
+    content: ""
+order: 1000

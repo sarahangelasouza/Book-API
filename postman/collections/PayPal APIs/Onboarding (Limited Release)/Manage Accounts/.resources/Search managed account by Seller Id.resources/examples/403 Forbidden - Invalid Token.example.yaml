@@ -1,0 +1,43 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id?views=process_view"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  queryParams:
+    - key: views
+      value: process_view
+      description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response.
+    - key: ""
+      value: ""
+      disabled: true
+  pathVariables:
+    - key: id
+      value: 5CNQ4YGQV84CQ
+      description: The ID of the seller.
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    Connection: keep-alive
+    Content-Length: "0"
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: ca1ba1d7868a9
+    Server-Timing: traceparent;desc="00-0000000000000000000ca1ba1d7868a9-713ad69f3c64037f-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Thu, 06 Apr 2023 08:16:36 GMT
+    X-Served-By: cache-hnd18725-HND, cache-tyo11923-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1680768996.927750,VS0,VE390
+  body:
+    type: text
+    content: ""
+order: 5000

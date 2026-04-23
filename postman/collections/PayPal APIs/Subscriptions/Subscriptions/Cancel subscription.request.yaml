@@ -1,0 +1,16 @@
+$kind: http-request
+description: Cancels the subscription.
+url: "{{base_url}}/v1/billing/subscriptions/:subscription_id/cancel"
+method: POST
+headers:
+  Content-Type: application/json
+pathVariables:
+  subscription_id: "{{subscription_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "reason": "Item out of stock"
+    }
+examples: ./.resources/Cancel subscription.resources/examples
+order: 7000

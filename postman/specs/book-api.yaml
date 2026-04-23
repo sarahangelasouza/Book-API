@@ -99,16 +99,7 @@ paths:
                 error:
                   code: 400
                   message: Bad Request
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                error:
-                  code: 500
-                  message: Internal Server Error
+
 
   /books/{id}:
     parameters:

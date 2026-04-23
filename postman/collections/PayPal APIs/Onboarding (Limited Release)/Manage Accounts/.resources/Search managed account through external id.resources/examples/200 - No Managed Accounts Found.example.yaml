@@ -1,0 +1,41 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts?external_id=ASkAAAvMTPat7Uduoq67CUtCcUwD&views=process_view"
+  method: GET
+  queryParams:
+    - key: external_id
+      value: ASkAAAvMTPat7Uduoq67CUtCcUwD
+      description: (Required) The `external_id` query parameter can be used to request managed accounts with the given external_id.
+    - key: views
+      value: process_view
+      description: The `views` query parameter can be used to request `process_view` in addition to the default GET response
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: a58af0cc4c26d
+    Server-Timing: traceparent;desc="00-0000000000000000000a58af0cc4c26d-461a733e9708cb3b-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: br
+    Edge-Control: max-age=0
+    Date: Mon, 10 Apr 2023 04:06:44 GMT
+    X-Served-By: cache-hnd18739-HND, cache-tyo11948-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681099605.772818,VS0,VE177
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "managed_accounts": []
+      }
+order: 4000

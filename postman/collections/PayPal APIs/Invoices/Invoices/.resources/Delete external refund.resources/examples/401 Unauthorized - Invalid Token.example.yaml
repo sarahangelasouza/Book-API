@@ -1,0 +1,67 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/invoices/:invoice_id/refunds/:transaction_id"
+  method: DELETE
+  headers:
+    - key: Content-Type
+      value: application/json
+      disabled: true
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  pathVariables:
+    - key: invoice_id
+      value: "{{invoice_id}}"
+      description: (Required) The ID of the invoice from which to delete the external refund transaction.
+    - key: transaction_id
+      value: "{{invoice_refund_id}}"
+      description: (Required) The ID of the external refund transaction to delete.
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: d4260bda238a8
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 06 Apr 2023 22:11:27 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100077-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680819087.980667,VS0,VE60
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 2000

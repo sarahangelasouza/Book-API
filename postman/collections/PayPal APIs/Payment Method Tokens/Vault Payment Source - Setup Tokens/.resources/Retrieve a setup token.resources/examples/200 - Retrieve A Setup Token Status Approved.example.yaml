@@ -1,0 +1,75 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/setup-tokens/:setup_token_id"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  pathVariables:
+    setup_token_id: "{{setup_token_id}}"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+          "id": "3FV81224DT325173L",
+          "customer": {
+              "id": "RXtFdntTOA"
+          },
+          "status": "APPROVED",
+          "payment_source": {
+              "card": {
+                  "last_digits": "1111",
+                  "brand": "VISA",
+                  "expiry": "2027-02",
+                  "billing_address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "17.3.160",
+                      "admin_area_2": "San Jose",
+                      "admin_area_1": "CA",
+                      "postal_code": "95131",
+                      "country_code": "US"
+                  },
+                  "verification_status": "VERIFIED",
+                  "verification": {
+                      "network_transaction_id": "21590180576320777",
+                      "time": "2023-10-06T21:56:48.000Z",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "0.00"
+                      },
+                      "processor_response": {
+                          "avs_code": "A",
+                          "cvv_code": "C",
+                          "response_code": "00"
+                      }
+                  }
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/setup-tokens/3FV81224DT325173L",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens",
+                  "rel": "confirm",
+                  "method": "POST",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 1000

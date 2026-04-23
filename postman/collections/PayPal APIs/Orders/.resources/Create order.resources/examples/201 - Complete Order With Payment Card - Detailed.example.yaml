@@ -1,0 +1,366 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |+
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+
+  body:
+    type: json
+    content: |-
+      {
+          "intent": "CAPTURE",
+          "purchase_units": [
+              {
+                  "reference_id": "PUHF",
+                  "description": "Sporting Goods",
+                  "invoice_id": {{$timestamp}},
+                  "custom_id": "CUST-HighFashions",
+                  "soft_descriptor": "HighFashions",
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "240.00",
+                      "breakdown": {
+                          "item_total": {
+                              "currency_code": "USD",
+                              "value": "200.00"
+                          },
+                          "shipping": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "handling": {
+                              "currency_code": "USD",
+                              "value": "10.00"
+                          },
+                          "tax_total": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "shipping_discount": {
+                              "currency_code": "USD",
+                              "value": "5.00"
+                          },
+                          "discount": {
+                              "currency_code": "USD",
+                              "value": "5.00"
+                          }
+                      }
+                  },
+                  "payee": {
+                      "email_address": "sb-jgbqn12111212@business.example.com",
+                      "merchant_id": "65MXV4T2ZV6KY",
+                      "display_data": {
+                          "business_email": "support@example.com",
+                          "business_phone": {
+                              "country_code": "1",
+                              "national_number": "18882211161",
+                              "extension_number": "9"
+                          },
+                          "brand_name": "Example Business"
+                      }
+                  },
+                  "items": [
+                      {
+                          "name": "T-Shirt",
+                          "description": "Green XL",
+                          "sku": "sku01",
+                          "unit_amount": {
+                              "currency_code": "USD",
+                              "value": "100.00"
+                          },
+                          "tax": {
+                              "currency_code": "USD",
+                              "value": "10.00"
+                          },
+                          "quantity": "1",
+                          "category": "PHYSICAL_GOODS"
+                      },
+                      {
+                          "name": "Shoes",
+                          "description": "Running, Size 10.5",
+                          "sku": "sku02",
+                          "unit_amount": {
+                              "currency_code": "USD",
+                              "value": "50.00"
+                          },
+                          "tax": {
+                              "currency_code": "USD",
+                              "value": "5.00"
+                          },
+                          "quantity": "2",
+                          "category": "PHYSICAL_GOODS"
+                      }
+                  ],
+                  "shipping": {
+                      "address": {
+                          "address_line_1": "123 Townsend St",
+                          "address_line_2": "Floor 6",
+                          "admin_area_2": "San Francisco",
+                          "admin_area_1": "CA",
+                          "postal_code": "94107",
+                          "country_code": "US"
+                      },
+                      "options": [
+                          {
+                              "id": "SHIP0000001",
+                              "label": "1 Day Priority",
+                              "type": "SHIPPING",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "20.00"
+                              },
+                              "selected": true
+                          },
+                          {
+                              "id": "STORE00020202",
+                              "label": "Free Shipping",
+                              "type": "SHIPPING",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "0.00"
+                              },
+                              "selected": false
+                          },
+                          {
+                              "id": "PICKUP00000232323",
+                              "label": "Priority Shipping",
+                              "type": "PICKUP",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "10.00"
+                              },
+                              "selected": false
+                          }
+                      ]
+                  }
+              }
+          ],
+          "payment_source": {
+              "card": {
+                  "number": "4111111111111111",
+                  "expiry": "2035-12"
+              }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Connection: keep-alive
+    Content-Length: "4021"
+    Content-Type: application/json
+    Server: nginx/1.18.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: d832df4022323
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Fri, 21 Jan 2022 00:18:42 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-sjc10048-SJC
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1642724317.334496,VS0,VE5101
+  body:
+    type: json
+    content: |-
+      {
+          "id": "0K4795520C763571A",
+          "intent": "CAPTURE",
+          "status": "COMPLETED",
+          "payment_source": {
+              "card": {
+                  "last_digits": "4111",
+                  "brand": "VISA",
+                  "type": "UNKNOWN"
+              }
+          },
+          "purchase_units": [
+              {
+                  "reference_id": "PUHF",
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "240.00",
+                      "breakdown": {
+                          "item_total": {
+                              "currency_code": "USD",
+                              "value": "200.00"
+                          },
+                          "shipping": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "handling": {
+                              "currency_code": "USD",
+                              "value": "10.00"
+                          },
+                          "tax_total": {
+                              "currency_code": "USD",
+                              "value": "20.00"
+                          },
+                          "insurance": {
+                              "currency_code": "USD",
+                              "value": "0.00"
+                          },
+                          "shipping_discount": {
+                              "currency_code": "USD",
+                              "value": "5.00"
+                          },
+                          "discount": {
+                              "currency_code": "USD",
+                              "value": "5.0"
+                          }
+                      }
+                  },
+                  "payee": {
+                      "email_address": "sb-jgbqn12111212@business.example.com",
+                      "merchant_id": "65MXV4T2ZV6KY"
+                  },
+                  "description": "Sporting Goods",
+                  "custom_id": "CUST-HighFashions",
+                  "invoice_id": "1642724317",
+                  "soft_descriptor": "PP*HIGHFASHIONS",
+                  "items": [
+                      {
+                          "name": "T-Shirt",
+                          "unit_amount": {
+                              "currency_code": "USD",
+                              "value": "100.00"
+                          },
+                          "tax": {
+                              "currency_code": "USD",
+                              "value": "10.00"
+                          },
+                          "quantity": "1",
+                          "description": "Green XL",
+                          "sku": "sku01"
+                      },
+                      {
+                          "name": "Shoes",
+                          "unit_amount": {
+                              "currency_code": "USD",
+                              "value": "50.00"
+                          },
+                          "tax": {
+                              "currency_code": "USD",
+                              "value": "5.00"
+                          },
+                          "quantity": "2",
+                          "description": "Running, Size 10.5",
+                          "sku": "sku02"
+                      }
+                  ],
+                  "shipping": {
+                      "address": {
+                          "address_line_1": "123 Townsend St",
+                          "address_line_2": "Floor 6",
+                          "admin_area_2": "San Francisco",
+                          "admin_area_1": "CA",
+                          "postal_code": "94107",
+                          "country_code": "US"
+                      },
+                      "options": [
+                          {
+                              "id": "SHIP0000001",
+                              "label": "1 Day Priority",
+                              "type": "SHIPPING",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "20.00"
+                              },
+                              "selected": true
+                          }
+                      ]
+                  },
+                  "payments": {
+                      "captures": [
+                          {
+                              "id": "26W18329M9058473L",
+                              "status": "COMPLETED",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "240.00"
+                              },
+                              "final_capture": true,
+                              "disbursement_mode": "INSTANT",
+                              "seller_protection": {
+                                  "status": "NOT_ELIGIBLE"
+                              },
+                              "seller_receivable_breakdown": {
+                                  "gross_amount": {
+                                      "currency_code": "USD",
+                                      "value": "240.00"
+                                  },
+                                  "paypal_fee": {
+                                      "currency_code": "USD",
+                                      "value": "8.87"
+                                  },
+                                  "net_amount": {
+                                      "currency_code": "USD",
+                                      "value": "231.13"
+                                  }
+                              },
+                              "invoice_id": "1642724317",
+                              "custom_id": "CUST-HighFashions",
+                              "links": [
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/captures/26W18329M9058473L",
+                                      "rel": "self",
+                                      "method": "GET"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/captures/26W18329M9058473L/refund",
+                                      "rel": "refund",
+                                      "method": "POST"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/checkout/orders/0K4795520C763571A",
+                                      "rel": "up",
+                                      "method": "GET"
+                                  }
+                              ],
+                              "create_time": "2022-01-21T00:18:41Z",
+                              "update_time": "2022-01-21T00:18:41Z",
+                              "processor_response": {
+                                  "avs_code": "A",
+                                  "cvv_code": "M",
+                                  "response_code": "0000"
+                              }
+                          }
+                      ]
+                  }
+              }
+          ],
+          "create_time": "2022-01-21T00:18:41Z",
+          "update_time": "2022-01-21T00:18:41Z",
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/0K4795520C763571A",
+                  "rel": "self",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 6000

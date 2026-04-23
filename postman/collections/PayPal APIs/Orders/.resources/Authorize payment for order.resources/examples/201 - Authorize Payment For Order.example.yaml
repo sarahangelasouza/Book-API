@@ -1,0 +1,144 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders/:order_id/authorize"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  pathVariables:
+    order_id: "{{order_id}}"
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Connection: keep-alive
+    Content-Length: "1516"
+    Content-Type: application/json
+    Server: nginx/1.18.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 18cffb400dcff
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 20 Jan 2022 19:00:46 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-sjc10062-SJC
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1642705245.917296,VS0,VE1391
+  body:
+    type: json
+    content: |-
+      {
+          "id": "9P375962UG756752D",
+          "status": "COMPLETED",
+          "purchase_units": [
+              {
+                  "reference_id": "default",
+                  "shipping": {
+                      "name": {
+                          "full_name": "FooBuyer Jones"
+                      },
+                      "address": {
+                          "address_line_1": "1 Main St",
+                          "admin_area_2": "San Jose",
+                          "admin_area_1": "CA",
+                          "postal_code": "95131",
+                          "country_code": "US"
+                      }
+                  },
+                  "payments": {
+                      "authorizations": [
+                          {
+                              "status": "CREATED",
+                              "id": "8VF53974JG831581P",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "1000.00"
+                              },
+                              "seller_protection": {
+                                  "status": "ELIGIBLE",
+                                  "dispute_categories": [
+                                      "ITEM_NOT_RECEIVED",
+                                      "UNAUTHORIZED_TRANSACTION"
+                                  ]
+                              },
+                              "expiration_time": "2022-02-18T19:00:45Z",
+                              "links": [
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/8VF53974JG831581P",
+                                      "rel": "self",
+                                      "method": "GET"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/8VF53974JG831581P/capture",
+                                      "rel": "capture",
+                                      "method": "POST"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/8VF53974JG831581P/void",
+                                      "rel": "void",
+                                      "method": "POST"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/8VF53974JG831581P/reauthorize",
+                                      "rel": "reauthorize",
+                                      "method": "POST"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/checkout/orders/9P375962UG756752D",
+                                      "rel": "up",
+                                      "method": "GET"
+                                  }
+                              ],
+                              "create_time": "2022-01-20T19:00:45Z",
+                              "update_time": "2022-01-20T19:00:45Z"
+                          }
+                      ]
+                  }
+              }
+          ],
+          "payer": {
+              "name": {
+                  "given_name": "FooBuyer",
+                  "surname": "Jones"
+              },
+              "email_address": "foobuyer@gmail.com",
+              "payer_id": "QYR5Z8XDVJNXQ",
+              "address": {
+                  "country_code": "US"
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/9P375962UG756752D",
+                  "rel": "self",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

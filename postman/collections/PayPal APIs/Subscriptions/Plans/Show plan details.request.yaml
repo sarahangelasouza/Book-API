@@ -1,0 +1,8 @@
+$kind: http-request
+description: Shows details for a plan, by ID.
+url: "{{base_url}}/v1/billing/plans/:billing_plan_id"
+method: GET
+pathVariables:
+  billing_plan_id: "{{billing_plan_id}}"
+examples: ./.resources/Show plan details.resources/examples
+order: 3000

@@ -1,0 +1,149 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts"
+  method: POST
+  headers:
+    - key: Prefer
+      value: return=representation,views=process_view
+      description: (Optional)The preferred server response upon successful processing of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>account_id</code>, <code>external_id</code>, and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation without `process_view`.</li><li><code>return=representation, views=process_view</code>. The server returns complete resource representation along with `process_view` which includes policies information along with data/documents requirement to fulfill those.</li><li><code>views=process_view</code>. The server returns complete resource representation along with `process_view` which includes policies information along with data/documents requirement to fulfill those.</li></ul>
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  body:
+    type: json
+    content: |-
+      {
+          "external_id": "EXT-{{$timestamp}}",
+          "legal_country_code": "FR",
+          "organization": "{{managed_path_organization}}",
+          "user_id": "{{$timestamp}}",
+          "primary_currency_code": "EUR",
+          "individual_owners": [
+              {
+                  "names": [
+                      {
+                          "given_name": "TONYA",
+                          "surname": "MALLUWAA",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "addresses": [
+                      {
+                          "address_line_1": "100",
+                          "admin_area_2": "Paris",
+                          "postal_code": "75012",
+                          "country_code": "FR",
+                          "type": "HOME"
+                      }
+                  ],
+                  "birth_details": {
+                      "date_of_birth": "1990-01-01"
+                  }
+              }
+          ],
+          "business_entity": {
+              "type": "INDIVIDUAL",
+              "merchant_category_code":"5462",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "Abishak MALLUWA",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                  "address_line_1": "30 Rue Erard",
+                  "address_line_2": "BAT D4",
+                  "admin_area_2": "Paris",
+                  "postal_code": "75012",
+                  "country_code": "FR"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "33",
+                      "national_number": "0182280066",
+                      "type": "CUSTOMER_SERVICE"
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "NO"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "major_version": 3,
+                  "minor_version": 3,
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              }
+          ],
+           "financial_instruments": {
+              "banks": [
+                  {
+                      "account_number": "59010470",
+                      "account_number_type": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "10011001",
+                      "currency_code": "EUR",
+                      "country_code": "DE",
+                      "account_holder_details" : {
+                          "name":"Abishak MALLUWA"
+                      },
+                      "bank_name": "N26 Bank AG",
+                      "branch_location":"10179 Berlin DE"
+                  }
+              ]
+          }
+          
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Connection: keep-alive
+    Content-Length: "413"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 62d4242000ad3
+    Server-Timing: traceparent;desc="00-000000000000000000062d4242000ad3-4dc1b7b588d8779b-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Thu, 20 Apr 2023 03:42:18 GMT
+    X-Served-By: cache-hnd18737-HND, cache-tyo11933-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681962133.778490,VS0,VE5418
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "62d4242000ad3",
+          "details": [
+              {
+                  "field": "/financial_instruments/banks/0",
+                  "location": "body",
+                  "issue": "VALIDATION_ERROR",
+                  "description": "Invalid bank account information provided."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/managed-accounts",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 13000

@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id/wallet-domains"
+  method: GET
+  pathVariables:
+    - key: id
+      value: 2B57KS2A3E7ZE
+      description: The ID of the seller.
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    Connection: keep-alive
+    Content-Length: "0"
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 85a404487cd2d
+    Server-Timing: traceparent;desc="00-000000000000000000085a404487cd2d-5290332f5bab553f-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Mon, 17 Apr 2023 06:42:51 GMT
+    X-Served-By: cache-hnd18747-HND, cache-tyo11922-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681713771.940703,VS0,VE535
+  body:
+    type: text
+    content: ""
+order: 2000

@@ -1,10 +1,7 @@
 $kind: http-request
-method: DELETE
-url: "{{baseUrl}}/books/:id"
 description: Deletes a book by ID.
+url: "{{baseUrl}}/books/:id"
+method: DELETE
 pathVariables:
-  - key: id
-    value: "{{bookID}}"
-    $type: ""
-examples: ./.resources/Delete Book.resources/examples
+  id: "{{bookID}}"
 order: 5000

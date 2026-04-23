@@ -1,0 +1,33 @@
+$kind: http-request
+description: Returns all payment tokens for a customer.
+url: "{{base_url}}/v3/vault/payment-tokens?customer_id={{vault_customer_id}}"
+method: GET
+headers:
+  - key: Content-Type
+    value: application/json
+    description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  - key: PayPal-Request-Id
+    value: "{{$guid}}"
+    description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+  - key: PayPal-Auth-Assertion
+    value: "{{paypal_auth_assertion}}"
+    disabled: true
+    description: |
+      An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+queryParams:
+  - key: page_size
+    value: "5"
+    disabled: true
+    description: A non-negative, non-zero integer indicating the maximum number of results to return at one time.
+  - key: page
+    value: "1"
+    disabled: true
+    description: A non-negative, non-zero integer representing the page of the results.
+  - key: total_required
+    value: "false"
+    disabled: true
+    description: A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.
+  - key: customer_id
+    value: "{{vault_customer_id}}"
+examples: ./.resources/List all payment tokens for customer.resources/examples
+order: 4000

@@ -1,0 +1,76 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/payments/authorizations/:authorization_id"
+  method: GET
+  pathVariables:
+    - key: authorization_id
+      value: "{{authorization_id}}"
+      description: (Required) The ID of the authorized payment for which to show details.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json;charset=UTF-8
+    Content-Length: "1015"
+    Connection: keep-alive
+    Date: Mon, 07 Feb 2022 23:42:01 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 8a489df489f62
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "id": "3KM30725CS262502P",
+          "status": "CREATED",
+          "amount": {
+              "currency_code": "USD",
+              "value": "100.00"
+          },
+          "seller_protection": {
+              "status": "NOT_ELIGIBLE"
+          },
+          "processor_response": {
+              "avs_code": "A",
+              "cvv_code": "M",
+              "response_code": "0000"
+          },
+          "supplementary_data": {
+              "related_ids": {
+                  "order_id": "8HD65802VF9526337"
+              }
+          },
+          "expiration_time": "2022-03-09T23:41:56Z",
+          "create_time": "2022-02-07T23:41:56Z",
+          "update_time": "2022-02-07T23:41:56Z",
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/3KM30725CS262502P",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/3KM30725CS262502P/capture",
+                  "rel": "capture",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/3KM30725CS262502P/void",
+                  "rel": "void",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/authorizations/3KM30725CS262502P/reauthorize",
+                  "rel": "reauthorize",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/8HD65802VF9526337",
+                  "rel": "up",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

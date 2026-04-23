@@ -1,0 +1,49 @@
+$kind: http-request
+description: Sends or schedules an invoice, by ID, to be sent to a customer. The action depends on the invoice issue date:<ul><li>If the invoice issue date is current or in the past, sends the invoice immediately.</li><li>If the invoice issue date is in the future, schedules the invoice to be sent on that date.</li></ul>To suppress the merchant's email notification, set the `send_to_invoicer` body parameter to `false`. To send the invoice through a share link and not through PayPal, set the <code>send_to_recipient</code> parameter to <code>false</code> in the <code>notification</code> object. The <code>send_to_recipient</code> parameter does not apply to a future issue date because the invoice is scheduled to be sent through PayPal on that date.<blockquote><strong>Notes:</strong><ul><li>After you send an invoice, resending it has no effect.</li><li>To send a notification for updates, <a href="#invoices_update">update the invoice</a> and set the <code>send_to_recipient</code> body parameter to <code>true</code>.</li></ul></blockquote>
+url: "{{base_url}}/v2/invoicing/invoices/:invoice_id/send"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+    description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  - key: PayPal-Request-Id
+    value: "{{$guid}}"
+    description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+  - key: PayPal-Client-Metadata-Id
+    value: "{{paypal_client_metadata_Id}}"
+    disabled: true
+    description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+  - key: PayPal-Partner-Attribution-Id
+    value: "{{paypal_partner_attribution_id}}"
+    disabled: true
+    description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+  - key: PayPal-Auth-Assertion
+    value: "{{paypal_auth_assertion}}"
+    disabled: true
+    description: |
+      An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  - key: Prefer
+    value: "{{prefer_representation_detailed}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  - key: Prefer
+    value: "{{prefer_representation_minimal}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+pathVariables:
+  invoice_id: "{{invoice_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "subject": "<The subject of the email that is sent as a notification to the recipient.>",
+        "note": "<A note to the payer.>",
+        "send_to_recipient": true,
+        "additional_recipients": [
+            "recipient_cc1@example.com",
+            "recipient_cc2@example.com"
+        ],
+        "send_to_invoicer": false
+    }
+examples: ./.resources/Send invoice.resources/examples
+order: 7000

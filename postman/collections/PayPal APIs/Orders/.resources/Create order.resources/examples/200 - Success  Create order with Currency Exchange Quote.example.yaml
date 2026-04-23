@@ -1,0 +1,125 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |+
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+
+    - key: PayPal-Mock-Response
+      value: '{ "mock_application_codes": "{{mock_issue}}" }'
+      disabled: true
+      description: For a list of error codes to test for see https://developer.paypal.com/api/rest/reference/orders/v2/errors/#link-createorder
+  body:
+    type: json
+    content: |-
+      {
+          "intent": "{{order_intent}}",
+          "payment_source": {
+              "paypal": {
+                  "experience_context": {
+                      "return_url": "https://developer.paypal.com",
+                      "cancel_url": "https://www.bing.com",
+                      "user_action": "PAY_NOW"
+                  }
+              }
+          },
+          "purchase_units": [
+              {
+                  "amount": {
+                      "currency_code": "CAD",
+                      "value": "16.80"
+                  },
+                   "payment_instruction": {
+                      "payee_receivable_fx_rate_id": "{{fx_id}}"
+                   }
+              }
+          ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: f75476437f3a4
+    Server-Timing: traceparent;desc="00-0000000000000000000f75476437f3a4-6c2129d4d97a21bc-01"
+    HTTP_X_PP_AZ_LOCATOR: ccg18.slc
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: br
+    Edge-Control: max-age=0
+    Date: Mon, 17 Nov 2025 07:43:03 GMT
+    X-Served-By: cache-qpg1257-QPG, cache-maa10249-MAA
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1763365382.122084,VS0,VE1360
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: text
+    content: |-
+      {
+          "id": "8H747528VH236835E",
+          "intent": "CAPTURE",
+          "status": "PAYER_ACTION_REQUIRED",
+          "payment_source": {
+              "paypal": {}
+          },
+          "purchase_units": [
+              {
+                  "reference_id": "default",
+                  "amount": {
+                      "currency_code": "CAD",
+                      "value": "16.80"
+                  },
+                  "payee": {
+                      "email_address": "sb-bdqth47438624@business.example.com",
+                      "merchant_id": "DTMRD43MJG542"
+                  },
+                  "payment_instruction": {
+                      "payee_receivable_fx_rate_id": "MTFGMC1DMzg4LUVEM0E4ODVDLTlGQUUtNzRGOEUwMTRCQUFF"
+                  },
+                  "supplementary_data": {
+                      "tax_nexus": []
+                  }
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/8H747528VH236835E",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://www.sandbox.paypal.com/checkoutnow?token=8H747528VH236835E",
+                  "rel": "payer-action",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 3000

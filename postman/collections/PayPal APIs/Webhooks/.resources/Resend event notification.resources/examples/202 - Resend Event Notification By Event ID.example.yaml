@@ -1,0 +1,136 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/notifications/webhooks-events/:event_id/resend"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      disabled: true
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  pathVariables:
+    - key: event_id
+      value: "{{event_id}}"
+      description: (Required) The ID of the webhook event notification to resend.
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 202
+  statusText: Accepted
+  headers:
+    Content-Type: application/json
+    Content-Length: "1572"
+    Connection: keep-alive
+    Date: Wed, 02 Feb 2022 02:22:40 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 91fbd57d31329
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "id": "WH-2CL46544TB770421K-5VB92446WP7345818",
+          "create_time": "2022-02-02T00:23:12.336Z",
+          "resource_type": "capture",
+          "event_type": "PAYMENT.CAPTURE.COMPLETED",
+          "summary": "Payment completed for $ 100.0 USD",
+          "resource": {
+              "disbursement_mode": "INSTANT",
+              "amount": {
+                  "value": "100.00",
+                  "currency_code": "USD"
+              },
+              "seller_protection": {
+                  "status": "NOT_ELIGIBLE"
+              },
+              "supplementary_data": {
+                  "related_ids": {
+                      "order_id": "89T257400V0473133"
+                  }
+              },
+              "update_time": "2022-02-02T00:22:38Z",
+              "create_time": "2022-02-02T00:22:38Z",
+              "final_capture": true,
+              "seller_receivable_breakdown": {
+                  "paypal_fee": {
+                      "value": "3.98",
+                      "currency_code": "USD"
+                  },
+                  "gross_amount": {
+                      "value": "100.00",
+                      "currency_code": "USD"
+                  },
+                  "net_amount": {
+                      "value": "96.02",
+                      "currency_code": "USD"
+                  }
+              },
+              "processor_response": {
+                  "cvv_code": "M",
+                  "response_code": "0000",
+                  "avs_code": "A"
+              },
+              "links": [
+                  {
+                      "method": "GET",
+                      "rel": "self",
+                      "href": "https://api.sandbox.paypal.com/v2/payments/captures/29Y24445UY2083144"
+                  },
+                  {
+                      "method": "POST",
+                      "rel": "refund",
+                      "href": "https://api.sandbox.paypal.com/v2/payments/captures/29Y24445UY2083144/refund"
+                  },
+                  {
+                      "method": "GET",
+                      "rel": "up",
+                      "href": "https://api.sandbox.paypal.com/v2/checkout/orders/89T257400V0473133"
+                  }
+              ],
+              "id": "29Y24445UY2083144",
+              "status": "COMPLETED"
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks-events/WH-2CL46544TB770421K-5VB92446WP7345818",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks-events/WH-2CL46544TB770421K-5VB92446WP7345818/resend",
+                  "rel": "resend",
+                  "method": "POST",
+                  "encType": "application/json"
+              }
+          ],
+          "event_version": "1.0",
+          "resource_version": "2.0"
+      }
+order: 1000

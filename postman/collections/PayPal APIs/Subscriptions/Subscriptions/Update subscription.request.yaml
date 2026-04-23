@@ -1,0 +1,80 @@
+$kind: http-request
+description: Updates a subscription which could be in <code>ACTIVE</code> or <code>SUSPENDED</code> status. You can override plan level default attributes by providing customised values for plan path in the patch request.<br /> <ul> <li>You cannot update attributes that have already completed (Example - trial cycles can’t be updated if completed).</li> <li>Once overridden, changes to plan resource will not impact subscription.</li> <li>Any price update will not impact billing cycles within next 10 days (Applicable only for subscriptions funded by PayPal account).</li> </ul> Following are the fields eligible for patch.<table><thead><tr><th>Attribute or object</th><th>Operations</th></tr></thead><tbody><tr><td><code>billing_info.outstanding_balance</code></td><td>replace</td></tr><tr><td><code>custom_id</code></td><td>add,replace</td></tr><tr><td><code>plan.billing_cycles[@sequence==n].<br/>pricing_scheme.fixed_price</code></td><td>add,replace</td></tr><tr><td><code>plan.billing_cycles[@sequence==n].<br/>pricing_scheme.tiers</code></td><td>replace</td></tr><tr><td><code>plan.billing_cycles[@sequence==n].<br/>total_cycles</code></td><td>replace</td></tr><tr><td><code>plan.payment_preferences.<br/>auto_bill_outstanding</code></td><td>replace</td></tr><tr><td><code>plan.payment_preferences.<br/>payment_failure_threshold</code></td><td>replace</td></tr><tr><td><code>plan.taxes.inclusive</code></td><td>add,replace</td></tr><tr><td><code>plan.taxes.percentage</code></td><td>add,replace</td></tr><tr><td><code>shipping_amount</code></td><td>add,replace</td></tr><tr><td><code>start_time</code></td><td>replace</td></tr><tr><td><code>subscriber.shipping_address</code></td><td>add,replace</td></tr><tr><td><code>subscriber.payment_source (for subscriptions funded<br/>by card payments)</code></td><td>replace</td></tr></tbody></table>
+url: "{{base_url}}/v1/billing/subscriptions/:subscription_id"
+method: PATCH
+headers:
+  - key: Content-Type
+    value: application/json
+    description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  - key: PayPal-Request-Id
+    value: "{{$guid}}"
+    description: The server stores keys for 72 hours.
+  - key: PayPal-Client-Metadata-Id
+    value: "{{paypal_client_metadata_Id}}"
+    disabled: true
+    description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+  - key: PayPal-Partner-Attribution-Id
+    value: "{{paypal_partner_attribution_id}}"
+    disabled: true
+    description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+  - key: PayPal-Auth-Assertion
+    value: "{{paypal_auth_assertion}}"
+    disabled: true
+    description: |
+      An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  - key: Prefer
+    value: "{{prefer_representation_detailed}}"
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  - key: Prefer
+    value: "{{prefer_representation_minimal}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+pathVariables:
+  subscription_id: "{{subscription_id}}"
+body:
+  type: json
+  content: |-
+    [
+        {
+            "op": "replace",
+            "path": "/subscriber/shipping_address",
+            "value": {
+                "name": {
+                    "full_name": "John Doe"
+                },
+                "address": {
+                    "address_line_1": "2211 N First Street",
+                    "address_line_2": "Building 17",
+                    "admin_area_2": "San Jose",
+                    "admin_area_1": "CA",
+                    "postal_code": "95131",
+                    "country_code": "US"
+                }
+            }
+        },
+        {
+            "op": "replace",
+            "path": "/plan/payment_preferences/auto_bill_outstanding",
+            "value": true
+        },
+        {
+            "op": "replace",
+            "path": "/plan/payment_preferences/payment_failure_threshold",
+            "value": 1
+        },
+        {
+            "op": "replace",
+            "path": "/plan/billing_cycles/@sequence==1/total_cycles",
+            "value": 2
+        },
+        {
+            "op": "replace",
+            "path": "/plan/billing_cycles/@sequence==1/pricing_scheme/fixed_price",
+            "value": {
+                "currency_code": "USD",
+                "value": "50.00"
+            }
+        }
+    ]
+examples: ./.resources/Update subscription.resources/examples
+order: 3000

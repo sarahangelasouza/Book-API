@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/adjudicate"
+  method: POST
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "adjudication_outcome": "BUYER_FAVOR"
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Connection: keep-alive
+    Content-Length: "305"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: c263f914bc757
+    Server-Timing: traceparent;desc="00-0000000000000000000c263f914bc757-7d91dba6f89ca079-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Tue, 11 Apr 2023 19:21:46 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100049-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681240906.788383,VS0,VE495
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "c263f914bc757",
+          "information_link": "https://developer.paypal.com/docs/api/customer-disputes/v1/#errors",
+          "details": [
+              {
+                  "issue": "ACTION_NOT_ALLOWED_IN_CURRENT_DISPUTE_STATE"
+              }
+          ],
+          "links": []
+      }
+order: 1000

@@ -1,0 +1,56 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/subscriptions/:subscription_id/cancel"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    subscription_id: "{{subscription_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "reason": "Item out of stock"
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "347"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 963ed6e3cb660
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Mon, 10 Apr 2023 18:58:02 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000059-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681153082.853552,VS0,VE322
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "message": "The specified resource does not exist.",
+          "debug_id": "963ed6e3cb660",
+          "details": [
+              {
+                  "issue": "INVALID_RESOURCE_ID",
+                  "description": "Requested resource ID was not found."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#RESOURCE_NOT_FOUND",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 3000

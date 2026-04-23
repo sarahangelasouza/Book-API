@@ -1,0 +1,88 @@
+$kind: collection
+description: |-
+  # Aircraft Parts API
+
+  ## Overview
+
+  Welcome to the **Aircraft Parts API** workspace! This workspace provides a complete REST API solution for managing aircraft parts inventory and operations. Whether you're tracking components, managing inventory, or integrating with aircraft maintenance systems, this API offers a robust set of endpoints to handle all your aircraft parts management needs.
+
+  ## API Endpoints
+
+  This collection includes the following endpoints:
+
+  ### Parts Management
+
+  - **List Parts** (`GET /parts`) - Retrieve a list of all aircraft parts in the system
+      
+  - **Get Part** (`GET /parts/:id`) - Fetch detailed information about a specific part by ID
+      
+  - **Create Part** (`POST /parts`) - Add a new aircraft part to the inventory
+      
+  - **Update Part** (`PATCH /parts/:id`) - Modify existing part information
+      
+  - **Delete Part** (`DELETE /parts/:id`) - Remove a part from the system
+      
+
+  ## Environments
+
+  This workspace includes three pre-configured environments to support different stages of development and testing:
+
+  1. **Aircraft Local** - For local development and testing against your local server
+      
+  2. **Aircraft Public Mock** - Uses a public mock server for testing without a live backend
+      
+  3. **Aircraft Local Mock** - Local mock server configuration for offline development
+      
+
+  Simply switch between environments using the environment selector to test against different backends.
+
+  ## Special Features
+
+  ### Automated Conformance Testing
+
+  This collection includes automated conformance tests that run after every request. The tests use the `@field-services-v12-demo/conformance-test` package to ensure API responses meet established standards and specifications. This helps maintain API quality and consistency across all endpoints.
+
+  ## Getting Started
+
+  ### Quick Start
+
+  1. **Select an environment** - Choose the appropriate environment from the dropdown (Aircraft Local, Aircraft Public Mock, or Aircraft Local Mock)
+      
+  2. **Review the requests** - Explore the available endpoints in the collection
+      
+  3. **Send a request** - Try the "List Parts" endpoint to see the API in action
+      
+  4. **Check the tests** - View the test results tab after each request to see conformance test results
+      
+  5. **Customize as needed** - Modify requests, add new endpoints, or adjust the conformance tests to fit your requirements
+      
+
+  ### Best Practices
+
+  - Use the appropriate environment for your testing scenario
+      
+  - Review conformance test results after each request
+      
+  - Keep the `baseUrl` variable updated in your active environment
+      
+  - Document any new endpoints you add to the collection
+      
+
+  ## Support & Collaboration
+
+  This workspace is designed for team collaboration. All team members can contribute to improving the API, adding new endpoints, and enhancing test coverage. If you have questions or need assistance, reach out to your workspace admin.
+
+  ---
+
+  **Ready to get started?** Select an environment and send your first request!
+variables:
+  baseUrl: http://localhost:3000
+scripts:
+  - type: http:afterResponse
+    code: |
+      const conformanceTest = pm.require('@field-services-v12-demo/conformance-test');
+      conformanceTest.runConformanceTests();
+    language: text/javascript
+    packages:
+      "@field-services-v12-demo/conformance-test":
+        id: 019cc120-c8d5-7281-80d1-64e0193142e5

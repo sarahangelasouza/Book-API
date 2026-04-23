@@ -1,0 +1,275 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: The Accept header field is used to specify the form of response that can be understand and processed
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: (Optional)The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the account_id, external_id, and HATEOAS links.
+    - key: Prefer
+      value: return=representation
+      disabled: true
+    - key: Prefer
+      value: return=representation, views=process_view
+    - key: Prefer
+      value: views=process_view
+      disabled: true
+  body:
+    type: json
+    content: |-
+      {
+          "external_id": "EXT-{{currentTime}}",
+          "legal_country_code": "US",
+          "organization": "{{managed_path_organization}}",
+          "user_id": "{{currentTime}}",
+          "primary_currency_code": "USD",
+          "individual_owners": [
+              {
+                  "names": [
+                      {
+                          "type": "LEGAL",
+                          "given_name": "Mary",
+                          "surname": "Collins"
+                      }
+                  ],
+                  "addresses": [
+                      {
+                          "type": "HOME",
+                          "address_line_1": "1234 Lane1 Drive",
+                          "admin_area_2": "Challottesville",
+                          "postal_code": "95014",
+                          "country_code": "US"
+                      }
+                  ],
+                  "birth_details": {
+                      "date_of_birth": "1995-05-30"
+                  },
+                  "identification_documents": [
+                      {
+                          "type": "SOCIAL_SECURITY_NUMBER",
+                          "identification_number": "123456789",
+                          "issuing_country_code": "US"
+                      }
+                  ]
+              }
+          ],
+           "financial_instruments": {
+              "banks": [
+                  {
+                      "mandate": {
+                          "consent_to_debit": true
+                      },
+                      "account_number": "59010882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "branch_code": "08501",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "bank_name": "Key Bank National Association"
+                  }
+              ]
+          },
+          "business_entity": {
+              "type": "INDIVIDUAL",
+              "names": [
+                  {
+                      "type": "LEGAL",
+                      "business_name": "LALALIA"
+                  }
+              ],
+              "phone_numbers": [
+                  {
+                      "type": "BUSINESS",
+                      "country_code": "1",
+                      "national_number": "4342843456"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Connection: keep-alive
+    Content-Length: "2154"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 9310c8bc33d70
+    Server-Timing: traceparent;desc="00-00000000000000000009310c8bc33d70-eada2cfbccf4400a-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Fri, 21 Apr 2023 02:53:05 GMT
+    X-Served-By: cache-hnd18724-HND, cache-nrt-rjtf7700067-NRT
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1682045574.818009,VS0,VE11416
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "A7D4MBLS9H5GL",
+          "legal_country_code": "US",
+          "individual_owners": [
+              {
+                  "id": "A7D4MBLS9H5GL",
+                  "names": [
+                      {
+                          "given_name": "Mary",
+                          "surname": "Collins",
+                          "id": "Q55EBDVUAPFZ2",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "primary_residence": {
+                      "address_line_1": "1234 Lane1 Drive",
+                      "admin_area_2": "Challottesville",
+                      "postal_code": "95014",
+                      "country_code": "US"
+                  },
+                  "birth_details": {
+                      "date_of_birth": "1995-05-30"
+                  },
+                  "identification_documents": [
+                      {
+                          "id": "5HG6KSGJY5DUL",
+                          "identification_number": "****",
+                          "issuing_country_code": "US",
+                          "type": "SOCIAL_SECURITY_NUMBER"
+                      }
+                  ]
+              }
+          ],
+          "business_entity": {
+              "type": "INDIVIDUAL",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "LALALIA",
+                      "id": "ERMMCVEM2WV34",
+                      "type": "LEGAL"
+                  }
+              ],
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "4342843456",
+                      "id": "VTBJ5SNEPA4DC",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "NO"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ],
+          "external_id": "EXT-{{currentTime}}",
+          "organization": "us",
+          "user_id": "{{currentTime}}",
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "id": "BA-88D53BP2UHFAJ",
+                      "last_4_digits": "0882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "account_holder_details": {
+                          "name": "LALALIA"
+                      },
+                      "branch_code": "08501",
+                      "bank_name": "KEY BANK NATIONAL ASSOCIATION"
+                  }
+              ]
+          },
+          "primary_currency_code": "USD",
+          "soft_descriptor": "LALALIA",
+          "capabilities": [
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              }
+          ],
+          "process_view": {
+              "processes": [
+                  {
+                      "name": "MANAGED_PATH_KYC",
+                      "status": "NEED_MORE_DATA",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          }
+                      ]
+                  },
+                  {
+                      "name": "MANAGED_PATH_BO_VERIFICATION",
+                      "status": "COMPLETED",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY"
+                          }
+                      ]
+                  }
+              ]
+          },
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/A7D4MBLS9H5GL",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/A7D4MBLS9H5GL",
+                  "rel": "edit",
+                  "method": "PATCH"
+              }
+          ]
+      }
+order: 2000

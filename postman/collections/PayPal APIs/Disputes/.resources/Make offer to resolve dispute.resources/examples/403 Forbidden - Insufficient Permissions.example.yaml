@@ -1,0 +1,54 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/make-offer"
+  method: POST
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "note": "Offer refund with replacement item.",
+          "offer_amount": {
+              "currency_code": "USD",
+              "value": "23"
+          },
+          "offer_type": "REFUND_WITH_REPLACEMENT"
+      }
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    Connection: keep-alive
+    Content-Length: "260"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 63972809c5968
+    Server-Timing: traceparent;desc="00-000000000000000000063972809c5968-e72c307684d49e0a-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Wed, 12 Apr 2023 16:59:30 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100174-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681318771.630788,VS0,VE262
+  body:
+    type: json
+    content: |-
+      {
+          "name": "NOT_AUTHORIZED",
+          "message": "Authorization failed due to insufficient permissions.",
+          "debug_id": "63972809c5968",
+          "information_link": "https://developer.paypal.com/docs/api/customer-disputes/v1/#errors",
+          "details": [
+              {
+                  "issue": "ACTION_NOT_ALLOWED"
+              }
+          ],
+          "links": []
+      }
+order: 3000

@@ -1,0 +1,115 @@
+$kind: http-request
+description: Creates a product.
+url: "{{base_url}}/v1/catalogs/products"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+    description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  - key: PayPal-Request-Id
+    value: "{{$guid}}"
+    description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+  - key: PayPal-Client-Metadata-Id
+    value: "{{paypal_client_metadata_Id}}"
+    disabled: true
+    description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+  - key: PayPal-Partner-Attribution-Id
+    value: "{{paypal_partner_attribution_id}}"
+    disabled: true
+    description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+  - key: PayPal-Auth-Assertion
+    value: "{{paypal_auth_assertion}}"
+    disabled: true
+    description: |
+      An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  - key: Prefer
+    value: "{{prefer_representation_detailed}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  - key: Prefer
+    value: "{{prefer_representation_minimal}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+body:
+  type: json
+  content: |-
+    {
+        "id": "evnt_{{$timestamp}}",
+        "name": "Soccer Event"
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      // import functions from collection variables
+      eval(pm.collectionVariables.get("paypal_postman_scripts"));
+
+      if(this.PayPalPostmanUtils.isSandbox() && pm.collectionVariables.get("webhook_site_token") !== "") { 
+          pm.test("event must be sent", function() {
+              var jsonData = pm.response.json();
+              pm.expect(jsonData).to.have.property('id');
+              console.log("triggered event id",jsonData.id);
+
+              pm.collectionVariables.unset("event_transmission_id");
+              pm.collectionVariables.unset("event_transmission_time");
+              pm.collectionVariables.unset("event_cert_url");
+              pm.collectionVariables.unset("event_auth_algo");
+              pm.collectionVariables.unset("event_transmission_sig");
+              pm.collectionVariables.unset("event_webhook_payload");
+
+              // now look for this event to get delivered on the registered webhook url
+              fetchEvents(10, 20000, jsonData.id, function(isReceived) {
+                  pm.test("event must be received, id="+jsonData.id, function() {
+                      if(!isReceived) {
+                          var webhooksView = "https://webhook.site/#!/view/"+pm.collectionVariables.get("webhook_site_token");
+                          console.warn("Failed to receive webhook event at ", webhooksView, " in time. Skipping validation");
+                          pm.execution.setNextRequest("Resend event notification");
+                      }
+                      pm.expect(true).to.equal(isReceived);
+                  });
+              });
+          });
+      }
+      function fetchEvents(retry, sleep, eventId, callback) {
+          if(retry == 0) {
+             return callback(false);
+          }
+          // Retrieve recent events from webhook endpoint
+          console.log(`Retrieving last 5 events from webhook site`)
+          pm.sendRequest("https://webhook.site/token/"+pm.collectionVariables.get("webhook_site_token")+"/requests?sorting=newest&per_page=5", (error, response) => {
+              var event = extractEvent(response.json(), eventId);
+              if(event === undefined) {
+                  // webhooks takes a while to get delivered and appear at requestbin
+                  var webhooksView = "https://webhook.site/#!/view/"+pm.collectionVariables.get("webhook_site_token");
+                  console.log("Waiting additional ", sleep, "ms for event id=", eventId," to appear at... ", webhooksView);
+                  setTimeout(function() {
+                      return fetchEvents(retry-1, sleep, eventId, callback);
+                  }, sleep);
+              } else {
+                  pm.collectionVariables.set("event_transmission_id", event.headers["paypal-transmission-id"]);
+                  pm.collectionVariables.set("event_transmission_time", event.headers["paypal-transmission-time"]);
+                  pm.collectionVariables.set("event_cert_url", event.headers["paypal-cert-url"]);
+                  pm.collectionVariables.set("event_auth_algo", event.headers["paypal-auth-algo"]);
+                  pm.collectionVariables.set("event_transmission_sig", event.headers["paypal-transmission-sig"]);
+                  pm.collectionVariables.set("event_webhook_payload", event.content);
+                  return callback(true);
+              }
+          });
+      }
+
+      function extractEvent(jsonData, eventId) {
+          if(jsonData.data && jsonData.data.length > 0) {
+              console.log(`fetched last '${jsonData.data.length}' events from webhook site`)
+              for(var eventIndex = jsonData.data.length-1; eventIndex>=0 ;eventIndex--) {
+                  var event = jsonData.data[eventIndex];
+                  var payload = event.content;
+                  var payloadJson = JSON.parse(payload);
+                  if(payloadJson.resource.id === eventId) {
+                      console.log(`Found event '${eventId}' in webhook site`)
+                      return event;
+                  }
+              } 
+          }
+      }
+    language: text/javascript
+examples: ./.resources/Trigger a sample event.resources/examples
+order: 8000

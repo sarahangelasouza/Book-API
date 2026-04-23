@@ -1,0 +1,145 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/notifications/webhooks-events?transaction_id={{capture_id}}"
+  method: GET
+  queryParams:
+    - key: page_size
+      value: "10"
+      disabled: true
+      description: The number of webhook event notifications to return in the response.
+    - key: start_time
+      value: 2022-02-01T00:00:00Z
+      disabled: true
+      description: "Filters the webhook event notifications in the response to those created on or after this date and time and on or before the `end_time` value. Both values are in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6) format. Example: `start_time=2013-03-06T11:00:00Z`."
+    - key: end_time
+      value: 2022-03-01T00:00:00Z
+      disabled: true
+      description: "Filters the webhook event notifications in the response to those created on or after the `start_time` and on or before this date and time. Both values are in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6) format. Example: `end_time=2013-03-06T11:00:00Z`."
+    - key: transaction_id
+      value: "{{capture_id}}"
+      description: Filters the response to a single transaction, by ID.
+    - key: event_type
+      value: PAYMENT.CAPTURE.COMPLETED
+      disabled: true
+      description: Filters the response to a single event.
+    - key: move_to
+      value: next
+      disabled: true
+    - key: offset
+      value: "10"
+      disabled: true
+    - key: prev_offset
+      value: "10"
+      disabled: true
+    - key: index_id
+      value: "1"
+      disabled: true
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Content-Language: ""
+    Paypal-Debug-Id: "8788945222364"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Mon, 10 Apr 2023 22:05:02 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000079-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681164302.917138,VS0,VE240
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "events": [
+              {
+                  "id": "WH-6MU909868L179220L-65239480AR672041G",
+                  "create_time": "2023-04-06T20:28:58.184Z",
+                  "resource_type": "capture",
+                  "event_type": "PAYMENT.CAPTURE.COMPLETED",
+                  "summary": "Payment completed for $ 200.0 USD",
+                  "resource": {
+                      "disbursement_mode": "INSTANT",
+                      "amount": {
+                          "value": "200.00",
+                          "currency_code": "USD"
+                      },
+                      "seller_protection": {
+                          "dispute_categories": [
+                              "ITEM_NOT_RECEIVED",
+                              "UNAUTHORIZED_TRANSACTION"
+                          ],
+                          "status": "ELIGIBLE"
+                      },
+                      "supplementary_data": {
+                          "related_ids": {
+                              "order_id": "64E64612G5802414N"
+                          }
+                      },
+                      "update_time": "2023-04-06T20:33:57Z",
+                      "create_time": "2023-04-06T20:28:51Z",
+                      "final_capture": true,
+                      "seller_receivable_breakdown": {
+                          "paypal_fee": {
+                              "value": "7.47",
+                              "currency_code": "USD"
+                          },
+                          "gross_amount": {
+                              "value": "200.00",
+                              "currency_code": "USD"
+                          },
+                          "net_amount": {
+                              "value": "192.53",
+                              "currency_code": "USD"
+                          }
+                      },
+                      "links": [
+                          {
+                              "method": "GET",
+                              "rel": "self",
+                              "href": "https://api.sandbox.paypal.com/v2/payments/captures/52909142TS941641N"
+                          },
+                          {
+                              "method": "POST",
+                              "rel": "refund",
+                              "href": "https://api.sandbox.paypal.com/v2/payments/captures/52909142TS941641N/refund"
+                          },
+                          {
+                              "method": "GET",
+                              "rel": "up",
+                              "href": "https://api.sandbox.paypal.com/v2/checkout/orders/64E64612G5802414N"
+                          }
+                      ],
+                      "id": "52909142TS941641N",
+                      "status": "REFUNDED"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks-events/WH-6MU909868L179220L-65239480AR672041G",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks-events/WH-6MU909868L179220L-65239480AR672041G/resend",
+                          "rel": "resend",
+                          "method": "POST",
+                          "encType": "application/json"
+                      }
+                  ],
+                  "event_version": "1.0",
+                  "resource_version": "2.0"
+              }
+          ],
+          "count": 1
+      }
+order: 2000

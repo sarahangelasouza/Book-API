@@ -1,0 +1,39 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/require-evidence"
+  method: POST
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "action": "BUYER_EVIDENCE"
+      }
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 6ca9952ff74e8
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Wed, 12 Apr 2023 16:46:45 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100174-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681318006.791047,VS0,VE56
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 2000

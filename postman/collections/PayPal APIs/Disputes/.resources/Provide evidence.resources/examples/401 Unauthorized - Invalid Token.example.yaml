@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/provide-evidence"
+  method: POST
+  headers:
+    Content-Type: multipart/form-data
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: formdata
+    content:
+      - type: file
+        key: evidence-file
+        src: /Users/swsapar/Desktop/caution.jpg
+        description: A file with evidence.
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 5d43a742ea41c
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Wed, 12 Apr 2023 16:47:11 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100174-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681318032.819246,VS0,VE156
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 3000

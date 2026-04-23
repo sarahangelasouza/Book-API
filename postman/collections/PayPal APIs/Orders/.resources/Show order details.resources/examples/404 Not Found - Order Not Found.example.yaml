@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders/:order_id"
+  method: GET
+  pathVariables:
+    order_id: 51R18997VL852680D
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "385"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: ea05c4b048c6b
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 06 Apr 2023 15:28:46 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000111-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680794926.261453,VS0,VE304
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "details": [
+              {
+                  "issue": "INVALID_RESOURCE_ID",
+                  "description": "Specified resource ID does not exist. Please check the resource ID and try again."
+              }
+          ],
+          "message": "The specified resource does not exist.",
+          "debug_id": "ea05c4b048c6b",
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/orders/v2/#error-INVALID_RESOURCE_ID",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 4000

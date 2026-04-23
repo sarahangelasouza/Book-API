@@ -1,10 +1,7 @@
 $kind: http-request
-name: Create Book
-method: POST
-url: "{{baseUrl}}/books"
 description: Creates a new book. Requires `title` and `author`. `year` is optional.
-examples: .resources/Create Book.resources/examples
-order: 3000
+url: "{{baseUrl}}/books"
+method: POST
 headers:
   Content-Type: application/json
 body:
@@ -16,3 +13,4 @@ body:
         "genre": "fiction",
         "yearPublished": "1987"
     }
+order: 3000

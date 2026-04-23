@@ -1,0 +1,51 @@
+$kind: http-request
+url: "{{baseUrl}}/parts"
+method: GET
+headers:
+  Accept: application/json
+body:
+  type: text
+  content: ""
+scripts:
+  - type: afterResponse
+    code: |+
+      pm.test('Status code is 200', function () {
+          pm.response.to.have.status(200);
+      })
+
+
+      pm.test('Response time is under 2000ms', function () {
+          pm.expect(pm.response.responseTime).to.be.below(2000);
+      })
+
+      pm.test('Each part has required properties', function () {
+          const jsonData = pm.response.json();
+          if (jsonData.length > 0) {
+              jsonData.forEach(function (part) {
+                  pm.expect(part).to.have.property('id');
+                  pm.expect(part).to.have.property('name');
+                  pm.expect(part).to.have.property('partNumber');
+                  pm.expect(part).to.have.property('manufacturer');
+                  pm.expect(part).to.have.property('quantity');
+                  pm.expect(part).to.have.property('price');
+              });
+          }
+      })
+
+      pm.test('Data types are correct for all parts', function () {
+          const jsonData = pm.response.json();
+          if (jsonData.length > 0) {
+              jsonData.forEach(function (part) {
+                  pm.expect(part.id).to.be.a('string');
+                  pm.expect(part.name).to.be.a('string');
+                  pm.expect(part.partNumber).to.be.a('string');
+                  pm.expect(part.manufacturer).to.be.a('string');
+                  pm.expect(part.quantity).to.be.a('number');
+                  pm.expect(part.price).to.be.a('number');
+              });
+          }
+      })
+
+    language: text/javascript
+examples: ./.resources/List Parts.resources/examples
+order: 2000

@@ -1,0 +1,45 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id/wallet-domains"
+  method: GET
+  pathVariables:
+    - key: id
+      value: QTA74RYDFH72U
+      description: The ID of the seller.
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "204"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 6b10aa23ca449
+    Server-Timing: traceparent;desc="00-00000000000000000006b10aa23ca449-37147a60245876cb-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Wed, 26 Apr 2023 03:16:08 GMT
+    X-Served-By: cache-hnd18738-HND, cache-tyo11950-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1682478968.324319,VS0,VE244
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "message": "The specified resource does not exist.",
+          "debug_id": "6b10aa23ca449",
+          "details": [
+              {
+                  "issue": "INVALID_RESOURCE_ID",
+                  "description": "Requested resource ID was not found."
+              }
+          ]
+      }
+order: 3000

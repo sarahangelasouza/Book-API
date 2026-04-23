@@ -1,0 +1,443 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/invoices"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  body:
+    type: json
+    content: |-
+      {
+          "detail": {
+              "invoice_number": "{{$timestamp}}",
+              "invoice_date": "2022-02-04",
+              "payment_term": {
+                  "term_type": "NET_10",
+                  "due_date": "2022-02-14"
+              },
+              "currency_code": "USD",
+              "reference": "<The reference data. Includes a post office (PO) number.>",
+              "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+              "terms_and_conditions": "<The general terms of the invoice. Can include return or cancellation policy and other terms and conditions.>",
+              "memo": "<A private bookkeeping note for merchant.>"
+          },
+          "invoicer": {
+              "name": {
+                  "given_name": "David",
+                  "surname": "Larusso"
+              },
+              "address": {
+                  "address_line_1": "123 Townsend St",
+                  "address_line_2": "Floor 6",
+                  "admin_area_2": "San Francisco",
+                  "admin_area_1": "CA",
+                  "postal_code": "94107",
+                  "country_code": "US"
+              },
+              "phones": [
+                  {
+                      "country_code": "001",
+                      "national_number": "4085551234",
+                      "phone_type": "MOBILE"
+                  }
+              ],
+              "website": "www.example.com",
+              "tax_id": "XX-XXXXXXX",
+              "logo_url": "https://example.com/logo.png",
+              "additional_notes": "<Any additional information. Includes business hours.>"
+          },
+          "primary_recipients": [
+              {
+                  "billing_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      },
+                      "email_address": "foobuyer@example.com",
+                      "phones": [
+                          {
+                              "country_code": "001",
+                              "national_number": "4884551234",
+                              "phone_type": "HOME"
+                          }
+                      ],
+                      "additional_info_value": "add-info"
+                  },
+                  "shipping_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      }
+                  }
+              }
+          ],
+          "items": [
+              {
+                  "name": "Yoga Mat",
+                  "description": "Elastic mat to practice yoga.",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "50.00"
+                  },
+                  "tax": {
+                      "name": "Sales Tax",
+                      "percent": "7.25"
+                  },
+                  "discount": {
+                      "percent": "5"
+                  },
+                  "unit_of_measure": "QUANTITY"
+              },
+              {
+                  "name": "Yoga t-shirt",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "10.00"
+                  },
+                  "tax": {
+                      "name": "Sales Tax",
+                      "percent": "7.25"
+                  },
+                  "discount": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "5.00"
+                      }
+                  },
+                  "unit_of_measure": "QUANTITY"
+              }
+          ],
+          "configuration": {
+              "partial_payment": {
+                  "allow_partial_payment": true,
+                  "minimum_amount_due": {
+                      "currency_code": "USD",
+                      "value": "20.00"
+                  }
+              },
+              "allow_tip": true,
+              "tax_calculated_after_discount": true,
+              "tax_inclusive": false
+          },
+          "amount": {
+              "breakdown": {
+                  "custom": {
+                      "label": "Packing Charges",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  },
+                  "shipping": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      },
+                      "tax": {
+                          "name": "Sales Tax",
+                          "percent": "7.25"
+                      }
+                  },
+                  "discount": {
+                      "invoice_discount": {
+                          "percent": "5"
+                      }
+                  }
+              }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+    Content-Length: "4356"
+    Connection: keep-alive
+    Date: Fri, 04 Feb 2022 03:01:27 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 295fdf15ffeb
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Location: https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P
+  body:
+    type: json
+    content: |-
+      {
+          "id": "INV2-GWNR-QBAW-496B-4Y5P",
+          "status": "DRAFT",
+          "detail": {
+              "reference": "<The reference data. Includes a post office (PO) number.>",
+              "currency_code": "USD",
+              "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+              "terms_and_conditions": "<The general terms of the invoice. Can include return or cancellation policy and other terms and conditions.>",
+              "memo": "<A private bookkeeping note for merchant.>",
+              "additional_data": "<Any additional information. Includes business hours.>",
+              "category_code": "SHIPPABLE",
+              "invoice_number": "1643943687",
+              "invoice_date": "2022-02-04",
+              "payment_term": {
+                  "term_type": "NET_10",
+                  "due_date": "2022-02-14"
+              },
+              "viewed_by_recipient": false,
+              "group_draft": false,
+              "metadata": {
+                  "create_time": "2022-02-04T03:01:26Z",
+                  "last_update_time": "2022-02-04T03:01:26Z",
+                  "created_by_flow": "REGULAR_SINGLE",
+                  "recipient_view_url": "https://www.sandbox.paypal.com/invoice/p/#GWNRQBAW496B4Y5P",
+                  "invoicer_view_url": "https://www.sandbox.paypal.com/invoice/details/INV2-GWNR-QBAW-496B-4Y5P",
+                  "caller_type": "API_V2_INVOICE"
+              },
+              "archived": false
+          },
+          "invoicer": {
+              "name": {
+                  "given_name": "David",
+                  "surname": "Larusso",
+                  "full_name": "David Larusso"
+              },
+              "address": {
+                  "address_line_1": "123 Townsend St",
+                  "address_line_2": "Floor 6",
+                  "admin_area_2": "San Francisco",
+                  "admin_area_1": "CA",
+                  "postal_code": "94107",
+                  "country_code": "US"
+              },
+              "phones": [
+                  {
+                      "country_code": "001",
+                      "national_number": "4085551234",
+                      "phone_type": "MOBILE"
+                  }
+              ],
+              "website": "www.example.com",
+              "tax_id": "XX-XXXXXXX",
+              "additional_notes": "<Any additional information. Includes business hours.>",
+              "logo_url": "https://example.com/logo.png"
+          },
+          "primary_recipients": [
+              {
+                  "billing_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers",
+                          "full_name": "Stephanie Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      },
+                      "email_address": "foobuyer@example.com"
+                  },
+                  "shipping_info": {
+                      "name": {
+                          "given_name": "Stephanie",
+                          "surname": "Meyers",
+                          "full_name": "Stephanie Meyers"
+                      },
+                      "address": {
+                          "address_line_1": "1234 Main Street",
+                          "admin_area_2": "Anytown",
+                          "admin_area_1": "CA",
+                          "postal_code": "98765",
+                          "country_code": "US"
+                      }
+                  }
+              }
+          ],
+          "items": [
+              {
+                  "id": "ITEM-482534480G7751930",
+                  "name": "Yoga Mat",
+                  "description": "Elastic mat to practice yoga.",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "50.00"
+                  },
+                  "tax": {
+                      "id": "TAX-0N0416338A793061R",
+                      "name": "Sales Tax",
+                      "percent": "7.25",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "3.27"
+                      }
+                  },
+                  "discount": {
+                      "percent": "5",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "-2.50"
+                      }
+                  },
+                  "unit_of_measure": "QUANTITY"
+              },
+              {
+                  "id": "ITEM-6EU06276GR5056456",
+                  "name": "Yoga t-shirt",
+                  "quantity": "1",
+                  "unit_amount": {
+                      "currency_code": "USD",
+                      "value": "10.00"
+                  },
+                  "tax": {
+                      "id": "TAX-0N0416338A793061R",
+                      "name": "Sales Tax",
+                      "percent": "7.25",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "0.34"
+                      }
+                  },
+                  "discount": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "-5.00"
+                      }
+                  },
+                  "unit_of_measure": "QUANTITY"
+              }
+          ],
+          "configuration": {
+              "tax_calculated_after_discount": true,
+              "tax_inclusive": false,
+              "allow_tip": true,
+              "partial_payment": {
+                  "allow_partial_payment": true,
+                  "minimum_amount_due": {
+                      "currency_code": "USD",
+                      "value": "20.00"
+                  }
+              },
+              "template_id": "TEMP-8LK05440PT816351U"
+          },
+          "amount": {
+              "breakdown": {
+                  "item_total": {
+                      "currency_code": "USD",
+                      "value": "60.00"
+                  },
+                  "discount": {
+                      "invoice_discount": {
+                          "percent": "5",
+                          "amount": {
+                              "currency_code": "USD",
+                              "value": "-2.63"
+                          }
+                      },
+                      "item_discount": {
+                          "currency_code": "USD",
+                          "value": "-7.50"
+                      }
+                  },
+                  "tax_total": {
+                      "currency_code": "USD",
+                      "value": "4.34"
+                  },
+                  "shipping": {
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      },
+                      "tax": {
+                          "id": "TAX-1LK55478EH604142P",
+                          "name": "Sales Tax",
+                          "percent": "7.25",
+                          "amount": {
+                              "currency_code": "USD",
+                              "value": "0.73"
+                          }
+                      }
+                  },
+                  "custom": {
+                      "label": "Packing Charges",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "10.00"
+                      }
+                  }
+              },
+              "currency_code": "USD",
+              "value": "74.21"
+          },
+          "due_amount": {
+              "currency_code": "USD",
+              "value": "74.21"
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P/send",
+                  "rel": "send",
+                  "method": "POST"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P",
+                  "rel": "replace",
+                  "method": "PUT"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P",
+                  "rel": "delete",
+                  "method": "DELETE"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P/payments",
+                  "rel": "record-payment",
+                  "method": "POST"
+              }
+          ]
+      }
+order: 2000

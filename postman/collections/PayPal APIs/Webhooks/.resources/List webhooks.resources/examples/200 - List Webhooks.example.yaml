@@ -1,0 +1,239 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/notifications/webhooks"
+  method: GET
+  queryParams:
+    - key: anchor_type
+      value: APPLICATION
+      disabled: true
+      description: Filters the webhooks in the response by an `anchor_id` entity type.
+    - key: anchor_type
+      value: ACCOUNT
+      disabled: true
+      description: Filters the webhooks in the response by an `anchor_id` entity type.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Content-Language: ""
+    Paypal-Debug-Id: b47fc2794ded0
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Mon, 10 Apr 2023 21:43:54 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000084-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681163034.222818,VS0,VE199
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "webhooks": [
+              {
+                  "id": "5B54558042185511F",
+                  "url": "https://8839-2600-1700-1d1-b9d0-9cc1-33a5-ea63-bf36.ngrok.io/api/v2/paypal/callback",
+                  "event_types": [
+                      {
+                          "name": "PAYMENT.PAYOUTSBATCH.SUCCESS",
+                          "description": "A batch payout payment completes successfully.",
+                          "status": "ENABLED"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/5B54558042185511F",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/5B54558042185511F",
+                          "rel": "update",
+                          "method": "PATCH"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/5B54558042185511F",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      }
+                  ]
+              },
+              {
+                  "id": "52S63182MN3538544",
+                  "url": "https://engdshxm95zkm.x.pipedream.net",
+                  "event_types": [
+                      {
+                          "name": "*",
+                          "description": "ALL",
+                          "status": "ENABLED"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/52S63182MN3538544",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/52S63182MN3538544",
+                          "rel": "update",
+                          "method": "PATCH"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/52S63182MN3538544",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      }
+                  ]
+              },
+              {
+                  "id": "0NU019858L0458526",
+                  "url": "https://enjrv1c06t10r.x.pipedream.net",
+                  "event_types": [
+                      {
+                          "name": "*",
+                          "description": "ALL",
+                          "status": "ENABLED"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/0NU019858L0458526",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/0NU019858L0458526",
+                          "rel": "update",
+                          "method": "PATCH"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/0NU019858L0458526",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      }
+                  ]
+              },
+              {
+                  "id": "1AV998667T7275054",
+                  "url": "https://enllwl46eqmr.x.pipedream.net",
+                  "event_types": [
+                      {
+                          "name": "*",
+                          "description": "ALL",
+                          "status": "ENABLED"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/1AV998667T7275054",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/1AV998667T7275054",
+                          "rel": "update",
+                          "method": "PATCH"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/1AV998667T7275054",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      }
+                  ]
+              },
+              {
+                  "id": "9CG186800G234263Y",
+                  "url": "https://enwic0dqm93m.x.pipedream.net",
+                  "event_types": [
+                      {
+                          "name": "*",
+                          "description": "ALL",
+                          "status": "ENABLED"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/9CG186800G234263Y",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/9CG186800G234263Y",
+                          "rel": "update",
+                          "method": "PATCH"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/9CG186800G234263Y",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      }
+                  ]
+              },
+              {
+                  "id": "6821871623091200G",
+                  "url": "https://enxajuxx91mzb.x.pipedream.net",
+                  "event_types": [
+                      {
+                          "name": "*",
+                          "description": "ALL",
+                          "status": "ENABLED"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/6821871623091200G",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/6821871623091200G",
+                          "rel": "update",
+                          "method": "PATCH"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/6821871623091200G",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      }
+                  ]
+              },
+              {
+                  "id": "46N90101SA7196504",
+                  "url": "https://enz9n2033gwkn.x.pipedream.net",
+                  "event_types": [
+                      {
+                          "name": "*",
+                          "description": "ALL",
+                          "status": "ENABLED"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/46N90101SA7196504",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/46N90101SA7196504",
+                          "rel": "update",
+                          "method": "PATCH"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/46N90101SA7196504",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      }
+                  ]
+              }
+          ]
+      }
+order: 1000

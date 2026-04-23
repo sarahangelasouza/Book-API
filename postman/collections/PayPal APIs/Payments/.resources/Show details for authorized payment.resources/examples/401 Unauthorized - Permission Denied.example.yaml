@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/payments/authorizations/:authorization_id"
+  method: GET
+  pathVariables:
+    - key: authorization_id
+      value: 8VF53974JG831581P
+      description: (Required) The ID of the authorized payment for which to show details.
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "374"
+    Content-Type: application/json;charset=UTF-8
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 76b0de042aa2f
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 06 Apr 2023 17:41:54 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100167-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680802914.314388,VS0,VE325
+  body:
+    type: json
+    content: |-
+      {
+          "name": "NOT_AUTHORIZED",
+          "message": "Authorization failed due to insufficient permissions.",
+          "debug_id": "76b0de042aa2f",
+          "details": [
+              {
+                  "issue": "PERMISSION_DENIED",
+                  "description": "You do not have permission to access or perform operations on this resource."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/payments/v2/#error-PERMISSION_DENIED",
+                  "rel": "information_link"
+              }
+          ]
+      }
+order: 3000

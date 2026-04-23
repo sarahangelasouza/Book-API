@@ -1,0 +1,60 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/payments/authorizations/:authorization_id/reauthorize"
+  method: POST
+  headers:
+    - key: PayPal-Request-Id
+      value: P82d
+      description: The server stores keys for 45 days.
+    - key: Prefer
+      value: return=minimal
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Content-Type
+      value: application/json
+  pathVariables:
+    - key: authorization_id
+      value: "{{authorization_id}}"
+      description: (Required) The PayPal-generated ID for the authorized payment to reauthorize.
+  body:
+    type: json
+    content: |-
+      {
+          "amount": {
+              "value": "10.99",
+              "currency_code": "USD"
+          }
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Content-Type: application/json;charset=UTF-8
+    Content-Length: "418"
+    Connection: keep-alive
+    Date: Mon, 07 Feb 2022 23:45:50 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 8154d60b5430
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "name": "UNPROCESSABLE_ENTITY",
+          "message": "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          "debug_id": "8154d60b5430",
+          "details": [
+              {
+                  "issue": "AUTHORIZATION_ALREADY_CAPTURED",
+                  "description": "Authorization has previously been captured."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/payments/v2/#error-AUTHORIZATION_ALREADY_CAPTURED",
+                  "rel": "information_link"
+              }
+          ]
+      }
+order: 5000

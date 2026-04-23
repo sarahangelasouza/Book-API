@@ -1,0 +1,61 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/setup-tokens/:setup_token_id"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  pathVariables:
+    setup_token_id: "{{setup_token_id}}"
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+          "id": "85Y15182AJ132912C",
+          "customer": {
+              "id": "GYzSRHSEAu"
+          },
+          "status": "PAYER_ACTION_REQUIRED",
+          "payment_source": {
+              "card": {
+                  "last_digits": "9482",
+                  "brand": "VISA",
+                  "expiry": "2027-02",
+                  "billing_address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "17.3.160",
+                      "admin_area_2": "San Jose",
+                      "admin_area_1": "CA",
+                      "postal_code": "95131",
+                      "country_code": "US"
+                  }
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/setup-tokens/85Y15182AJ132912C",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://www.sandbox.paypal.com/webapps/helios?action=authenticate&token=28A9864342204934F",
+                  "rel": "approve",
+                  "method": "GET",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 2000

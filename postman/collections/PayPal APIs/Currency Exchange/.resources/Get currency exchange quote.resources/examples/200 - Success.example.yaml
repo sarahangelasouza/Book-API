@@ -1,0 +1,56 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/pricing/quote-exchange-rates/{{fx_id}}"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      disabled: true
+  body:
+    type: json
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: f73842128f302
+    Server-Timing: traceparent;desc="00-0000000000000000000f73842128f302-86de5890588bcd04-01"
+    HTTP_X_PP_AZ_LOCATOR: ccg18.slc
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: br
+    Edge-Control: max-age=0
+    Date: Mon, 17 Nov 2025 07:55:19 GMT
+    X-Served-By: cache-qpg120114-QPG, cache-maa10231-MAA
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1763366118.657836,VS0,VE1346
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: text
+    content: |-
+      {
+          "exchange_rate_quotes": [
+              {
+                  "base_amount": {
+                      "currency_code": "USD",
+                      "value": "80.00"
+                  },
+                  "quote_amount": {
+                      "currency_code": "CAD",
+                      "value": "115.97"
+                  },
+                  "exchange_rate": "1.44964725",
+                  "fx_id": "MTFGMC1DMzg4LUVEM0E4ODVDLTlGQUUtNzRGOEUwMTRCQUFF",
+                  "expiry_time": "2025-11-18T02:00Z"
+              }
+          ]
+      }
+order: 1000

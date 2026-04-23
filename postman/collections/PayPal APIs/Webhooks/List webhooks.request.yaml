@@ -1,0 +1,15 @@
+$kind: http-request
+description: Lists webhooks for an app.
+url: "{{base_url}}/v1/notifications/webhooks"
+method: GET
+queryParams:
+  - key: anchor_type
+    value: APPLICATION
+    disabled: true
+    description: Filters the webhooks in the response by an `anchor_id` entity type.
+  - key: anchor_type
+    value: ACCOUNT
+    disabled: true
+    description: Filters the webhooks in the response by an `anchor_id` entity type.
+examples: ./.resources/List webhooks.resources/examples
+order: 3000

@@ -1,0 +1,35 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/invoices/:invoice_id"
+  method: GET
+  pathVariables:
+    - key: invoice_id
+      value: "{{invoice_id}}"
+      description: (Required) The ID of the invoice for which to show details.
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: c00f2987db7e7
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Thu, 06 Apr 2023 21:52:15 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100077-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1680817935.215754,VS0,VE155
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 10000

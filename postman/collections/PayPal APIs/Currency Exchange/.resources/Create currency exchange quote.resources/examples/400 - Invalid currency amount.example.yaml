@@ -1,0 +1,56 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/pricing/quote-exchange-rates"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+          "quote_items": [
+              {
+                  "base_currency": "USD",
+                  "base_amount": "10.001",
+                  "quote_currency": "INR"
+              }
+          ]
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Connection: keep-alive
+    Content-Length: "260"
+    Content-Type: application/json
+    Server: nginx
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: f74120321147c
+    Server-Timing: traceparent;desc="00-0000000000000000000f74120321147c-60bcd706a2c6b93a-01"
+    HTTP_X_PP_AZ_LOCATOR: ccg18.slc
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Thu, 06 Nov 2025 13:31:16 GMT
+    X-Served-By: cache-qpg1275-QPG, cache-maa10232-MAA
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1762435876.865660,VS0,VE956
+    Vary: Accept-Encoding
+  body:
+    type: text
+    content: |-
+      {
+          "name": "VALIDATION_ERROR",
+          "message": "Invalid request - see details",
+          "debug_id": "f74120321147c",
+          "details": [
+              {
+                  "issue": "java.lang.IllegalArgumentException: too many Decimal places for Currency code: USDtoo many Decimal places for Currency code: USD"
+              }
+          ],
+          "links": []
+      }
+order: 2000

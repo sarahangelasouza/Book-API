@@ -1,13 +1,9 @@
 $kind: http-request
-name: Get Book
-method: GET
-url: "{{baseUrl}}/books/:id"
 description: Returns a single book by ID.
+url: "{{baseUrl}}/books/:id"
+method: GET
 headers:
   "": ""
 pathVariables:
-  - key: id
-    value: "{{bookID}}"
-    $type: ""
-examples: .resources/Get Book.resources/examples
+  id: "{{bookID}}"
 order: 2000

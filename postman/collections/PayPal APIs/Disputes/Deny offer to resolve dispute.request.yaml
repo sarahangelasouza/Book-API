@@ -1,0 +1,16 @@
+$kind: http-request
+description: Denies an offer that the merchant proposes for a dispute, by ID.
+url: "{{base_url}}/v1/customer/disputes/:dispute_id/deny-offer"
+method: POST
+headers:
+  Content-Type: application/json
+pathVariables:
+  dispute_id: "{{dispute_id}}"
+body:
+  type: text
+  content: |-
+    {
+        "note": "refund offer is very low."
+    }
+examples: ./.resources/Deny offer to resolve dispute.resources/examples
+order: 14000

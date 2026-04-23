@@ -1,0 +1,64 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/pricing/quote-exchange-rates"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "quote_items": [
+          {
+            "base_currency": "USD",
+            "base_amount": "16.80",
+            "quote_currency": "GBP"
+          }
+        ]
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: f914610e7fd87
+    Server-Timing: traceparent;desc="00-0000000000000000000f914610e7fd87-a08f01c5575288f7-01"
+    HTTP_X_PP_AZ_LOCATOR: ccg18.slc
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: br
+    Edge-Control: max-age=0
+    Date: Thu, 06 Nov 2025 12:22:03 GMT
+    X-Served-By: cache-qpg120094-QPG, cache-maa10246-MAA
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1762431723.969961,VS0,VE931
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: text
+    content: |-
+      {
+          "exchange_rate_quotes": [
+              {
+                  "base_amount": {
+                      "currency_code": "USD",
+                      "value": "16.80"
+                  },
+                  "quote_amount": {
+                      "currency_code": "GBP",
+                      "value": "12.85"
+                  },
+                  "exchange_rate": "0.76508641343",
+                  "fx_id": "MTFGMC1CQjA5LUQzMzU3MTYyLTk3NkYtMjRCNzUwRDBGQkQz",
+                  "expiry_time": "2025-11-07T02:00Z",
+                  "rate_refresh_time": "2025-11-07T01:00Z"
+              }
+          ]
+      }
+order: 1000

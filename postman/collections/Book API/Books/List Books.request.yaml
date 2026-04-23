@@ -1,7 +1,5 @@
 $kind: http-request
-name: List Books
-method: GET
-url: "{{baseUrl}}/books"
 description: Returns a list of all books.
-examples: .resources/List Books.resources/examples
+url: "{{baseUrl}}/books"
+method: GET
 order: 1000

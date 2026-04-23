@@ -1,0 +1,67 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/payments/refunds/:refund_id"
+  method: GET
+  pathVariables:
+    - key: refund_id
+      value: "{{refund_id}}"
+      description: (Required) The PayPal-generated ID for the refund for which to show details.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "719"
+    Connection: keep-alive
+    Date: Tue, 08 Feb 2022 00:36:50 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 69253d6a227fd
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "id": "55105082X5896632E",
+          "amount": {
+              "currency_code": "USD",
+              "value": "10.00"
+          },
+          "note_to_payer": "Defective product",
+          "seller_payable_breakdown": {
+              "gross_amount": {
+                  "currency_code": "USD",
+                  "value": "10.00"
+              },
+              "paypal_fee": {
+                  "currency_code": "USD",
+                  "value": "0.35"
+              },
+              "net_amount": {
+                  "currency_code": "USD",
+                  "value": "9.65"
+              },
+              "total_refunded_amount": {
+                  "currency_code": "USD",
+                  "value": "30.00"
+              }
+          },
+          "invoice_id": "1644280607",
+          "status": "COMPLETED",
+          "create_time": "2022-02-07T16:36:47-08:00",
+          "update_time": "2022-02-07T16:36:47-08:00",
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/refunds/55105082X5896632E",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/payments/captures/9BT885563M275774M",
+                  "rel": "up",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

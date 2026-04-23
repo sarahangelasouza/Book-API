@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/fact"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: max_length
+    value: "14003335"
+    disabled: true
+    description: maximum length of returned fact
+order: 1000

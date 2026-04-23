@@ -1,0 +1,154 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts?external_id={{managed_path_external_id}}"
+  method: GET
+  queryParams:
+    - key: external_id
+      value: "{{managed_path_external_id}}"
+      description: The `external_id` query parameter can be used to request managed accounts with the given external_id.
+    - key: views
+      value: process_view
+      disabled: true
+      description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 243961bc133cc
+    Server-Timing: traceparent;desc="00-0000000000000000000243961bc133cc-ba37939788c95518-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: gzip
+    Edge-Control: max-age=0
+    Date: Fri, 21 Apr 2023 03:36:22 GMT
+    X-Served-By: cache-hnd18738-HND, cache-tyo11947-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1682048181.752637,VS0,VE1284
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "managed_accounts": [
+              {
+                  "account_id": "N4UJ5Z7GUXWM8",
+                  "legal_country_code": "FR",
+                  "individual_owners": [
+                      {
+                          "id": "N4UJ5Z7GUXWM8",
+                          "names": [
+                              {
+                                  "given_name": "TONY",
+                                  "surname": "MALLUWA",
+                                  "id": "LAZGPW7KPQQ3S",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "FR",
+                          "primary_residence": {
+                              "address_line_1": "Lane 100 W STR",
+                              "admin_area_2": "Paris",
+                              "postal_code": "75012",
+                              "country_code": "FR"
+                          },
+                          "birth_details": {
+                              "date_of_birth": "1990-01-01"
+                          }
+                      }
+                  ],
+                  "business_entity": {
+                      "type": "INDIVIDUAL",
+                      "merchant_category_code": "5462",
+                      "incorporation_details": {},
+                      "names": [
+                          {
+                              "business_name": "Abishak MALLUWA",
+                              "id": "RW9UBHCR7BTZ6",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "registered_business_address": {
+                          "address_line_1": "30 Rue Erard",
+                          "address_line_2": "BAT D4",
+                          "admin_area_2": "Paris",
+                          "postal_code": "75012",
+                          "country_code": "FR"
+                      },
+                      "phone_numbers": [
+                          {
+                              "country_code": "33",
+                              "national_number": "0182222222",
+                              "id": "NU3UFGVL7BJHQ",
+                              "type": "CUSTOMER_SERVICE"
+                          }
+                      ],
+                      "declarations": [
+                          {
+                              "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                              "value": "NO"
+                          }
+                      ]
+                  },
+                  "agreements": [
+                      {
+                          "type": "TERMS_ACCEPTED",
+                          "accepted_time": "2022-09-10T00:00:00Z"
+                      }
+                  ],
+                  "external_id": "EXT-1682048105",
+                  "organization": "us",
+                  "user_id": "1682048105",
+                  "financial_instruments": {
+                      "banks": [
+                          {
+                              "id": "BA-M8UJ2ST7HQYZC",
+                              "last_4_digits": "6690",
+                              "account_number_type": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+                              "account_type": "CHECKING",
+                              "routing_number": "61262345",
+                              "currency_code": "EUR",
+                              "country_code": "DE",
+                              "account_holder_details": {
+                                  "name": "Abishak MALLUWA"
+                              },
+                              "bank_name": "Bernhauser Bank eG",
+                              "branch_location": "70794 Filderstadt DE"
+                          }
+                      ]
+                  },
+                  "primary_currency_code": "EUR",
+                  "soft_descriptor": "ABISHAKMALL",
+                  "capabilities": [
+                      {
+                          "name": "RECEIVE_MONEY",
+                          "status": "ACTIVE"
+                      },
+                      {
+                          "name": "WITHDRAW_MONEY",
+                          "status": "ACTIVE"
+                      }
+                  ],
+                  "links": [
+                      {
+                          "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/N4UJ5Z7GUXWM8",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/N4UJ5Z7GUXWM8",
+                          "rel": "edit",
+                          "method": "PATCH"
+                      }
+                  ]
+              }
+          ]
+      }
+order: 2000

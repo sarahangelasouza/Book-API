@@ -1,0 +1,115 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes?disputed_transaction_id={{capture_id}}"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      disabled: true
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      disabled: true
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  queryParams:
+    - key: start_time
+      value: 2021-11-15T19:38:40.000Z
+      disabled: true
+      description: Filters the disputes in the response by a creation date and time. The start time must be within the last 180 days. Value is in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`.<br/><br/>You can specify either but not both the `start_time` and `disputed_transaction_id` query parameters.
+    - key: disputed_transaction_id
+      value: "{{capture_id}}"
+      description: Filters the disputes in the response by a transaction, by ID.<br/><br/>You can specify either but not both the `start_time` and `disputed_transaction_id` query parameter.
+    - key: page_size
+      value: "10"
+      disabled: true
+      description: Limits the number of disputes in the response to this value.
+    - key: next_page_token
+      value: ""
+      disabled: true
+      description: The token that describes the next page of results to fetch. The <a href="/docs/api/customer-disputes/v1/#disputes_list">list disputes</a> call returns this token in the HATEOAS links in the response.
+    - key: dispute_state
+      value: RESOLVED
+      disabled: true
+      description: Filters the disputes in the response by a state. Separate multiple values with a comma (`,`). When you specify more than one dispute_state, the response lists disputes that belong to any of the specified dispute_state.
+    - key: update_time_before
+      value: 2021-11-15T19:49:10.000Z
+      disabled: true
+      description: The date and time when the dispute was last updated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`. update_time_before must be within the last 180 days and the default is the current time.
+    - key: update_time_after
+      value: 2021-11-15T19:38:40.000Z
+      disabled: true
+      description: The date and time when the dispute was last updated, in [Internet date and time format](https://tools.ietf.org/html/rfc3339#section-5.6). For example, *`yyyy`*-*`MM`*-*`dd`*`T`*`HH`*:*`mm`*:*`ss`*.*`SSS`*`Z`. update_time_after must be within the last 180 days and the default is the maximum time (180 days) supported.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "725"
+    Connection: keep-alive
+    Date: Wed, 02 Feb 2022 03:30:18 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 1d523e2b81d83
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "items": [
+              {
+                  "dispute_id": "PP-D-61394",
+                  "create_time": "2022-02-02T03:23:10.000Z",
+                  "update_time": "2022-02-02T03:28:07.000Z",
+                  "reason": "MERCHANDISE_OR_SERVICE_NOT_RECEIVED",
+                  "status": "WAITING_FOR_SELLER_RESPONSE",
+                  "dispute_state": "REQUIRED_ACTION",
+                  "dispute_amount": {
+                      "currency_code": "USD",
+                      "value": "100.00"
+                  },
+                  "dispute_life_cycle_stage": "INQUIRY",
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v1/customer/disputes/PP-D-61394",
+                          "rel": "self",
+                          "method": "GET"
+                      }
+                  ]
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/customer/disputes?disputed_transaction_id=8E3322494D591061V",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/customer/disputes?disputed_transaction_id=8E3322494D591061V",
+                  "rel": "first",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 4000

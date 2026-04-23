@@ -1,0 +1,126 @@
+$kind: http-request
+description: Subscribes your webhook listener to events. For testing create a sample webhook endpoint on [https://webhook.site/](https://webhook.site/) to receive webhook events sent by PayPal.
+url: "{{base_url}}/v1/notifications/webhooks"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+    description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  - key: PayPal-Request-Id
+    value: "{{$guid}}"
+    description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+  - key: PayPal-Client-Metadata-Id
+    value: "{{paypal_client_metadata_Id}}"
+    disabled: true
+    description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+  - key: PayPal-Partner-Attribution-Id
+    value: "{{paypal_partner_attribution_id}}"
+    disabled: true
+    description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+  - key: PayPal-Auth-Assertion
+    value: "{{paypal_auth_assertion}}"
+    disabled: true
+    description: |
+      An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  - key: Prefer
+    value: "{{prefer_representation_detailed}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  - key: Prefer
+    value: "{{prefer_representation_minimal}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+body:
+  type: json
+  content: |-
+    {
+        "url": "{{webhook_url}}",
+        "event_types": [
+            {
+                "name": "*"
+            }
+        ]
+    }
+scripts:
+  - type: beforeRequest
+    code: |
+      // import functions from collection variables
+      eval(pm.collectionVariables.get("paypal_postman_scripts"));
+
+      // Create a temp endpoint on 'webhook.site' to register and receive webhooks events
+      // Please note this creates a public webhook endpoint.
+      // You may want to create a private endpoint by signing up on 'webhook.site' or their alternatives.
+
+      if(this.PayPalPostmanUtils.isSandbox()) {  // avoid live data on public endpoint even by accident
+          const postRequest = {
+              url: 'https://webhook.site/token',
+              method: 'POST',
+              body: {
+                  "default_status": 200,
+                  "default_content": { "status": "success", "code": "200", "msg": "processing" },
+                  "default_content_type": "application/json",
+                  "timeout": 0
+              }
+          };
+
+          pm.sendRequest(postRequest, (error, response) => {
+              var jsonData = response.json();
+              console.log(error ? error : jsonData);
+              pm.collectionVariables.set("webhook_site_token", jsonData.uuid);
+              pm.collectionVariables.set("webhook_url", "https://webhook.site/"+jsonData.uuid);
+          });
+
+          //Check how many hooks already available.
+          //You can only have max 10 hooks. so remove few hooks if required.
+          pm.sendRequest({
+              url: pm.variables.get("base_url") + '/v1/notifications/webhooks',
+              method: 'GET',
+              header: {
+                  'Authorization': 'Bearer ' + pm.collectionVariables.get("access_token")
+              }
+          }, (error, response) => {
+              if(response.code === 200) {
+                  const threshold = 7;
+                  const jsonData = response.json();
+                  if(jsonData && jsonData.webhooks && jsonData.webhooks.length > threshold) {
+                      //Removing last few hooks.
+                      //Webhooks returned by list webhook endpoint are ordered by 'url' field. 
+                      //looking at the response json, there is no way to figure out webhooks creation date/time.
+                      //we might delete recently created webhook with this.
+                      const hooksToBeRemoved = jsonData.webhooks.slice(threshold);
+                      hooksToBeRemoved.forEach((webhook)=> {
+                          console.log("Deleting webhook : ", webhook);
+                          pm.sendRequest({
+                              url: pm.variables.get('base_url') + '/v1/notifications/webhooks/' + webhook.id,
+                              method: 'DELETE',
+                              header: {
+                                  'Authorization': 'Bearer ' + pm.collectionVariables.get("access_token")
+                              }
+                          }, (error, response)=> {
+                              if(response.code === 204) {
+                                  console.log("Webhook deleted ", webhook);
+                              }
+                          });
+                      });
+                  }
+              } else {
+                  console.error("Something went wrong while fetching current webhooks.", error, response);
+              }
+          });
+      }
+    language: text/javascript
+  - type: afterResponse
+    code: |-
+      pm.test("Extract resource_id", function() {
+          var jsonData = pm.response.json();
+          pm.expect(jsonData).to.have.property('id');
+          pm.collectionVariables.set("webhook_id", jsonData.id);
+          pm.collectionVariables.set("webhook_url", jsonData.url);
+      });
+      var webhooksView = "https://webhook.site/#!/view/"+pm.collectionVariables.get("webhook_site_token");
+      pm.test("View Webhooks here "+webhooksView, function() {
+          console.log("View Webhooks here", webhooksView);
+      });
+    language: text/javascript
+examples: ./.resources/Create webhook.resources/examples
+order: 2000

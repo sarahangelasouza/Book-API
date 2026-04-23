@@ -1,0 +1,154 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  queryParams:
+    - key: views
+      value: process_view
+      disabled: true
+      description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response.
+  pathVariables:
+    - key: id
+      value: "{{managed_path_account_id}}"
+      description: The ID of the seller.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: dc09159736c70
+    Server-Timing: traceparent;desc="00-0000000000000000000dc09159736c70-9a00502817f864ea-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: gzip
+    Edge-Control: max-age=0
+    Date: Fri, 14 Apr 2023 02:04:23 GMT
+    X-Served-By: cache-hnd18733-HND, cache-nrt-rjtf7700070-NRT
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681437862.788578,VS0,VE1502
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "B72SPVXN3GHZE",
+          "legal_country_code": "US",
+          "individual_owners": [
+              {
+                  "id": "B72SPVXN3GHZE",
+                  "names": [
+                      {
+                          "given_name": "MaryAPPROVED",
+                          "surname": "Collins",
+                          "id": "PS7PSHU5MZCKE",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "primary_residence": {
+                      "address_line_1": "1234 Lane1 Drive",
+                      "admin_area_2": "100",
+                      "postal_code": "95014",
+                      "country_code": "US"
+                  },
+                  "birth_details": {
+                      "date_of_birth": "1995-05-30"
+                  },
+                  "identification_documents": [
+                      {
+                          "id": "BR4ZHUG3DLKVE",
+                          "identification_number": "****",
+                          "issuing_country_code": "US",
+                          "type": "SOCIAL_SECURITY_NUMBER"
+                      }
+                  ]
+              }
+          ],
+          "business_entity": {
+              "type": "INDIVIDUAL",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "Demo Inc.",
+                      "id": "UPHTP2MQJA646",
+                      "type": "LEGAL"
+                  }
+              ],
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "id": "MDL5EBFPJSM8E",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "NO"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ],
+          "external_id": "EXT-1681437816",
+          "organization": "us",
+          "user_id": "1681437816",
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "id": "BA-MR77U9T2V3J88",
+                      "last_4_digits": "0882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "account_holder_details": {
+                          "name": "Demo Inc."
+                      },
+                      "branch_code": "08501",
+                      "bank_name": "KEY BANK NATIONAL ASSOCIATION"
+                  }
+              ]
+          },
+          "primary_currency_code": "USD",
+          "soft_descriptor": "DEMO INC",
+          "capabilities": [
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "status": "ACTIVE"
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/B72SPVXN3GHZE",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/B72SPVXN3GHZE",
+                  "rel": "edit",
+                  "method": "PATCH"
+              }
+          ]
+      }
+order: 2000

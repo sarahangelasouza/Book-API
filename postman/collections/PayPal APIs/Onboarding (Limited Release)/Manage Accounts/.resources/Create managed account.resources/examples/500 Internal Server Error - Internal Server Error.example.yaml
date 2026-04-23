@@ -1,0 +1,257 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts"
+  method: POST
+  headers:
+    - key: Prefer
+      value: return=representation,views=process_view
+      description: (Optional) The preferred server response upon successful processing of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>account_id</code>, <code>external_id</code>, and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation without `process_view`.</li><li><code>return=representation, views=process_view</code>. The server returns complete resource representation along with `process_view` which includes policies information along with data/documents requirement to fulfill those.</li><li><code>views=process_view</code>. The server returns complete resource representation along with `process_view` which includes policies information along with data/documents requirement to fulfill those.</li></ul>
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  body:
+    type: json
+    content: |-
+      {
+          "external_id": "EXT-{{$timestamp}}",
+          "legal_country_code": "US",
+          "organization": "{{managed_path_organization}}",
+          "user_id": "{{$timestamp}}",
+          "primary_currency_code": "USD",
+          "individual_owners": [
+              {
+                  "names": [
+                      {
+                          "given_name": "TONY",
+                          "surname": "STARK",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "addresses": [
+                      {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                          "postal_code": "95014",
+                          "country_code": "US",
+                          "type": "HOME"
+                      }
+                  ]
+              }
+          ],
+          "business_entity": {
+              "type": "CORPORATION",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "STARK INDUSTRY.",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                  "postal_code": "95014",
+                  "country_code": "US"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "identification_documents": [
+                  {
+                      "identification_number": "32-2124444",
+                      "issuing_country_code": "US",
+                      "type": "EMPLOYER_IDENTIFICATION_NUMBER"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "names": [
+                              {
+                                  "given_name": "Tom",
+                                  "surname": "Norman",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "identification_documents": [
+                              {
+                                  "identification_number": "123-44-6789",
+                                  "issuing_country_code": "US",
+                                  "type": "SOCIAL_SECURITY_NUMBER"
+                              }
+                          ],
+                          "percentage_of_ownership": "26",
+                          "controlling_influence": false
+                      },
+                      {
+                          "names": [
+                              {
+                                  "given_name": "Mary",
+                                  "surname": "Smoth",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "percentage_of_ownership": "35",
+                          "controlling_influence": false
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "names": [
+                          {
+                              "given_name": "Katy",
+                              "surname": "Collins",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                              "postal_code": "22903",
+                              "country_code": "US",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1990-01-01"
+                      },
+                      "role": "CHAIRMAN"
+                  },
+                  {
+                      "names": [
+                          {
+                              "given_name": "Donald",
+                              "surname": "TREASWILLIAMSON",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                          "address_line_1": "W 294 STR",
+                          "admin_area_2": "New York",
+                              "postal_code": "29212",
+                              "country_code": "US",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1991-05-30"
+                      },
+                      "identification_documents": [
+                          {
+                              "identification_number": "123-45-6789",
+                              "issuing_country_code": "US",
+                              "type": "SOCIAL_SECURITY_NUMBER"
+                          }
+                      ]
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "mandate": {
+                          "consent_to_debit": true
+                      },
+                      "account_number": "59010882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "branch_code": "08501",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "bank_name": "Key Bank National Association"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "major_version": 3,
+                  "minor_version": 3,
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              },
+              {
+                  "type": "PERSONAL_INFORMATION_COLLECTION_CONSENT",
+                  "major_version": 1,
+                  "minor_version": 1,
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              }
+          ]
+      }
+response:
+  statusCode: 500
+  statusText: Internal Server Error
+  headers:
+    Connection: keep-alive
+    Content-Length: "108"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 7a17851ed9e0b
+    Server-Timing: traceparent;desc="00-00000000000000000007a17851ed9e0b-df3b5c5067b92318-01"
+    X-Slr-Retry: "500"
+    X-Slr-Retry-Api: /v3/customer/managed-accounts
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Wed, 19 Apr 2023 02:05:53 GMT
+    X-Served-By: cache-hnd18732-HND, cache-tyo11958-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681869942.985602,VS0,VE11524
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INTERNAL_SERVICE_ERROR",
+          "message": "An internal service error has occurred",
+          "details": [],
+          "links": []
+      }
+order: 16000

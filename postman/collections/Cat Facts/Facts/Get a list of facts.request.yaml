@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/facts?max_length=14003335&limit=14003335"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: max_length
+    value: "14003335"
+  - key: limit
+    value: "14003335"
+    description: limit the amount of results returned
+order: 2000

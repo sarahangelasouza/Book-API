@@ -1,0 +1,70 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/payments/payouts-item/:payout_item_id"
+  method: GET
+  pathVariables:
+    - key: payout_item_id
+      value: "{{payout_item_id}}"
+      description: (Required) The ID of the payout item for which to show details.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "1193"
+    Connection: keep-alive
+    Date: Wed, 02 Feb 2022 06:49:54 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: 8086834ce7b2b
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "payout_item_id": "4FNYP6JKEW28S",
+          "transaction_id": "7S520406M51625248",
+          "activity_id": "9MA543628Y061272E",
+          "transaction_status": "UNCLAIMED",
+          "payout_item_fee": {
+              "currency": "USD",
+              "value": "0.25"
+          },
+          "payout_batch_id": "42WWRAXUXYSQQ",
+          "sender_batch_id": "Payouts_1643784368",
+          "payout_item": {
+              "recipient_type": "EMAIL",
+              "amount": {
+                  "currency": "USD",
+                  "value": "10.00"
+              },
+              "note": "Thanks for your patronage!",
+              "receiver": "Barry4@yahoo.com",
+              "sender_item_id": "201403140001",
+              "recipient_wallet": "PAYPAL"
+          },
+          "time_processed": "2022-02-02T06:46:09Z",
+          "errors": {
+              "name": "RECEIVER_UNREGISTERED",
+              "message": "The recipient for this payout does not have an account. A link to sign up for an account was sent to the recipient. However, if the recipient does not claim this payout within 30 days, the funds will be returned to your account.",
+              "information_link": "https://developer.paypal.com/docs/api/payments.payouts-batch/#errors",
+              "details": [],
+              "links": []
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/payments/payouts-item/4FNYP6JKEW28S",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/payments/payouts/42WWRAXUXYSQQ",
+                  "rel": "batch",
+                  "method": "GET",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 1000

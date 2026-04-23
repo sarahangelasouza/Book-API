@@ -1,0 +1,49 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/parts"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "partNumber": "HYD-PUMP-007",
+        "name": "Hydraulic Pump Assembly",
+        "description": "Main hydraulic system pump for flight control actuation",
+        "category": "HYDRAULICS",
+        "status": "ACTIVE",
+        "manufacturer": "Parker Aerospace",
+        "quantityOnHand": 5,
+        "reorderThreshold": 2,
+        "unitCost": 15750.00,
+        "location": "Warehouse A, Row 5, Bin 12",
+        "notes": "Requires pressure testing before installation"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "660e8400-e29b-41d4-a716-446655440001",
+        "partNumber": "HYD-PUMP-007",
+        "name": "Hydraulic Pump Assembly",
+        "description": "Main hydraulic system pump for flight control actuation",
+        "category": "HYDRAULICS",
+        "status": "ACTIVE",
+        "manufacturer": "Parker Aerospace",
+        "quantityOnHand": 5,
+        "reorderThreshold": 2,
+        "unitCost": 15750.00,
+        "location": "Warehouse A, Row 5, Bin 12",
+        "notes": "Requires pressure testing before installation",
+        "createdAt": "2024-01-15T11:00:00.000Z",
+        "updatedAt": "2024-01-15T11:00:00.000Z"
+      }
+order: 1000

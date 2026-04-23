@@ -1,0 +1,55 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/subscriptions/:subscription_id/cancel"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    subscription_id: "{{subscription_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "reason": "Item out of stock"
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Connection: keep-alive
+    Content-Length: "481"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 198b9ed79bcf4
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Mon, 10 Apr 2023 19:00:03 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000059-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681153203.135416,VS0,VE335
+  body:
+    type: json
+    content: |-
+      {
+          "name": "UNPROCESSABLE_ENTITY",
+          "message": "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          "debug_id": "198b9ed79bcf4",
+          "details": [
+              {
+                  "issue": "SUBSCRIPTION_STATUS_INVALID",
+                  "description": "Invalid subscription status for cancel action; subscription status should be active or suspended."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#UNPROCESSABLE_ENTITY",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 4000

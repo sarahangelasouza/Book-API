@@ -1,0 +1,41 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/subscriptions/:subscription_id/cancel"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    subscription_id: "{{subscription_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "reason": "Item out of stock"
+      }
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Connection: keep-alive
+    Content-Length: "83"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 92e4c5f52b795
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Mon, 10 Apr 2023 19:17:16 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000059-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681154236.043629,VS0,VE58
+  body:
+    type: json
+    content: |-
+      {
+          "error": "invalid_token",
+          "error_description": "Token signature verification failed"
+      }
+order: 2000

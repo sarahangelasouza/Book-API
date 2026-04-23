@@ -1,0 +1,365 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/reporting/balances"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      disabled: true
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      disabled: true
+      description: The server stores keys for 72 hours.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  queryParams:
+    - key: as_of_time
+      value: 2022-03-20T00:00:00.000Z
+      disabled: true
+      description: List balances in the response at the date time provided, will return the last refreshed balance in the system when not provided.
+    - key: currency_code
+      value: ALL
+      disabled: true
+      description: Filters the transactions in the response by a [three-character ISO-4217 currency code](https://developer.paypal.com/docs/api/reference/currency-codes/) for the PayPal transaction currency.
+    - key: include_crypto_currencies
+      value: "true"
+      disabled: true
+      description: Indicates whether the response list balances including crypto transactions. Value is either:<ul><li><code>false</code>. The default. The response doesn't include crypto transactions.</li><li><code>true</code>. The response also includes crypto transactions.</li></ul>
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: b12845ef66eb6
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Tue, 11 Apr 2023 17:03:57 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-kigq8000067-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681232637.286912,VS0,VE203
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "balances": [
+              {
+                  "currency": "CHF",
+                  "total_balance": {
+                      "currency_code": "CHF",
+                      "value": "1037.98"
+                  },
+                  "available_balance": {
+                      "currency_code": "CHF",
+                      "value": "1037.98"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "CHF",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "HKD",
+                  "total_balance": {
+                      "currency_code": "HKD",
+                      "value": "0.00"
+                  },
+                  "available_balance": {
+                      "currency_code": "HKD",
+                      "value": "0.00"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "HKD",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "TWD",
+                  "total_balance": {
+                      "currency_code": "TWD",
+                      "value": "5193.00"
+                  },
+                  "available_balance": {
+                      "currency_code": "TWD",
+                      "value": "5193.00"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "TWD",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "MXN",
+                  "total_balance": {
+                      "currency_code": "MXN",
+                      "value": "3822172.57"
+                  },
+                  "available_balance": {
+                      "currency_code": "MXN",
+                      "value": "3822172.57"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "MXN",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "EUR",
+                  "total_balance": {
+                      "currency_code": "EUR",
+                      "value": "204951.56"
+                  },
+                  "available_balance": {
+                      "currency_code": "EUR",
+                      "value": "204951.56"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "EUR",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "USD",
+                  "primary": true,
+                  "total_balance": {
+                      "currency_code": "USD",
+                      "value": "19599281.07"
+                  },
+                  "available_balance": {
+                      "currency_code": "USD",
+                      "value": "19599281.07"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "CAD",
+                  "total_balance": {
+                      "currency_code": "CAD",
+                      "value": "6544.17"
+                  },
+                  "available_balance": {
+                      "currency_code": "CAD",
+                      "value": "6544.17"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "CAD",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "THB",
+                  "total_balance": {
+                      "currency_code": "THB",
+                      "value": "96658.02"
+                  },
+                  "available_balance": {
+                      "currency_code": "THB",
+                      "value": "96658.02"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "THB",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "AUD",
+                  "total_balance": {
+                      "currency_code": "AUD",
+                      "value": "7048.64"
+                  },
+                  "available_balance": {
+                      "currency_code": "AUD",
+                      "value": "7048.64"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "AUD",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "ILS",
+                  "total_balance": {
+                      "currency_code": "ILS",
+                      "value": "0.00"
+                  },
+                  "available_balance": {
+                      "currency_code": "ILS",
+                      "value": "0.00"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "ILS",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "SGD",
+                  "total_balance": {
+                      "currency_code": "SGD",
+                      "value": "41.50"
+                  },
+                  "available_balance": {
+                      "currency_code": "SGD",
+                      "value": "41.50"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "SGD",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "JPY",
+                  "total_balance": {
+                      "currency_code": "JPY",
+                      "value": "100686"
+                  },
+                  "available_balance": {
+                      "currency_code": "JPY",
+                      "value": "100686"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "JPY",
+                      "value": "0"
+                  }
+              },
+              {
+                  "currency": "PLN",
+                  "total_balance": {
+                      "currency_code": "PLN",
+                      "value": "0.00"
+                  },
+                  "available_balance": {
+                      "currency_code": "PLN",
+                      "value": "0.00"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "PLN",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "GBP",
+                  "total_balance": {
+                      "currency_code": "GBP",
+                      "value": "161813.34"
+                  },
+                  "available_balance": {
+                      "currency_code": "GBP",
+                      "value": "161813.34"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "GBP",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "HUF",
+                  "total_balance": {
+                      "currency_code": "HUF",
+                      "value": "0.00"
+                  },
+                  "available_balance": {
+                      "currency_code": "HUF",
+                      "value": "0.00"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "HUF",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "NZD",
+                  "total_balance": {
+                      "currency_code": "NZD",
+                      "value": "0.00"
+                  },
+                  "available_balance": {
+                      "currency_code": "NZD",
+                      "value": "0.00"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "NZD",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "PHP",
+                  "total_balance": {
+                      "currency_code": "PHP",
+                      "value": "288953.46"
+                  },
+                  "available_balance": {
+                      "currency_code": "PHP",
+                      "value": "288953.46"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "PHP",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "BRL",
+                  "total_balance": {
+                      "currency_code": "BRL",
+                      "value": "0.00"
+                  },
+                  "available_balance": {
+                      "currency_code": "BRL",
+                      "value": "0.00"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "BRL",
+                      "value": "0.00"
+                  }
+              },
+              {
+                  "currency": "RUB",
+                  "total_balance": {
+                      "currency_code": "RUB",
+                      "value": "274.53"
+                  },
+                  "available_balance": {
+                      "currency_code": "RUB",
+                      "value": "274.53"
+                  },
+                  "withheld_balance": {
+                      "currency_code": "RUB",
+                      "value": "0.00"
+                  }
+              }
+          ],
+          "account_id": "C7CYMKZDG8D6E",
+          "as_of_time": "2023-04-11T08:59:59Z",
+          "last_refresh_time": "2023-04-11T08:59:59Z"
+      }
+order: 3000

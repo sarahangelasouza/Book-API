@@ -1,0 +1,27 @@
+$kind: http-request
+description: |-
+  Show details for managed accounts, based on search criteria.
+
+  The detailed description for the endpoint can be found on PayPal Developer Portal under [Managed Accounts](https://developer.paypal.com/api/limited-release/managed-accounts/v3/#managed-accounts_get).
+url: "{{base_url}}/v3/customer/managed-accounts?external_id={{managed_path_external_id}}"
+method: GET
+queryParams:
+  - key: external_id
+    value: "{{managed_path_external_id}}"
+    description: |+
+      The `external_id` query parameter can be used to request managed accounts with the given external_id. Searches for the managed account that has the given external_id. To locate a particular account, you should set this to the same value that you provided in the /external_id property in your Create Managed Account request.
+
+  - key: views
+    value: process_view
+    disabled: true
+    description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response. A comma-separated list of data sets that should be returned in the response. The only allowed value here is process_view, which indicates that the process_view property should be populated in the response; this property contains information on the regulatory processes that must be completed for this merchant.
+scripts:
+  - type: afterResponse
+    code: |-
+      if(!pm.collectionVariables.get("managed_path_account_id")) {
+          //Skipping remaining MAM API calls when account id is not available
+          pm.execution.setNextRequest("Create a setup token");
+      }
+    language: text/javascript
+examples: ./.resources/Search managed account through external id.resources/examples
+order: 2000

@@ -1,0 +1,57 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts?external_id={{managed_path_external_id}}&views=process"
+  method: GET
+  queryParams:
+    - key: external_id
+      value: "{{managed_path_external_id}}"
+      description: The `external_id` query parameter can be used to request managed accounts with the given external_id.
+    - key: views
+      value: process
+      description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Connection: keep-alive
+    Content-Length: "406"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 295fe04dea688
+    Server-Timing: traceparent;desc="00-0000000000000000000295fe04dea688-4e3028ebaefecdc1-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Mon, 10 Apr 2023 04:07:28 GMT
+    X-Served-By: cache-hnd18733-HND, cache-tyo11948-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1681099649.705279,VS0,VE192
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "295fe04dea688",
+          "details": [
+              {
+                  "field": "views",
+                  "value": "process",
+                  "location": "query",
+                  "issue": "INVALID_PARAMETER_VALUE",
+                  "description": "Query parameter has invalid value."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/managed-accounts",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 5000

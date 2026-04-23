@@ -1,0 +1,141 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/oauth2/token"
+  method: POST
+  body:
+    type: urlencoded
+    content:
+      - key: grant_type
+        value: client_credentials
+        description: The credential type to exchange for an access token.
+      - key: grant_type
+        value: refresh_token
+        disabled: true
+        description: The credential type to exchange for an access token.
+      - key: refresh_token
+        value: "{{refresh_token}}"
+        disabled: true
+        description: The refresh token. Use to get access tokens. Use the same authorization grant as described in [OAuth2.0 RFC6749 Section 6](https://tools.ietf.org/html/rfc6749#section-6). Returns value only for `POST /token` calls with a `grant_type` of `authorization_code`.
+      - key: grant_type
+        value: authorization_code
+        disabled: true
+        description: The credential type to exchange for an access token.
+      - key: code
+        value: "{{authorization_code}}"
+        disabled: true
+        description: The authorization code that the `/login` call returns to the client to complete a user log in and get a third-party access token. Required if the `grant_type` is `authorization_code`.
+      - key: ignoreCache
+        value: "true"
+      - key: return_authn_schemes
+        value: "true"
+        description: Lists user authentication options and returns a first-party access token to authenticate an end user. Valid for all grant types except the `authzcode` authorization code, which indicates that the user is already authenticated.
+      - key: return_client_metadata
+        value: "true"
+        description: Lists client metadata attributes. Valid for all grant types.
+      - key: return_unconsented_scopes
+        value: "true"
+        description: Lists unconsented scopes between the user and client. Valid for all grant types except `client_credentials`.
+      - key: redirect_uri
+        value: ""
+        disabled: true
+        description: The redirection endpoint that terminates the user authorization flow. The value must be an EXACT match to the URI registered for the client during the client registration. If you pass the `target_client_id` parameter, the URI must be `target_client_id`. The out-of-band value is `urn:ietf:wg:oauth:2.0:oob`. Native apps can use the `redirect_uri` parameter.
+      - key: response_type
+        value: token
+        disabled: true
+        description: A space-separated list of token types. If the list is valid, the API returns all requested token types.
+      - key: response_type
+        value: uat
+        disabled: true
+      - key: scope
+        value: ""
+        disabled: true
+        description: |-
+          A list of space-separated and case-sensitive scopes, or permissions, to associate with the access token. If you omit this value, the API assumes the maximum set of allowed scopes. The scopes must be one of these values:
+          A subset of the scopes authorized for the client.
+          Consented by the user in case of end-user scopes.
+          Associated with the refresh token, depending on the `grant_type`.
+      - key: device_info
+        value: ""
+        disabled: true
+        description: The URL-encoded key-and-value pair that defines device information. If `unbind_device` is `true`, you must include the `device_info` or `refresh_token` parameter.
+      - key: app_info
+        value: ""
+        disabled: true
+        description: The URL-encoded key-and-value pair that defines application information. If `unbind_device` is `true`, you must include the `app_info` or `refresh_token` parameter.
+      - key: risk_data
+        value: ""
+        disabled: true
+        description: The URL-encoded key-and-value pairs of data required by risk. You can typically obtain values through the Dyson library. Required for public clients.
+      - key: target_subject
+        value: ""
+        disabled: true
+        description: The email address or payer ID of the user for whom you want to create an access token. Required if the `grant_type` is `client_credentials`, `refresh_token`, or `urn:paypal:params:oauth2:grant_type:unique_device_identifier`. This kind of `/token` request comes from a legacy client without REST API credentials.
+      - key: target_client_id
+        value: ""
+        disabled: true
+        description: The client ID of the client application for which the access token is created. Because the client who makes this kind of `/bind` request is a proxy, identifies the real client application. The client ID must have the `GRANT_PROXY_CLIENT` scope to use the `target_client_id` parameter.
+      - key: partner_client_id
+        value: ""
+        disabled: true
+        description: The ID of the partner with permission granted by the merchant for the partner to create the access token. Required, and only relevant, if the `grant_type` is set to `client_credentials`, `refresh_token`, or `urn:paypal:params:oauth2:grant_type:unique_device_identifier
+      - key: claims[]
+        value: customer_id:A2062N462U97
+        disabled: true
+        description: The client-specific key-and-value pairs associated with the access token. You can retrieve these pairs through the security context. Use a comma (`,`) to separate the key-and-value pairs.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Content-Length: "2205"
+    Connection: keep-alive
+    Date: Wed, 09 Feb 2022 05:53:00 GMT
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 6a2199cbeec30
+    Pragma: no-cache
+    X-Paypal-Token-Service: IAAS
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "scope": "https://uri.paypal.com/services/invoicing https://uri.paypal.com/services/vault/payment-tokens/read https://uri.paypal.com/services/disputes/read-buyer https://uri.paypal.com/services/payments/realtimepayment https://uri.paypal.com/services/disputes/update-seller https://uri.paypal.com/services/payments/payment/authcapture openid https://uri.paypal.com/services/disputes/read-seller Braintree:Vault https://uri.paypal.com/services/payments/refund https://api.paypal.com/v1/vault/credit-card https://api.paypal.com/v1/payments/.* https://uri.paypal.com/payments/payouts https://uri.paypal.com/services/vault/payment-tokens/readwrite https://api.paypal.com/v1/vault/credit-card/.* https://uri.paypal.com/services/subscriptions https://uri.paypal.com/services/applications/webhooks",
+          "access_token": "A21AALC5CWFkcA6TqNiGHfAhh3Y3LYn84SSVOhPNRfcWSR_zfrsPV0iLNDDyX7tTLt_6JpstWsvt972nsUYWx3TBU8XOoFoDQ",
+          "token_type": "Bearer",
+          "app_id": "APP-80W284485P519543T",
+          "expires_in": 32400,
+          "supported_authn_schemes": [
+              "email_password",
+              "remember_me"
+          ],
+          "nonce": "2022-02-09T05:53:00ZRcoM7FwwQCTcaZnToeIqtvup7IKFG5s8AfBjfuSGccU",
+          "client_metadata": {
+              "name": "postman2",
+              "display_name": "postman2-Nov-03-2021",
+              "logo_uri": "",
+              "scopes": [
+                  "https://uri.paypal.com/services/payments/futurepayments",
+                  "https://uri.paypal.com/services/invoicing",
+                  "https://uri.paypal.com/services/vault/payment-tokens/read",
+                  "https://uri.paypal.com/services/payments/basic",
+                  "https://uri.paypal.com/services/disputes/read-buyer",
+                  "https://uri.paypal.com/services/payments/realtimepayment",
+                  "https://uri.paypal.com/services/payments/payment/authcapture",
+                  "https://uri.paypal.com/services/disputes/update-seller",
+                  "openid",
+                  "https://uri.paypal.com/services/disputes/read-seller",
+                  "https://uri.paypal.com/services/payments/refund",
+                  "https://uri.paypal.com/web/experience/incontextxo",
+                  "https://api.paypal.com/v1/vault/credit-card",
+                  "Braintree:Vault",
+                  "https://api.paypal.com/v1/payments/.*",
+                  "https://uri.paypal.com/payments/payouts",
+                  "https://uri.paypal.com/services/vault/payment-tokens/readwrite",
+                  "https://api.paypal.com/v1/vault/credit-card/.*",
+                  "https://uri.paypal.com/services/subscriptions",
+                  "https://uri.paypal.com/services/applications/webhooks"
+              ],
+              "ui_type": "NEW"
+          }
+      }
+order: 2000

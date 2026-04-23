@@ -1,0 +1,350 @@
+$kind: http-example
+name: 200 - [EKYC Failed/Document Required] Get Account with Process View
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id"
+  method: GET
+  queryParams:
+    - key: views
+      value: process_view
+      disabled: true
+      description: (Optional) The `views` query parameter can be used to request `process_view` in addition to the default GET response.
+  pathVariables:
+    - key: id
+      value: "{{managed_path_account_id}}"
+      description: The ID of the seller.
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "GN6BRCRDTRVDU",
+          "legal_country_code": "US",
+          "individual_owners": [
+              {
+                  "id": "GN6BRCRDTRVDU",
+                  "names": [
+                      {
+                          "given_name": "LMTNREVIEW",
+                          "surname": "STARK",
+                          "id": "UKQSXFAEUCBV2",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "primary_residence": {
+                      "address_line_1": "W 294 STR",
+                      "address_line_2": "300",
+                      "admin_area_2": "New York",
+                      "postal_code": "95014",
+                      "country_code": "US"
+                  },
+                  "birth_details": {
+                      "date_of_birth": "1995-05-30"
+                  },
+                  "identification_documents": [
+                      {
+                          "id": "W5Q5NC9R7GKV8",
+                          "identification_number": "****",
+                          "issuing_country_code": "US",
+                          "type": "SOCIAL_SECURITY_NUMBER"
+                      }
+                  ]
+              }
+          ],
+          "business_entity": {
+              "type": "PROPRIETORSHIP",
+              "incorporation_details": {},
+              "names": [
+                  {
+                      "business_name": "STARK INDUSTRY.",
+                      "id": "ZJNDBRML65XDQ",
+                      "type": "LEGAL"
+                  }
+              ],
+              "phone_numbers": [
+                  {
+                      "country_code": "1",
+                      "national_number": "1",
+                      "id": "BPH3UMX3Q3REQ",
+                      "type": "BUSINESS"
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "NO"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2019-06-02T01:23:45Z"
+              }
+          ],
+          "balances": [
+              {
+                  "available_balances": [
+                      {
+                          "currency_code": "USD",
+                          "value": "0.00"
+                      }
+                  ]
+              }
+          ],
+          "external_id": "EXT-1699337233",
+          "organization": "us",
+          "user_id": "1699337233",
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "id": "BA-VLYQGC3RLJUQW",
+                      "last_4_digits": "0882",
+                      "account_number_type": "BASIC_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "074001048",
+                      "currency_code": "USD",
+                      "country_code": "US",
+                      "account_holder_details": {
+                          "name": "STARK INDUSTRY."
+                      },
+                      "branch_code": "08501",
+                      "bank_name": "KEYBANK NATIONAL ASSOCIATION"
+                  }
+              ]
+          },
+          "primary_currency_code": "USD",
+          "soft_descriptor": "STARKINDUST",
+          "capabilities": [
+              {
+                  "name": "APPLE_PAY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "CUSTOM_CARD_PROCESSING",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "USD",
+                          "value": "500.00",
+                          "remaining_value": "500.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              }
+          ],
+          "process_view": {
+              "processes": [
+                  {
+                      "name": "MANAGED_PATH_KYC",
+                      "status": "NEED_MORE_DATA",
+                      "capabilities": [
+                          {
+                              "name": "APPLE_PAY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          },
+                          {
+                              "name": "WITHDRAW_MONEY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          },
+                          {
+                              "name": "CUSTOM_CARD_PROCESSING",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "USD",
+                                      "value": "500.00",
+                                      "remaining_value": "500.00"
+                                  }
+                              ]
+                          }
+                      ],
+                      "required": {
+                          "op": "ALL_OF",
+                          "attributes": [
+                              {
+                                  "op": "ALL_OF",
+                                  "attributes": [
+                                      "riwf2"
+                                  ]
+                              },
+                              {
+                                  "op": "ONE_OF",
+                                  "attributes": [
+                                      "aIQrL",
+                                      "u0Z2Z"
+                                  ]
+                              },
+                              {
+                                  "op": "ONE_OF",
+                                  "attributes": [
+                                      "xyJxI",
+                                      "dzC3u",
+                                      "vis8M",
+                                      "UwlB3"
+                                  ]
+                              }
+                          ]
+                      }
+                  },
+                  {
+                      "name": "MANAGED_PATH_BO_VERIFICATION",
+                      "status": "COMPLETED",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY"
+                          },
+                          {
+                              "name": "CUSTOM_CARD_PROCESSING"
+                          },
+                          {
+                              "name": "APPLE_PAY"
+                          }
+                      ]
+                  }
+              ],
+              "required_documents": [
+                  {
+                      "id": "dzC3u",
+                      "name": "DRIVERS_LICENSE",
+                      "entity": "$.individual_owners[?(@['id']=='GN6BRCRDTRVDU')]",
+                      "links": [
+                          {
+                              "href": "https://api.sandbox.paypal.com/v1/customer/supporting-documents/26168510-5187-4bbb-b9ef-1b21c80d5d04/upload",
+                              "rel": "upload",
+                              "method": "POST"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "aIQrL",
+                      "name": "UTILITIES_BILL",
+                      "entity": "$.individual_owners[?(@['id']=='GN6BRCRDTRVDU')]",
+                      "links": [
+                          {
+                              "href": "https://api.sandbox.paypal.com/v1/customer/supporting-documents/26168510-5187-4bbb-b9ef-1b21c80d5d04/upload",
+                              "rel": "upload",
+                              "method": "POST"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "u0Z2Z",
+                      "name": "PROOF_OF_ADDRESS",
+                      "entity": "$.individual_owners[?(@['id']=='GN6BRCRDTRVDU')]",
+                      "links": [
+                          {
+                              "href": "https://api.sandbox.paypal.com/v1/customer/supporting-documents/26168510-5187-4bbb-b9ef-1b21c80d5d04/upload",
+                              "rel": "upload",
+                              "method": "POST"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "xyJxI",
+                      "name": "PASSPORT",
+                      "entity": "$.individual_owners[?(@['id']=='GN6BRCRDTRVDU')]",
+                      "links": [
+                          {
+                              "href": "https://api.sandbox.paypal.com/v1/customer/supporting-documents/26168510-5187-4bbb-b9ef-1b21c80d5d04/upload",
+                              "rel": "upload",
+                              "method": "POST"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "vis8M",
+                      "name": "PROOF_OF_IDENTITY",
+                      "entity": "$.individual_owners[?(@['id']=='GN6BRCRDTRVDU')]",
+                      "links": [
+                          {
+                              "href": "https://api.sandbox.paypal.com/v1/customer/supporting-documents/26168510-5187-4bbb-b9ef-1b21c80d5d04/upload",
+                              "rel": "upload",
+                              "method": "POST"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "UwlB3",
+                      "name": "PROOF_OF_NAME",
+                      "entity": "$.individual_owners[?(@['id']=='GN6BRCRDTRVDU')]",
+                      "links": [
+                          {
+                              "href": "https://api.sandbox.paypal.com/v1/customer/supporting-documents/26168510-5187-4bbb-b9ef-1b21c80d5d04/upload",
+                              "rel": "upload",
+                              "method": "POST"
+                          }
+                      ]
+                  },
+                  {
+                      "id": "riwf2",
+                      "name": "SOCIAL_SECURITY_NUMBER",
+                      "entity": "$.individual_owners[?(@['id']=='GN6BRCRDTRVDU')]",
+                      "links": [
+                          {
+                              "href": "https://api.sandbox.paypal.com/v1/customer/supporting-documents/26168510-5187-4bbb-b9ef-1b21c80d5d04/upload",
+                              "rel": "upload",
+                              "method": "POST"
+                          }
+                      ]
+                  }
+              ]
+          },
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/GN6BRCRDTRVDU",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/GN6BRCRDTRVDU",
+                  "rel": "edit",
+                  "method": "PATCH"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/GN6BRCRDTRVDU/wallet-domains?page=1",
+                  "rel": "wallet-domains",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 3000

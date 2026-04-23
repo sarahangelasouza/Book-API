@@ -1,0 +1,15 @@
+$kind: http-request
+description: Shows details for a captured payment, by ID.
+url: "{{base_url}}/v2/payments/captures/:capture_id"
+method: GET
+headers:
+  - key: PayPal-Mock-Response
+    value: '{ "mock_application_codes": "{{mock_issue}}" }'
+    disabled: true
+    description: For a list of error codes, see https://developer.paypal.com/docs/api/payments/v2/#errors
+pathVariables:
+  - key: capture_id
+    value: "{{capture_id}}"
+    description: (Required) The PayPal-generated ID for the captured payment for which to show details.
+examples: ./.resources/Show captured payment details.resources/examples
+order: 5000

@@ -1,0 +1,1425 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/invoicing/invoices"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      disabled: true
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      disabled: true
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_minimal}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  queryParams:
+    - key: page
+      value: "1"
+      disabled: true
+      description: The page number to be retrieved, for the list of items. So, a combination of `page=1` and `page_size=20` returns the first 20 invoices. A combination of `page=2` and `page_size=20` returns the next 20 invoices.
+    - key: page_size
+      value: "10"
+      disabled: true
+      description: The maximum number of invoices to return in the response.
+    - key: total_required
+      value: "false"
+      disabled: true
+      description: Indicates whether the to show <code>total_pages</code> and <code>total_items</code> in the response.
+    - key: fields
+      value: ullamco laboris
+      disabled: true
+      description: A comma-separated list of additional fields to return, if available.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Date: Fri, 04 Feb 2022 03:02:21 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: "331843583e902"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "items": [
+              {
+                  "id": "INV2-GWNR-QBAW-496B-4Y5P",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "<The reference data. Includes a post office (PO) number.>",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643943687",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T03:01:26Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@example.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-GWNR-QBAW-496B-4Y5P/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-K9Z3-8X6H-YZA9-WAXD",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "<The reference data. Includes a post office (PO) number.>",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643943679",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T03:01:19Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@example.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K9Z3-8X6H-YZA9-WAXD",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K9Z3-8X6H-YZA9-WAXD/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K9Z3-8X6H-YZA9-WAXD",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K9Z3-8X6H-YZA9-WAXD",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K9Z3-8X6H-YZA9-WAXD/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-Z53A-M2DL-3DED-EDP7",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "<The reference data. Includes a post office (PO) number.>",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643943411",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:56:51Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z53A-M2DL-3DED-EDP7",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z53A-M2DL-3DED-EDP7/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z53A-M2DL-3DED-EDP7",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z53A-M2DL-3DED-EDP7",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z53A-M2DL-3DED-EDP7/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-Z3KT-GBE7-6667-YEKU",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "<The reference data. Includes a post office (PO) number.>",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643943215",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:53:35Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z3KT-GBE7-6667-YEKU",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z3KT-GBE7-6667-YEKU/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z3KT-GBE7-6667-YEKU",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z3KT-GBE7-6667-YEKU",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-Z3KT-GBE7-6667-YEKU/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-D7SP-L8SF-U6CS-CNBW",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "<The reference data. Includes a post office (PO) number.>",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643943102",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:51:43Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-D7SP-L8SF-U6CS-CNBW",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-D7SP-L8SF-U6CS-CNBW/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-D7SP-L8SF-U6CS-CNBW",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-D7SP-L8SF-U6CS-CNBW",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-D7SP-L8SF-U6CS-CNBW/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-P9YA-M4QP-WFDY-T3QW",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643943018",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:50:18Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-P9YA-M4QP-WFDY-T3QW",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-P9YA-M4QP-WFDY-T3QW/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-P9YA-M4QP-WFDY-T3QW",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-P9YA-M4QP-WFDY-T3QW",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-P9YA-M4QP-WFDY-T3QW/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-9PSC-2JBY-QGAS-X3JY",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643943005",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:50:04Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-9PSC-2JBY-QGAS-X3JY",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-9PSC-2JBY-QGAS-X3JY/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-9PSC-2JBY-QGAS-X3JY",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-9PSC-2JBY-QGAS-X3JY",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-9PSC-2JBY-QGAS-X3JY/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-RHB4-CNP6-5D4Z-7PJK",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643942957",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:49:17Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-RHB4-CNP6-5D4Z-7PJK",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-RHB4-CNP6-5D4Z-7PJK/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-RHB4-CNP6-5D4Z-7PJK",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-RHB4-CNP6-5D4Z-7PJK",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-RHB4-CNP6-5D4Z-7PJK/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-4SL5-33HQ-E8TA-2GLW",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "<A note to the invoice recipient. Also appears on the invoice notification email.>",
+                      "memo": "<A private bookkeeping note for merchant.>",
+                      "invoice_number": "1643942944",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:49:04Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-4SL5-33HQ-E8TA-2GLW",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-4SL5-33HQ-E8TA-2GLW/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-4SL5-33HQ-E8TA-2GLW",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-4SL5-33HQ-E8TA-2GLW",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-4SL5-33HQ-E8TA-2GLW/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-JML4-DM39-5WQJ-CR6T",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "A note to the invoice recipient. Also appears on the invoice notification email.",
+                      "memo": "This is a long contract",
+                      "invoice_number": "1643942812",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:46:52Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-JML4-DM39-5WQJ-CR6T",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-JML4-DM39-5WQJ-CR6T/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-JML4-DM39-5WQJ-CR6T",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-JML4-DM39-5WQJ-CR6T",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-JML4-DM39-5WQJ-CR6T/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-5884-9JQ7-2YF4-P74Y",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "Thank you for your business.",
+                      "memo": "This is a long contract",
+                      "invoice_number": "1643942727",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:45:27Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-5884-9JQ7-2YF4-P74Y",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-5884-9JQ7-2YF4-P74Y/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-5884-9JQ7-2YF4-P74Y",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-5884-9JQ7-2YF4-P74Y",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-5884-9JQ7-2YF4-P74Y/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-TRM6-RCVD-3FBM-AE77",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "Thank you for your business.",
+                      "memo": "This is a long contract",
+                      "invoice_number": "1643942720",
+                      "invoice_date": "2021-02-04",
+                      "payment_term": {
+                          "due_date": "2021-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:45:19Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TRM6-RCVD-3FBM-AE77",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TRM6-RCVD-3FBM-AE77/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TRM6-RCVD-3FBM-AE77",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TRM6-RCVD-3FBM-AE77",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TRM6-RCVD-3FBM-AE77/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-MEGS-4LC4-HDU3-PF7D",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "Thank you for your business.",
+                      "memo": "This is a long contract",
+                      "invoice_number": "1643942693",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:44:53Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MEGS-4LC4-HDU3-PF7D",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MEGS-4LC4-HDU3-PF7D/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MEGS-4LC4-HDU3-PF7D",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MEGS-4LC4-HDU3-PF7D",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MEGS-4LC4-HDU3-PF7D/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-F7GC-A6EJ-53N6-7HEQ",
+                  "status": "DRAFT",
+                  "detail": {
+                      "reference": "deal-ref",
+                      "currency_code": "USD",
+                      "note": "Thank you for your business.",
+                      "memo": "This is a long contract",
+                      "invoice_number": "1643942686",
+                      "invoice_date": "2022-02-04",
+                      "payment_term": {
+                          "due_date": "2022-02-14"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:44:46Z"
+                      }
+                  },
+                  "primary_recipients": [
+                      {
+                          "billing_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              },
+                              "email_address": "foobuyer@gmail.com"
+                          },
+                          "shipping_info": {
+                              "name": {
+                                  "given_name": "Stephanie",
+                                  "surname": "Meyers",
+                                  "full_name": "Stephanie Meyers"
+                              }
+                          }
+                      }
+                  ],
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "74.21"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-F7GC-A6EJ-53N6-7HEQ",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-F7GC-A6EJ-53N6-7HEQ/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-F7GC-A6EJ-53N6-7HEQ",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-F7GC-A6EJ-53N6-7HEQ",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-F7GC-A6EJ-53N6-7HEQ/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-TKNW-LEZX-7NEF-Q4V2",
+                  "status": "DRAFT",
+                  "detail": {
+                      "currency_code": "USD",
+                      "invoice_number": "1643942295",
+                      "invoice_date": "2018-11-12",
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:40:06Z"
+                      }
+                  },
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TKNW-LEZX-7NEF-Q4V2",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TKNW-LEZX-7NEF-Q4V2/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TKNW-LEZX-7NEF-Q4V2",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TKNW-LEZX-7NEF-Q4V2",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-TKNW-LEZX-7NEF-Q4V2/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-8TRJ-K6ZV-AUB5-2B9A",
+                  "status": "DRAFT",
+                  "detail": {
+                      "currency_code": "USD",
+                      "invoice_number": "1643942294",
+                      "invoice_date": "2018-11-12",
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:39:57Z"
+                      }
+                  },
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-8TRJ-K6ZV-AUB5-2B9A",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-8TRJ-K6ZV-AUB5-2B9A/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-8TRJ-K6ZV-AUB5-2B9A",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-8TRJ-K6ZV-AUB5-2B9A",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-8TRJ-K6ZV-AUB5-2B9A/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-K75C-QBA6-6CWL-5CD2",
+                  "status": "DRAFT",
+                  "detail": {
+                      "currency_code": "USD",
+                      "invoice_number": "1643942293",
+                      "invoice_date": "2018-11-12",
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:38:36Z"
+                      }
+                  },
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K75C-QBA6-6CWL-5CD2",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K75C-QBA6-6CWL-5CD2/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K75C-QBA6-6CWL-5CD2",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K75C-QBA6-6CWL-5CD2",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-K75C-QBA6-6CWL-5CD2/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-HS73-2GDW-WF93-YDKM",
+                  "status": "DRAFT",
+                  "detail": {
+                      "currency_code": "USD",
+                      "invoice_number": "1643942292",
+                      "invoice_date": "2018-11-12",
+                      "payment_term": {
+                          "due_date": "2018-11-22"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:38:30Z"
+                      }
+                  },
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-HS73-2GDW-WF93-YDKM",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-HS73-2GDW-WF93-YDKM/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-HS73-2GDW-WF93-YDKM",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-HS73-2GDW-WF93-YDKM",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-HS73-2GDW-WF93-YDKM/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-MTZE-BFR8-U9A7-9FBP",
+                  "status": "DRAFT",
+                  "detail": {
+                      "currency_code": "USD",
+                      "memo": "This is a long contract",
+                      "invoice_number": "1643942291",
+                      "invoice_date": "2018-11-12",
+                      "payment_term": {
+                          "due_date": "2018-11-22"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:38:28Z"
+                      }
+                  },
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MTZE-BFR8-U9A7-9FBP",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MTZE-BFR8-U9A7-9FBP/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MTZE-BFR8-U9A7-9FBP",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MTZE-BFR8-U9A7-9FBP",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-MTZE-BFR8-U9A7-9FBP/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              },
+              {
+                  "id": "INV2-6VSC-42RT-MVJM-74MV",
+                  "status": "DRAFT",
+                  "detail": {
+                      "currency_code": "USD",
+                      "memo": "This is a long contract",
+                      "invoice_number": "1643942290",
+                      "invoice_date": "2018-11-12",
+                      "payment_term": {
+                          "due_date": "2018-11-22"
+                      },
+                      "viewed_by_recipient": false,
+                      "group_draft": false,
+                      "metadata": {
+                          "create_time": "2022-02-04T02:38:26Z"
+                      }
+                  },
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "due_amount": {
+                      "currency_code": "USD",
+                      "value": "0.00"
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-6VSC-42RT-MVJM-74MV",
+                          "rel": "self",
+                          "method": "GET"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-6VSC-42RT-MVJM-74MV/send",
+                          "rel": "send",
+                          "method": "POST"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-6VSC-42RT-MVJM-74MV",
+                          "rel": "replace",
+                          "method": "PUT"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-6VSC-42RT-MVJM-74MV",
+                          "rel": "delete",
+                          "method": "DELETE"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices/INV2-6VSC-42RT-MVJM-74MV/payments",
+                          "rel": "record-payment",
+                          "method": "POST"
+                      }
+                  ]
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices?page=1&page_size=20&total_required=false",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/invoicing/invoices?page=2&page_size=20&total_required=false",
+                  "rel": "next",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

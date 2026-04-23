@@ -1,0 +1,14 @@
+$kind: http-request
+description: Escalates the dispute, by ID, to a PayPal claim. To make this call, the stage in the dispute lifecycle must be `INQUIRY`.
+url: "{{base_url}}/v1/customer/disputes/:dispute_id/escalate"
+method: POST
+pathVariables:
+  dispute_id: "{{dispute_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "note": "Escalating to PayPal claim for resolution."
+    }
+examples: ./.resources/Escalate dispute to claim.resources/examples
+order: 11000

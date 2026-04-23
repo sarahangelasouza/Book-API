@@ -1,0 +1,64 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/supporting-documents/:token/upload"
+  method: POST
+  pathVariables:
+    token: "{{managed_path_upload_verification_token}}"
+  body:
+    type: formdata
+    content:
+      - type: text
+        key: document_info
+        value: '{"document_type":"UTILITIES_BILL"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"BANK_STATEMENT"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"BUSINESS_EXISTENCE"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"DRIVERS_LICENSE"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"PASSPORT"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"PROOF_OF_ADDRESS"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"SSN"}'
+      - type: text
+        key: document_info
+        value: '{"document_type":"BUSINESS_LICENSE"}'
+        disabled: true
+      - type: file
+        key: attachment
+        src: []
+        description: Need to upload document from local directory then manually trigger this API
+response:
+  statusCode: 400
+  statusText: Bad Request
+  body:
+    type: json
+    content: |-
+      {
+          "name": "INVALID_REQUEST",
+          "message": "Request is not well-formed, syntactically incorrect, or violates schema.",
+          "debug_id": "90bff07028f7f",
+          "details": [
+              {
+                  "field": "account_reference_id",
+                  "value": "xxxx-yyyy",
+                  "issue": "INVALID_PARAMETER_VALUE",
+                  "description": "A required field or parameter is missing."
+              }
+          ]
+      }
+order: 3000

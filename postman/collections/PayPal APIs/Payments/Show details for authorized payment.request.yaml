@@ -1,0 +1,21 @@
+$kind: http-request
+description: Shows details for an authorized payment, by ID.
+url: "{{base_url}}/v2/payments/authorizations/:authorization_id"
+method: GET
+headers:
+  - key: PayPal-Mock-Response
+    value: '{ "mock_application_codes": "{{mock_issue}}" }'
+    disabled: true
+    description: For a list of error codes, see https://developer.paypal.com/docs/api/payments/v2/#errors
+pathVariables:
+  - key: authorization_id
+    value: "{{authorization_id}}"
+    description: (Required) The ID of the authorized payment for which to show details.
+scripts:
+  - type: beforeRequest
+    code: |-
+      // first API in the folder enable delay subsequent APIs only during folder/collection run.
+      pm.variables.set('delayed_run', 'true');
+    language: text/javascript
+examples: ./.resources/Show details for authorized payment.resources/examples
+order: 1000

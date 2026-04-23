@@ -1,0 +1,44 @@
+$kind: http-request
+description: |
+  Generated from cURL: curl -X POST https://api.paypal.com/v2/pricing/quote-exchange-rates \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <ACCESS_TOKEN>" \
+    -d '{
+      "organization": "YOUR_ORGANIZATION_PATH",
+      "quote_items": [
+        {
+          "base_currency": "USD",
+          "base_amount": "100.00",
+          "quote_currency": "EUR",
+          "markup_percent": "1",
+          "fx_id": "PREVIOUS_FX_ID_IF_ANY"
+        }
+      ]
+    }'
+url: "{{base_url}}/v2/pricing/quote-exchange-rates"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "quote_items": [
+            {
+                "base_currency": "USD",
+                "base_amount": "20.00",
+                "quote_currency": "CAD"
+            }
+        ]
+    }
+auth:
+  type: bearer
+  credentials:
+    token: "{{access_token}}"
+scripts:
+  - type: afterResponse
+    code: |
+      var jsonData = pm.response.json();
+      pm.expect(jsonData).to.have.property('exchange_rate_quotes');
+      pm.collectionVariables.set("fx_id", jsonData.exchange_rate_quotes[0].fx_id);
+    language: text/javascript
+examples: ./.resources/Create currency exchange quote.resources/examples
+order: 1000

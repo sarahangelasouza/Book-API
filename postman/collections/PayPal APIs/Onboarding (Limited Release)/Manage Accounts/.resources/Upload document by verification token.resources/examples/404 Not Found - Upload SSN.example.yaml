@@ -1,0 +1,56 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/supporting-documents/:token/upload"
+  method: POST
+  pathVariables:
+    token: "{{managed_path_upload_verification_token}}"
+  body:
+    type: formdata
+    content:
+      - type: text
+        key: document_info
+        value: '{"document_type":"UTILITIES_BILL"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"BANK_STATEMENT"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"BUSINESS_EXISTENCE"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"DRIVERS_LICENSE"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"PASSPORT"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"PROOF_OF_ADDRESS"}'
+        disabled: true
+      - type: text
+        key: document_info
+        value: '{"document_type":"SSN"}'
+      - type: text
+        key: document_info
+        value: '{"document_type":"BUSINESS_LICENSE"}'
+        disabled: true
+      - type: file
+        key: attachment
+        src: []
+        description: Need to upload document from local directory then manually trigger this API
+response:
+  statusCode: 404
+  statusText: Not Found
+  body:
+    type: json
+    content: |-
+      {
+        "name": "NOT_FOUND",
+        "debugId": "b1d1f06c7246c",
+        "message": "The specified resource does not exist."
+      }
+order: 5000

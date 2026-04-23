@@ -1,0 +1,48 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/disputes/:dispute_id/escalate"
+  method: POST
+  pathVariables:
+    dispute_id: "{{dispute_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "note": "Escalating to PayPal claim for resolution."
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 8ed2aa752c365
+    Server-Timing: traceparent;desc="00-00000000000000000008ed2aa752c365-3825a1f1e39c1d18-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Wed, 12 Apr 2023 18:38:24 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100063-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681324703.437407,VS0,VE805
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v1/customer/disputes/PP-R-EYZ-10065656",
+                  "rel": "detail",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

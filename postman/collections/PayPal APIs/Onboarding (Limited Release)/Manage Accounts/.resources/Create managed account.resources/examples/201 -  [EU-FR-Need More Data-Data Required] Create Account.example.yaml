@@ -1,0 +1,529 @@
+$kind: http-example
+name: 201 -  [EU/FR/Need More Data/Data Required] Create Account
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Accept
+      value: application/json
+      description: The Accept header field is used to specify the form of response that can be understand and processed
+    - key: Prefer
+      value: return=minimal
+      disabled: true
+      description: (Optional)The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the account_id, external_id, and HATEOAS links.
+    - key: Prefer
+      value: return=representation
+      disabled: true
+      description: (Optional) The server returns a complete resource representation without process_view
+    - key: Prefer
+      value: return=representation, views=process_view
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+    - key: Prefer
+      value: views=process_view
+      disabled: true
+      description: (Optional)The server returns complete resource representation along with process_view which includes policies information along with data/documents requirement to fulfill those.
+  body:
+    type: json
+    content: |-
+      {
+          "external_id": "EXT-{{$timestamp}}",
+          "legal_country_code": "FR",
+          "organization": "{{managed_path_organization}}",
+          "user_id": "{{$timestamp}}",
+          "primary_currency_code": "EUR",
+          "individual_owners": [
+              {
+                 "names": [
+                      {
+                          "given_name": "TONY",
+                          "surname": "MALLUWA",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "citizenship": "FR",
+                  "addresses": [
+                      {
+                          "address_line_1": "100 W STREET",
+                          "admin_area_2": "Paris ",
+                          "postal_code": "75012",
+                          "country_code": "FR",
+                          "type": "HOME"
+                      }
+                  ],
+                  "birth_details": {
+                      "date_of_birth": "1990-01-01"
+                  }
+              }
+          ],
+          "business_entity": {
+              "type": "CORPORATION",
+              "merchant_category_code": "7929",
+              "incorporation_details": {
+                  "incorporation_country_code" : "FR"
+              },
+              "names": [
+                  {
+                      "business_name": "MONSIEUR PHILIPPE INDUSTRY.",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                  "address_line_1": " W 100 STR",
+                  "admin_area_2": "Anglet",
+                  "postal_code": "64600",
+                  "country_code": "FR"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "33",
+                      "national_number": "0603494746",
+                      "type": "CUSTOMER_SERVICE"
+                  }
+              ],
+              "identification_documents": [
+                  {
+                      "identification_number": "RCSPARIS123456789",
+                      "issuing_country_code": "FR",
+                      "type": "BUSINESS_REGISTRATION_NUMBER"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "names": [
+                              {
+                                  "given_name": "Katy",
+                                  "surname": "Norman",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                                  "address_line_1": "N 100 STR",
+                                  "admin_area_2": "New York ",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "percentage_of_ownership": "26",
+                          "controlling_influence": false
+                      },
+                      {
+                          "names": [
+                              {
+                                  "given_name": "LISA",
+                                  "surname": "Smoth",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "FR",
+                          "addresses": [
+                              {
+                                  "address_line_1": "W 100 STR",
+                                  "admin_area_2": "Anglet",
+                                  "postal_code": "64600",
+                                  "country_code": "FR",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1970-01-01"
+                          },
+                          "percentage_of_ownership": "35",
+                          "controlling_influence": false
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "names": [
+                          {
+                              "given_name": "Malin",
+                              "surname": "Collins",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "FR",
+                      "addresses": [
+                          {
+                              "address_line_1": "X 100 STR",
+                              "admin_area_2": "Paris",
+                              "postal_code": "64600",
+                              "country_code": "FR",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1990-01-01"
+                      },
+                      "role": "CHAIRMAN"
+                  },
+                  {
+                      "names": [
+                          {
+                              "given_name": "Shamula",
+                              "surname": "TREASWILLIAMSON",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                              "address_line_1": "N 100 STR",
+                              "admin_area_2": "New York",
+                              "postal_code": "29212",
+                              "country_code": "US",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1991-05-30"
+                      }
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "account_number": "DE96612623453878186690",
+                      "account_number_type": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "61262345",
+                      "currency_code": "EUR",
+                      "country_code": "DE",
+                      "account_holder_details": {
+                          "name": "Abishak MALLUWA"
+                      },
+                      "bank_name": "Bernhauser Bank eG",
+                      "branch_location": "Bernhauser Hauptstr 14"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "major_version": 3,
+                  "minor_version": 3,
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              }
+          ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Connection: keep-alive
+    Content-Length: "4231"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 41bcadb9917d3
+    Server-Timing: traceparent;desc="00-000000000000000000041bcadb9917d3-5c9ba089fd1c12ae-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: bytes
+    Via: 1.1 varnish, 1.1 varnish
+    Edge-Control: max-age=0
+    Date: Fri, 21 Apr 2023 02:57:13 GMT
+    X-Served-By: cache-hnd18740-HND, cache-nrt-rjtf7700067-NRT
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1682045820.499767,VS0,VE12989
+  body:
+    type: json
+    content: |-
+      {
+          "account_id": "Z8NDBF9HHU3GG",
+          "legal_country_code": "FR",
+          "individual_owners": [
+              {
+                  "id": "Z8NDBF9HHU3GG",
+                  "names": [
+                      {
+                          "given_name": "TONY",
+                          "surname": "MALLUWA",
+                          "id": "RLKLC36X8NTRS",
+                          "type": "LEGAL"
+                      }
+                  ],
+                  "citizenship": "FR",
+                  "primary_residence": {
+                      "address_line_1": "100 W STREET",
+                      "admin_area_2": "Paris ",
+                      "postal_code": "75012",
+                      "country_code": "FR"
+                  },
+                  "birth_details": {
+                      "date_of_birth": "1990-01-01"
+                  }
+              }
+          ],
+          "business_entity": {
+              "type": "CORPORATION",
+              "merchant_category_code": "7929",
+              "incorporation_details": {
+                  "incorporation_country_code": "FR"
+              },
+              "names": [
+                  {
+                      "business_name": "MONSIEUR PHILIPPE INDUSTRY.",
+                      "id": "R4SURMLBMV3GU",
+                      "type": "LEGAL"
+                  }
+              ],
+              "registered_business_address": {
+                  "address_line_1": " W 100 STR",
+                  "admin_area_2": "Anglet",
+                  "postal_code": "64600",
+                  "country_code": "FR"
+              },
+              "phone_numbers": [
+                  {
+                      "country_code": "33",
+                      "national_number": "0603494746",
+                      "id": "MDCTUDY57S3G6",
+                      "type": "CUSTOMER_SERVICE"
+                  }
+              ],
+              "identification_documents": [
+                  {
+                      "id": "4M7ADUYDGJFY8",
+                      "identification_number": "****",
+                      "issuing_country_code": "FR",
+                      "type": "BUSINESS_REGISTRATION_NUMBER"
+                  }
+              ],
+              "beneficial_owners": {
+                  "individuals": [
+                      {
+                          "id": "TKDAFNEJWZ6NJ",
+                          "names": [
+                              {
+                                  "given_name": "Katy",
+                                  "surname": "Norman",
+                                  "id": "4XAD2D78QUVPL",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "US",
+                          "addresses": [
+                              {
+                                  "address_line_1": "N 100 STR",
+                                  "admin_area_2": "New York ",
+                                  "postal_code": "95148",
+                                  "country_code": "US",
+                                  "id": "8UAW5SWWV4URU",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1960-01-01"
+                          },
+                          "percentage_of_ownership": "26",
+                          "controlling_influence": false
+                      },
+                      {
+                          "id": "KC73SAUTHTN4C",
+                          "names": [
+                              {
+                                  "given_name": "LISA",
+                                  "surname": "Smoth",
+                                  "id": "28374PHKSE7VS",
+                                  "type": "LEGAL"
+                              }
+                          ],
+                          "citizenship": "FR",
+                          "addresses": [
+                              {
+                                  "address_line_1": "W 100 STR",
+                                  "admin_area_2": "Anglet",
+                                  "postal_code": "64600",
+                                  "country_code": "FR",
+                                  "id": "8CAFJQK6D72LG",
+                                  "type": "HOME"
+                              }
+                          ],
+                          "birth_details": {
+                              "date_of_birth": "1970-01-01"
+                          },
+                          "percentage_of_ownership": "35",
+                          "controlling_influence": false
+                      }
+                  ]
+              },
+              "office_bearers": [
+                  {
+                      "id": "62UZQUJGEENG2",
+                      "names": [
+                          {
+                              "given_name": "Malin",
+                              "surname": "Collins",
+                              "id": "CMNZ4HR5AD77U",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "FR",
+                      "addresses": [
+                          {
+                              "address_line_1": "X 100 STR",
+                              "admin_area_2": "Paris",
+                              "postal_code": "64600",
+                              "country_code": "FR",
+                              "id": "5UUJ4WESYRKWY",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1990-01-01"
+                      },
+                      "role": "CHAIRMAN"
+                  },
+                  {
+                      "id": "K49AVSFLANAF8",
+                      "names": [
+                          {
+                              "given_name": "Shamula",
+                              "surname": "TREASWILLIAMSON",
+                              "id": "XTNFA3F7DT7HA",
+                              "type": "LEGAL"
+                          }
+                      ],
+                      "citizenship": "US",
+                      "addresses": [
+                          {
+                              "address_line_1": "N 100 STR",
+                              "admin_area_2": "New York",
+                              "postal_code": "29212",
+                              "country_code": "US",
+                              "id": "S2LFMYY2H72HS",
+                              "type": "HOME"
+                          }
+                      ],
+                      "birth_details": {
+                          "date_of_birth": "1991-05-30"
+                      }
+                  }
+              ],
+              "declarations": [
+                  {
+                      "name": "TWENTY_FIVE_PERCENT_BENEFICIAL_OWNER",
+                      "value": "YES"
+                  }
+              ]
+          },
+          "agreements": [
+              {
+                  "type": "TERMS_ACCEPTED",
+                  "accepted_time": "2022-09-10T00:00:00Z"
+              }
+          ],
+          "external_id": "EXT-1682045820",
+          "organization": "us",
+          "user_id": "1682045820",
+          "financial_instruments": {
+              "banks": [
+                  {
+                      "id": "BA-LSW2HBYXX4F5A",
+                      "last_4_digits": "6690",
+                      "account_number_type": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+                      "account_type": "CHECKING",
+                      "routing_number": "61262345",
+                      "currency_code": "EUR",
+                      "country_code": "DE",
+                      "account_holder_details": {
+                          "name": "Abishak MALLUWA"
+                      },
+                      "bank_name": "Bernhauser Bank eG",
+                      "branch_location": "70794 Filderstadt DE"
+                  }
+              ]
+          },
+          "primary_currency_code": "EUR",
+          "soft_descriptor": "MONSIEURPHI",
+          "capabilities": [
+              {
+                  "name": "RECEIVE_MONEY",
+                  "status": "ACTIVE"
+              },
+              {
+                  "name": "WITHDRAW_MONEY",
+                  "limits": [
+                      {
+                          "type": "AMOUNT",
+                          "unit": "EUR",
+                          "value": "1000.00",
+                          "remaining_value": "1000.00"
+                      }
+                  ],
+                  "status": "ACTIVE"
+              }
+          ],
+          "process_view": {
+              "processes": [
+                  {
+                      "name": "MANAGED_PATH_CIP_COLLECTION",
+                      "status": "COMPLETED",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY"
+                          },
+                          {
+                              "name": "RECEIVE_MONEY"
+                          }
+                      ]
+                  },
+                  {
+                      "name": "MANAGED_PATH_KYC",
+                      "status": "NEED_MORE_DATA",
+                      "capabilities": [
+                          {
+                              "name": "WITHDRAW_MONEY",
+                              "limits": [
+                                  {
+                                      "type": "AMOUNT",
+                                      "unit": "EUR",
+                                      "value": "1000.00",
+                                      "remaining_value": "1000.00"
+                                  }
+                              ]
+                          }
+                      ],
+                      "required": {
+                          "op": "ALL_OF",
+                          "attributes": [
+                              "$.business_entity.office_bearers[?(@['role']=='DIRECTOR')].citizenship",
+                              "$.business_entity.office_bearers[?(@['role']=='DIRECTOR')].names[?(@['type']=='LEGAL')]",
+                              "$.business_entity.office_bearers[?(@['role']=='DIRECTOR')].birth_details.date_of_birth"
+                          ]
+                      }
+                  }
+              ]
+          },
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/Z8NDBF9HHU3GG",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/Z8NDBF9HHU3GG",
+                  "rel": "edit",
+                  "method": "PATCH"
+              }
+          ]
+      }
+order: 6000

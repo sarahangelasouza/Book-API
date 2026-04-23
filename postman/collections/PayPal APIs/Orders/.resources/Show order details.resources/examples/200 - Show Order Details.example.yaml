@@ -1,0 +1,90 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders/:order_id"
+  method: GET
+  pathVariables:
+    order_id: "{{order_id}}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.18.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 86e54cf718464
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: none
+    Date: Wed, 19 Jan 2022 22:54:36 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-sjc10076-SJC
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1642632876.306814,VS0,VE170
+    Vary: Accept-Encoding
+    content-encoding: br
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "id": "1DA59471B5379105V",
+          "intent": "CAPTURE",
+          "status": "APPROVED",
+          "purchase_units": [
+              {
+                  "reference_id": "default",
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "1000.00"
+                  },
+                  "payee": {
+                      "email_address": "etondoze-facilitator@gmail.com",
+                      "merchant_id": "ER87FV8ER63HJ"
+                  },
+                  "shipping": {
+                      "name": {
+                          "full_name": "FooBuyer Jones"
+                      },
+                      "address": {
+                          "address_line_1": "1 Main St",
+                          "admin_area_2": "San Jose",
+                          "admin_area_1": "CA",
+                          "postal_code": "95131",
+                          "country_code": "US"
+                      }
+                  }
+              }
+          ],
+          "payer": {
+              "name": {
+                  "given_name": "FooBuyer",
+                  "surname": "Jones"
+              },
+              "email_address": "foobuyer@gmail.com",
+              "payer_id": "QYR5Z8XDVJNXQ",
+              "address": {
+                  "country_code": "US"
+              }
+          },
+          "create_time": "2022-01-19T22:53:27Z",
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/1DA59471B5379105V",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/1DA59471B5379105V",
+                  "rel": "update",
+                  "method": "PATCH"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/1DA59471B5379105V/capture",
+                  "rel": "capture",
+                  "method": "POST"
+              }
+          ]
+      }
+order: 1000

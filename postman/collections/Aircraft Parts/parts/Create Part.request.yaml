@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/parts"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: ""
+examples: ./.resources/Create Part.resources/examples
+order: 3000

@@ -1,0 +1,14 @@
+$kind: http-request
+description: Shows details for a dispute, by ID.<blockquote><strong>Note:</strong> The fields that appear in the response depend on whether you access this call through first- or third-party access. For example, if the merchant shows dispute details through third-party access, the customer's email ID does not appear.</blockquote>
+url: "{{base_url}}/v1/customer/disputes/:dispute_id"
+method: GET
+pathVariables:
+  dispute_id: "{{dispute_id}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      // skipping over rest of the dispute APIs since they need a valid transaction and that is not available until buyer approval flow is completed.
+      pm.execution.setNextRequest("Create managed account");
+    language: text/javascript
+examples: ./.resources/Show dispute details.resources/examples
+order: 2000

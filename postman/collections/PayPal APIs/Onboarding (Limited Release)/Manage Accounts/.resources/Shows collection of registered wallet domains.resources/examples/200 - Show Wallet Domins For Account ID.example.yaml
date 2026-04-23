@@ -1,0 +1,63 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/customer/managed-accounts/:id/wallet-domains"
+  method: GET
+  pathVariables:
+    - key: id
+      value: "{{managed_path_account_id}}"
+      description: The ID of the seller.
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Connection: keep-alive
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 7e3ce1fa8826a
+    Server-Timing: traceparent;desc="00-00000000000000000007e3ce1fa8826a-244e8655ae2e3e9a-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Accept-Ranges: none
+    Via: 1.1 varnish, 1.1 varnish
+    content-encoding: gzip
+    Edge-Control: max-age=0
+    Date: Mon, 15 May 2023 15:27:45 GMT
+    X-Served-By: cache-hnd18722-HND, cache-tyo11937-TYO
+    X-Cache: MISS, MISS
+    X-Cache-Hits: 0, 0
+    X-Timer: S1684164465.933528,VS0,VE672
+    Vary: Accept-Encoding
+    transfer-encoding: chunked
+  body:
+    type: json
+    content: |-
+      {
+          "wallet_domains": [
+              {
+                  "domain_name": "te-apm-wallet-test-tool-e2e06.qa.paypal.com",
+                  "id": "120557180788174364",
+                  "provider_type": "APPLE_PAY"
+              }
+          ],
+          "total_items": 1,
+          "total_pages": 1,
+          "links": [
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/W79Z8VUP5NXTL/wallet-domains?page_size=25&page=1",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/W79Z8VUP5NXTL/wallet-domains?page_size=25&page=1",
+                  "rel": "start",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api-m.sandbox.paypal.com/v3/customer/managed-accounts/W79Z8VUP5NXTL/wallet-domains?page_size=25&page=1",
+                  "rel": "last",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 1000

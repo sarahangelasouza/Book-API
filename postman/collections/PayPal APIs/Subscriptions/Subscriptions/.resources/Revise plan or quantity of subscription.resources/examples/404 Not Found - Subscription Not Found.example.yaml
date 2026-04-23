@@ -1,0 +1,84 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/subscriptions/:subscription_id/revise"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    subscription_id: I-1234WDRF1234
+  body:
+    type: json
+    content: |-
+      {
+        "plan_id": "{{billing_plan_id}}",
+        "shipping_amount": {
+          "currency_code": "USD",
+          "value": "10.00"
+        },
+        "shipping_address": {
+          "name": {
+            "full_name": "John Doe"
+          },
+          "address": {
+            "address_line_1": "2211 N First Street",
+            "address_line_2": "Building 17",
+            "admin_area_2": "San Jose",
+            "admin_area_1": "CA",
+            "postal_code": "95131",
+            "country_code": "US"
+          }
+        },
+        "application_context": {
+          "brand_name": "walmart",
+          "locale": "en-US",
+          "shipping_preference": "SET_PROVIDED_ADDRESS",
+          "payment_method": {
+            "payer_selected": "PAYPAL",
+            "payee_preferred": "IMMEDIATE_PAYMENT_REQUIRED"
+          },
+          "return_url": "https://example.com/returnUrl",
+          "cancel_url": "https://example.com/cancelUrl"
+        }
+      }
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Connection: keep-alive
+    Content-Length: "347"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 7da73cc621354
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Mon, 10 Apr 2023 18:07:01 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100084-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681150021.303251,VS0,VE300
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "name": "RESOURCE_NOT_FOUND",
+          "message": "The specified resource does not exist.",
+          "debug_id": "7da73cc621354",
+          "details": [
+              {
+                  "issue": "INVALID_RESOURCE_ID",
+                  "description": "Requested resource ID was not found."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#RESOURCE_NOT_FOUND",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 3000

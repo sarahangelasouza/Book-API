@@ -1,0 +1,81 @@
+$kind: http-request
+description: Searches for and lists invoices that match search criteria. If you pass multiple criteria, the response lists invoices that match all criteria.
+url: "{{base_url}}/v2/invoicing/search-invoices?page=1&page_size=10&total_required=true"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+    description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  - key: PayPal-Request-Id
+    value: "{{$guid}}"
+    disabled: true
+    description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+  - key: PayPal-Client-Metadata-Id
+    value: "{{paypal_client_metadata_Id}}"
+    disabled: true
+    description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+  - key: PayPal-Partner-Attribution-Id
+    value: "{{paypal_partner_attribution_id}}"
+    disabled: true
+    description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+  - key: PayPal-Auth-Assertion
+    value: "{{paypal_auth_assertion}}"
+    disabled: true
+    description: |
+      An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  - key: Prefer
+    value: "{{prefer_representation_detailed}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  - key: Prefer
+    value: "{{prefer_representation_minimal}}"
+    disabled: true
+    description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+queryParams:
+  - key: page
+    value: "1"
+    description: The page number to be retrieved, for the list of items. So, a combination of `page=1` and `page_size=20` returns the first 20 invoices. A combination of `page=2` and `page_size=20` returns the next 20 invoices.
+  - key: page_size
+    value: "10"
+    description: The page size for the search results.
+  - key: total_required
+    value: "true"
+    description: Indicates whether the to show <code>total_pages</code> and <code>total_items</code> in the response.
+body:
+  type: json
+  content: |-
+    {
+        "recipient_email": "foobuyer@gmail.com",
+        "recipient_first_name": "Stephanie",
+        "recipient_last_name": "Meyers",
+        "recipient_business_name": "",
+        "invoice_number": "1644275305",
+        "status": [
+            "DRAFT"
+        ],
+        "reference": "298",
+        "currency_code": "USD",
+        "memo": "<A private bookkeeping note for merchant.>",
+        "total_amount_range": {
+            "lower_amount": {
+                "currency_code": "USD",
+                "value": "100.00"
+            },
+            "upper_amount": {
+                "currency_code": "USD",
+                "value": "1000.00"
+            }
+        },
+        "invoice_date_range": {
+            "start": "2022-01-01",
+            "end": "2022-02-07"
+        }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      // skip over invoice payment APIs because there are no auth/capture transaction in the postman environment
+      pm.execution.setNextRequest("List templates"); 
+    language: text/javascript
+examples: ./.resources/Search for invoices.resources/examples
+order: 11000

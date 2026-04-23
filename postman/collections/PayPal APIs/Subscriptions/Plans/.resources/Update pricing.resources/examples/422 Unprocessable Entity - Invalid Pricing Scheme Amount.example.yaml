@@ -1,0 +1,86 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/billing/plans/:billing_plan_id/update-pricing-schemes"
+  method: POST
+  headers:
+    Content-Type: application/json
+  pathVariables:
+    billing_plan_id: "{{billing_plan_id}}"
+  body:
+    type: json
+    content: |-
+      {
+          "pricing_schemes": [
+              {
+                  "billing_cycle_sequence": 1,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "10",
+                          "currency_code": "USD"
+                      },
+                      "roll_out_strategy": {
+                          "effective_time": "2022-11-01T00:00:00Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              },
+              {
+                  "billing_cycle_sequence": 2,
+                  "pricing_scheme": {
+                      "fixed_price": {
+                          "value": "50",
+                          "currency_code": "USD"
+                      },
+                      "roll_out_strategy": {
+                          "effective_time": "2022-11-01T00:00:00Z",
+                          "process_change_from": "NEXT_PAYMENT"
+                      }
+                  }
+              }
+          ]
+      }
+response:
+  statusCode: 422
+  statusText: Unprocessable Entity
+  headers:
+    Content-Type: application/json
+    Content-Length: "763"
+    Connection: keep-alive
+    Date: Tue, 08 Feb 2022 22:12:52 GMT
+    Application_id: APP-80W284485P519543T
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Caller_acct_num: ER87FV8ER63HJ
+    Paypal-Debug-Id: c484ca813a1af
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+  body:
+    type: json
+    content: |-
+      {
+          "name": "UNPROCESSABLE_ENTITY",
+          "message": "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          "debug_id": "c484ca813a1af",
+          "details": [
+              {
+                  "field": "/pricing_schemes/0/pricing_scheme/fixed_price/value",
+                  "value": "1000",
+                  "location": "body",
+                  "issue": "PRICING_SCHEME_INVALID_AMOUNT",
+                  "description": "The amount entered should be different from the existing amount."
+              },
+              {
+                  "field": "/pricing_schemes/1/pricing_scheme/fixed_price/value",
+                  "value": "5000",
+                  "location": "body",
+                  "issue": "PRICING_SCHEME_INVALID_AMOUNT",
+                  "description": "The amount entered should be different from the existing amount."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://developer.paypal.com/docs/api/v1/billing/subscriptions#UNPROCESSABLE_ENTITY",
+                  "rel": "information_link",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 5000

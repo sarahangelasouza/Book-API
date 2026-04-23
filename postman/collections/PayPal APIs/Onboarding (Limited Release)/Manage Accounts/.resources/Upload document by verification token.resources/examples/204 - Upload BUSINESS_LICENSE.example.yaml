@@ -1,0 +1,24 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/customer/supporting-documents/:token/upload"
+  method: POST
+  pathVariables:
+    token: "{{managed_path_upload_verification_token}}"
+  body:
+    type: formdata
+    content:
+      - type: text
+        key: document_info
+        value: '{"document_type":"BUSINESS_LICENSE"}'
+        description: Document info of uploaded document. "document_type" is the only required field.
+      - type: file
+        key: attachment
+        src: []
+        description: Need to upload document from local directory then manually trigger this API
+response:
+  statusCode: 204
+  statusText: No Content
+  body:
+    type: text
+    content: ""
+order: 2000

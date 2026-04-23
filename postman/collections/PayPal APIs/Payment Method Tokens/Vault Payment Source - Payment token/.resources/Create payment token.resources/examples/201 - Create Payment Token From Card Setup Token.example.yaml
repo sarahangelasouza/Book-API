@@ -1,0 +1,84 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/payment-tokens"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  body:
+    type: json
+    content: |-
+      {
+          "payment_source": {
+              "token": {
+                  "id": "{{setup_token_id}}",
+                  "type": "SETUP_TOKEN"
+              }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: json
+    content: |-
+      {
+          "id": "17m19804ts2256137",
+          "customer": {
+              "id": "IoYQxaLaLn"
+          },
+          "payment_source": {
+              "card": {
+                  "name": "John Doe",
+                  "last_digits": "0017",
+                  "brand": "MASTER",
+                  "expiry": "2027-02",
+                  "billing_address": {
+                      "address_line_1": "2211 N First Street",
+                      "address_line_2": "17.3.160",
+                      "admin_area_2": "San Jose",
+                      "admin_area_1": "CA",
+                      "postal_code": "95131",
+                      "country_code": "US"
+                  },
+                  "verification_status": "VERIFIED",
+                  "verification": {
+                      "network_transaction_id": "21612175113180886",
+                      "time": "2023-10-26T15:16:03.000Z",
+                      "amount": {
+                          "currency_code": "USD",
+                          "value": "0.00"
+                      },
+                      "processor_response": {
+                          "avs_code": "Y",
+                          "cvv_code": "M",
+                          "response_code": "00"
+                      }
+                  }
+              }
+          },
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/17m19804ts2256137",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/17m19804ts2256137",
+                  "rel": "delete",
+                  "method": "DELETE",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 2000

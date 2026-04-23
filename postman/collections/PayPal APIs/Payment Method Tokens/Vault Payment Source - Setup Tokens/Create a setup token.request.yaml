@@ -1,0 +1,79 @@
+$kind: http-request
+description: Creates a Setup Token from the given payment source and adds it to the Vault of the associated customer.
+url: "{{base_url}}/v3/vault/setup-tokens"
+method: POST
+headers:
+  - key: Content-Type
+    value: application/json
+    description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+  - key: PayPal-Request-Id
+    value: "{{$guid}}"
+    description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+  - key: PayPal-Auth-Assertion
+    value: "{{paypal_auth_assertion}}"
+    disabled: true
+    description: |
+      An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+body:
+  type: json
+  content: |-
+    {
+        "payment_source": {
+            "card": {
+                "number": "{{card_number}}",
+                "expiry": "2027-02",
+                "name": "John Doe",
+                "billing_address": {
+                    "address_line_1": "2211 N First Street",
+                    "address_line_2": "17.3.160",
+                    "admin_area_1": "CA",
+                    "admin_area_2": "San Jose",
+                    "postal_code": "95131",
+                    "country_code": "US"
+                }
+            }
+        }
+    }
+scripts:
+  - type: afterResponse
+    code: |-
+      var data = pm.response.json();
+      pm.test("Response has setup token id", function() {
+          pm.expect(data).to.have.property('id');
+          pm.collectionVariables.set("setup_token_id", data.id);
+      });
+      pm.test("Response has customer token id", function() {
+          pm.expect(data.customer).to.have.property('id');
+          pm.collectionVariables.set("vault_customer_id", data.customer.id);
+      });
+    language: text/javascript
+  - type: beforeRequest
+    code: |
+      // first API in the folder enable delay subsequent APIs only during folder/collection run.
+      pm.variables.set('delayed_run', 'true');
+      //These test card numbers comes from here - https://developer.paypal.com/braintree/docs/guides/credit-cards/testing-go-live/java
+      var cards = [
+      '378282246310005',
+      '371449635398431',
+      '36259600000004',
+      '6011000991300009',
+      '3530111333300000',
+      '6304000000000000',
+      '5555555555554444',
+      '2223000048400011',
+      '4111111111111111',
+      '4005519200000004',
+      '4009348888881881',
+      '4012000033330026',
+      '4012000077777777',
+      '4012888888881881',
+      '4217651111111119',
+      '4500600000000061',
+      '6243030000000001',
+      '6221261111117766',
+      '6223164991230014'];
+
+      pm.variables.set("card_number", cards[Math.floor(Math.random() * 5)]);
+    language: text/javascript
+examples: ./.resources/Create a setup token.resources/examples
+order: 1000

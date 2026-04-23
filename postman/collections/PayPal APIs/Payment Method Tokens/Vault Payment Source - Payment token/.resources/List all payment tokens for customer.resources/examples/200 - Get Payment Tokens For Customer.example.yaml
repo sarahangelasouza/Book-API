@@ -1,0 +1,117 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v3/vault/payment-tokens?customer_id={{vault_customer_id}}"
+  method: GET
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+  queryParams:
+    - key: customer_id
+      value: "{{vault_customer_id}}"
+      description: (Required) A unique identifier representing a specific customer in merchant's/partner's system or records.
+    - key: page_size
+      value: "5"
+      disabled: true
+      description: A non-negative, non-zero integer indicating the maximum number of results to return at one time.
+    - key: page
+      value: "1"
+      disabled: true
+      description: A non-negative, non-zero integer representing the page of the results.
+    - key: total_required
+      value: "false"
+      disabled: true
+      description: A boolean indicating total number of items (total_items) and pages (total_pages) are expected to be returned in the response.
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: |-
+      {
+          "customer": {
+              "id": "zEKccQjcyi"
+          },
+          "payment_tokens": [
+              {
+                  "id": "qg76szx5",
+                  "customer": {
+                      "id": "zEKccQjcyi"
+                  },
+                  "payment_source": {
+                      "card": {
+                          "name": "John Doe",
+                          "last_digits": "1111",
+                          "brand": "VISA",
+                          "expiry": "2027-02",
+                          "billing_address": {
+                              "address_line_1": "2211 N First Street",
+                              "address_line_2": "17.3.160",
+                              "admin_area_2": "San Jose",
+                              "admin_area_1": "CA",
+                              "postal_code": "95131",
+                              "country_code": "US",
+                              "id": "ws"
+                          },
+                          "verification_status": "VERIFIED",
+                          "verification": {
+                              "network_transaction_id": "21593479112740241",
+                              "time": "2023-10-09T22:56:02Z",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "0.00"
+                              },
+                              "processor_response": {
+                                  "avs_code": "A",
+                                  "cvv_code": "C",
+                                  "response_code": "00"
+                              }
+                          }
+                      }
+                  },
+                  "links": [
+                      {
+                          "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/qg76szx5",
+                          "rel": "self",
+                          "method": "GET",
+                          "encType": "application/json"
+                      },
+                      {
+                          "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens/qg76szx5",
+                          "rel": "delete",
+                          "method": "DELETE",
+                          "encType": "application/json"
+                      }
+                  ]
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens?pageNumber=1&totalRequired=false&customer_id=zEKccQjcyi&pageSizeInternal=5",
+                  "rel": "self",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens?pageNumber=1&totalRequired=false&customer_id=zEKccQjcyi&pageSizeInternal=5",
+                  "rel": "first",
+                  "method": "GET",
+                  "encType": "application/json"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v3/vault/payment-tokens?pageNumber=1&totalRequired=false&customer_id=zEKccQjcyi&pageSizeInternal=5",
+                  "rel": "last",
+                  "method": "GET",
+                  "encType": "application/json"
+              }
+          ]
+      }
+order: 1000

@@ -1,0 +1,115 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v1/notifications/webhooks"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: Prefer
+      value: "{{prefer_representation_min}}"
+      disabled: true
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+  body:
+    type: json
+    content: |-
+      {
+          "url": "{{webhook_url}}",
+          "event_types": [
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.ACCOUNT-CREATED"
+              },
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.ACCOUNT-STATUS-CHANGED"
+              },
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.ACCOUNT-UPDATED"
+              },
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.CREATION-FAILED"
+              }
+          ]
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Connection: keep-alive
+    Content-Length: "481"
+    Content-Type: application/json
+    Server: nginx/1.14.0 (Ubuntu)
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Content-Language: ""
+    Paypal-Debug-Id: b5d6eaf74f40f
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Mon, 10 Apr 2023 20:40:21 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-chi-klot8100056-CHI
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1681159221.279917,VS0,VE197
+  body:
+    type: json
+    content: |-
+      {
+          "id": "26E90603PW189690E",
+          "url": "https://webhook.site/2c3f9838-f296-40e6-979e-866ad6a76fbc",
+          "event_types": [
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.ACCOUNT-CREATED",
+                  "description": "The webhook event that is triggered when the non-loginable account have been created."
+              },
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.ACCOUNT-STATUS-CHANGED",
+                  "description": "Webhook notification payload for account state changes for Capabilities and Processes"
+              },
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.ACCOUNT-UPDATED",
+                  "description": "The webhook event that is triggered when the non-loginable account is updated."
+              },
+              {
+                  "name": "CUSTOMER.MANAGED-ACCOUNT.CREATION-FAILED",
+                  "description": "This event is triggered when a non-loginable account creation has failed."
+              }
+          ],
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/26E90603PW189690E",
+                  "rel": "self",
+                  "method": "GET"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/26E90603PW189690E",
+                  "rel": "update",
+                  "method": "PATCH"
+              },
+              {
+                  "href": "https://api.sandbox.paypal.com/v1/notifications/webhooks/26E90603PW189690E",
+                  "rel": "delete",
+                  "method": "DELETE"
+              }
+          ]
+      }
+order: 2000

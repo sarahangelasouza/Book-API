@@ -1,0 +1,10 @@
+$kind: http-request
+description: Shows details for a template, by ID.
+url: "{{base_url}}/v2/invoicing/templates/:template_id"
+method: GET
+pathVariables:
+  - key: template_id
+    value: "{{invoice_template_id}}"
+    description: (Required) The ID of the template for which to show details.
+examples: ./.resources/Show template details.resources/examples
+order: 3000

@@ -1,0 +1,14 @@
+$kind: http-request
+description: <blockquote><strong>Important:</strong> This method is for sandbox use only.</blockquote> Settles a dispute in either the customer's or merchant's favor. Merchants can make this call in the sandbox to complete end-to-end dispute resolution testing, which mimics the dispute resolution that PayPal agents normally complete. To make this call, the dispute <code>status</code> must be <code>UNDER_REVIEW</code>.
+url: "{{base_url}}/v1/customer/disputes/:dispute_id/adjudicate"
+method: POST
+pathVariables:
+  dispute_id: "{{dispute_id}}"
+body:
+  type: json
+  content: |-
+    {
+        "adjudication_outcome": "BUYER_FAVOR"
+    }
+examples: ./.resources/Settle dispute.resources/examples
+order: 5000

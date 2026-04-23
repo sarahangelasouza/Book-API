@@ -1,0 +1,175 @@
+$kind: http-example
+request:
+  url: "{{base_url}}/v2/checkout/orders"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+      description: The Content-Type header field is used to specify the nature of the data in the body of an entity. PayPal REST APIs support application/json.
+    - key: Prefer
+      value: "{{prefer_representation_detailed}}"
+      description: The preferred server response upon successful completion of the request. Value is:<ul><li><code>return=minimal</code>. The server returns a minimal response to optimize communication between the API caller and the server. A minimal response includes the <code>id</code>, <code>status</code> and HATEOAS links.</li><li><code>return=representation</code>. The server returns a complete resource representation, including the current state of the resource.</li></ul>
+    - key: PayPal-Request-Id
+      value: "{{$guid}}"
+      description: The server stores keys for 6 hours. The API callers can request the times to up to 72 hours by speaking to their Account Manager.
+    - key: PayPal-Client-Metadata-Id
+      value: "{{paypal_client_metadata_Id}}"
+      disabled: true
+      description: Optional. Verifies that the payment originates from a valid, user-consented device and application. Reduces fraud and decreases declines. Transactions that do not include a client metadata ID are not eligible for PayPal Seller Protection.
+    - key: PayPal-Partner-Attribution-Id
+      value: "{{paypal_partner_attribution_id}}"
+      disabled: true
+      description: Optional. Identifies the caller as a PayPal partner. To receive revenue attribution, specify a unique build notation (BN) code. BN codes provide tracking on all transactions that originate or are associated with a particular partner. To find your BN code, see Code and Credential Reference.
+    - key: PayPal-Auth-Assertion
+      value: "{{paypal_auth_assertion}}"
+      disabled: true
+      description: |+
+        An API client-provided JSON Web Token (JWT) assertion that identifies the merchant. To use this header, you must get consent to act on behalf of a merchant.
+
+  body:
+    type: json
+    content: |-
+      {
+          "intent": "CAPTURE",
+          "purchase_units": [
+              {
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "100.00"
+                  }
+              }
+          ],
+          "payment_source": {
+              "card": {
+                  "number": "4111111111111111",
+                  "expiry": "2035-12"
+              }
+          }
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Connection: keep-alive
+    Content-Length: "1567"
+    Content-Type: application/json
+    Server: nginx
+    X-DataDome: protected
+    Accept-CH: Sec-CH-UA,Sec-CH-UA-Mobile,Sec-CH-UA-Platform,Sec-CH-UA-Arch,Sec-CH-UA-Full-Version-List,Sec-CH-UA-Model,Sec-CH-Device-Memory
+    Set-Cookie: datadome=1aOeSXKKyJMbVwbGzVLsqKJOTAtCDmGsWL_GJQ3noEzgBf0dABI6uM3uIxjNFMptYk0l_88MMCTmtnArzx3v5Dyw4dr0CBi3agQKaz1L-NwNzqg6ZB8T383~vVL_pPJT; Max-Age=31536000; Domain=.paypal.com; Path=/; Secure; SameSite=Lax; HttpOnly
+    Access-Control-Expose-Headers: Server-Timing
+    Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+    Paypal-Debug-Id: 6a86835022db8
+    Server-Timing: traceparent;desc="00-00000000000000000006a86835022db8-0887f0569f36d773-01"
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Edge-Control: max-age=0
+    Accept-Ranges: bytes
+    Date: Fri, 06 Oct 2023 23:01:03 GMT
+    Via: 1.1 varnish
+    X-Served-By: cache-iad-kcgs7200125-IAD
+    X-Cache: MISS
+    X-Cache-Hits: "0"
+    X-Timer: S1696633261.624767,VS0,VE2863
+    Vary: Accept-Encoding
+  body:
+    type: json
+    content: |-
+      {
+          "id": "4YA53131GR1797812",
+          "intent": "CAPTURE",
+          "status": "COMPLETED",
+          "payment_source": {
+              "card": {
+                  "last_digits": "1111",
+                  "expiry": "2035-02",
+                  "brand": "VISA",
+                  "available_networks": [
+                      "VISA"
+                  ],
+                  "type": "UNKNOWN",
+                  "bin_details": {}
+              }
+          },
+          "purchase_units": [
+              {
+                  "reference_id": "default",
+                  "amount": {
+                      "currency_code": "USD",
+                      "value": "100.00"
+                  },
+                  "payee": {
+                      "email_address": "mark_merchant@example.com",
+                      "merchant_id": "YYHCXACTDDFG2"
+                  },
+                  "soft_descriptor": "MARKMERCHAN",
+                  "payments": {
+                      "captures": [
+                          {
+                              "id": "5FG92519JR8657809",
+                              "status": "COMPLETED",
+                              "amount": {
+                                  "currency_code": "USD",
+                                  "value": "100.00"
+                              },
+                              "final_capture": true,
+                              "seller_protection": {
+                                  "status": "NOT_ELIGIBLE"
+                              },
+                              "seller_receivable_breakdown": {
+                                  "gross_amount": {
+                                      "currency_code": "USD",
+                                      "value": "100.00"
+                                  },
+                                  "paypal_fee": {
+                                      "currency_code": "USD",
+                                      "value": "3.08"
+                                  },
+                                  "net_amount": {
+                                      "currency_code": "USD",
+                                      "value": "96.92"
+                                  }
+                              },
+                              "links": [
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/captures/5FG92519JR8657809",
+                                      "rel": "self",
+                                      "method": "GET"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/payments/captures/5FG92519JR8657809/refund",
+                                      "rel": "refund",
+                                      "method": "POST"
+                                  },
+                                  {
+                                      "href": "https://api.sandbox.paypal.com/v2/checkout/orders/4YA53131GR1797812",
+                                      "rel": "up",
+                                      "method": "GET"
+                                  }
+                              ],
+                              "create_time": "2023-10-06T23:01:02Z",
+                              "update_time": "2023-10-06T23:01:02Z",
+                              "processor_response": {
+                                  "avs_code": "A",
+                                  "cvv_code": "M",
+                                  "response_code": "0000"
+                              },
+                              "network_transaction_reference": {
+                                  "id": "097365421420988",
+                                  "network": "VISA"
+                              }
+                          }
+                      ]
+                  }
+              }
+          ],
+          "create_time": "2023-10-06T23:01:02Z",
+          "update_time": "2023-10-06T23:01:02Z",
+          "links": [
+              {
+                  "href": "https://api.sandbox.paypal.com/v2/checkout/orders/4YA53131GR1797812",
+                  "rel": "self",
+                  "method": "GET"
+              }
+          ]
+      }
+order: 5000

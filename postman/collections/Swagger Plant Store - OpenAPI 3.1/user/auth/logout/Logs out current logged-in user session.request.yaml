@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{baseUrl}}/user/auth/logout"
+method: GET
+body:
+  type: text
+  content: ""
+examples: ./.resources/Logs out current logged-in user session.resources/examples
+order: 1000

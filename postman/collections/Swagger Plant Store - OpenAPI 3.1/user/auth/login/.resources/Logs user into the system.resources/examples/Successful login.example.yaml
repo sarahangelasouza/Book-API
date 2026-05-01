@@ -1,0 +1,33 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/user/auth/login?username=string&password=string"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: username
+      value: string
+      description: The username for login
+    - key: password
+      value: string
+      description: The password for login
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Set-Cookie
+      value: string
+      description: Session token for user authentication
+  body:
+    type: json
+    content: |-
+      {
+        "token": "abc123token",
+        "expiresIn": 3600
+      }
+order: 1000

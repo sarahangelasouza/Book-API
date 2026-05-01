@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/user/auth/login?username=string&password=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: username
+    value: string
+    description: The username for login
+  - key: password
+    value: string
+    description: The password for login
+body:
+  type: text
+  content: ""
+examples: ./.resources/Logs user into the system.resources/examples
+order: 1000

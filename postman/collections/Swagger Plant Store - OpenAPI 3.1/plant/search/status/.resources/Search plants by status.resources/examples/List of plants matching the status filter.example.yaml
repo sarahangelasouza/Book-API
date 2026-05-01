@@ -1,0 +1,41 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/plant/search/status?status=sold"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: status
+      value: sold
+      description: The status of plants to search for.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 101,
+          "name": "Fern",
+          "status": "available",
+          "tags": [
+            "green",
+            "leafy"
+          ]
+        },
+        {
+          "id": 102,
+          "name": "Palm",
+          "status": "available",
+          "tags": [
+            "tropical"
+          ]
+        }
+      ]
+order: 1000

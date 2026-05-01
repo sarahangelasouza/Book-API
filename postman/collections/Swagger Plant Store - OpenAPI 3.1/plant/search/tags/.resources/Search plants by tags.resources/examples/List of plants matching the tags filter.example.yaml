@@ -1,0 +1,42 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/plant/search/tags?tags=string"
+  method: GET
+  headers:
+    Accept: application/json
+  queryParams:
+    - key: tags
+      value: string
+      description: Tags to filter plants (comma-separated).
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "id": 101,
+          "name": "Fern",
+          "status": "available",
+          "tags": [
+            "green",
+            "leafy"
+          ]
+        },
+        {
+          "id": 103,
+          "name": "Cactus",
+          "status": "available",
+          "tags": [
+            "spiky",
+            "desert"
+          ]
+        }
+      ]
+order: 1000

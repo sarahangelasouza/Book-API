@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/plant"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Fern",
+      "category": "Indoor",
+      "tags": [
+        "green",
+        "leafy"
+      ],
+      "status": "available"
+    }
+examples: ./.resources/Add a new plant to the store.resources/examples
+order: 1000

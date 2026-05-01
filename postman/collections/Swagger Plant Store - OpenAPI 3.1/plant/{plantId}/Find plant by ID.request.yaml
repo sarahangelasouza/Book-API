@@ -1,0 +1,15 @@
+$kind: http-request
+description: Retrieve a plant's details by its ID.
+url: "{{baseUrl}}/plant/:plantId"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: plantId
+    value: "2846"
+    description: ID of the plant to retrieve
+body:
+  type: text
+  content: ""
+examples: ./.resources/Find plant by ID.resources/examples
+order: 1000

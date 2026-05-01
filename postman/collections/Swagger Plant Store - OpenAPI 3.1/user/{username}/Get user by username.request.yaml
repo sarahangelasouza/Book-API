@@ -1,0 +1,15 @@
+$kind: http-request
+description: Retrieve user details using their username.
+url: "{{baseUrl}}/user/:username"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: username
+    value: string
+    description: Username of the user to retrieve
+body:
+  type: text
+  content: ""
+examples: ./.resources/Get user by username.resources/examples
+order: 1000

@@ -1,0 +1,15 @@
+$kind: http-request
+description: Filter plants based on their current status.
+url: "{{baseUrl}}/plant/search/status?status=sold"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: status
+    value: sold
+    description: The status of plants to search for.
+body:
+  type: text
+  content: ""
+examples: ./.resources/Search plants by status.resources/examples
+order: 1000

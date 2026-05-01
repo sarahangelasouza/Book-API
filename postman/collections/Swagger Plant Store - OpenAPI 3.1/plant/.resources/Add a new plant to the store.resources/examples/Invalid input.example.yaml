@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/plant"
+  method: POST
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "name": "Fern",
+        "category": "Indoor",
+        "tags": [
+          "green",
+          "leafy"
+        ],
+        "status": "available"
+      }
+response:
+  statusCode: 405
+  statusText: Method Not Allowed
+  body:
+    type: text
+    content: ""
+order: 2000

@@ -1,0 +1,18 @@
+$kind: http-request
+description: Filter plants based on associated tags.
+url: "{{baseUrl}}/plant/search/tags?tags=string&tags=string"
+method: GET
+headers:
+  Accept: application/json
+queryParams:
+  - key: tags
+    value: string
+    description: Tags to filter plants (comma-separated).
+  - key: tags
+    value: string
+    description: Tags to filter plants (comma-separated).
+body:
+  type: text
+  content: ""
+examples: ./.resources/Search plants by tags.resources/examples
+order: 1000

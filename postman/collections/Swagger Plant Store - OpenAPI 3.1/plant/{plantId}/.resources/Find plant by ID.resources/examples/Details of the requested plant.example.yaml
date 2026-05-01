@@ -1,0 +1,31 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/plant/:plantId"
+  method: GET
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: plantId
+      value: "2846"
+      description: ID of the plant to retrieve
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": 101,
+        "name": "Fern",
+        "status": "available",
+        "tags": [
+          "green",
+          "leafy"
+        ]
+      }
+order: 1000

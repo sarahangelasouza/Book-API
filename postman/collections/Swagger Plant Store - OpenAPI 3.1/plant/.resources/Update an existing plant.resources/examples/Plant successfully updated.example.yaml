@@ -1,0 +1,37 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/plant"
+  method: PUT
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "name": "Fern",
+        "category": "Indoor",
+        "tags": [
+          "green",
+          "leafy"
+        ],
+        "status": "sold"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": 101,
+        "name": "Fern",
+        "status": "sold",
+        "tags": [
+          "green",
+          "leafy"
+        ]
+      }
+order: 1000

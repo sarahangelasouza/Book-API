@@ -1,7 +1,0 @@
-$kind: http-request
-description: Deletes a book by ID.
-url: "{{baseUrl}}/books/:id"
-method: DELETE
-pathVariables:
-  id: "{{bookID}}"
-order: 5000

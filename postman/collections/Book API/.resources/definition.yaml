@@ -1,36 +1,4 @@
 $kind: collection
-name: Book API
-description: |-
-  # Book API
-
-  A RESTful API for managing a library book catalog. Use this collection to create, retrieve, update, and delete books, as well as track overdue titles.
-
-  ## Endpoints
-
-  | Method | Endpoint | Description |
-  | --- | --- | --- |
-  | GET | `/books` | List all books in the catalog |
-  | GET | `/books/:id` | Retrieve a single book by ID |
-  | POST | `/books` | Add a new book (requires `title`, `author`; optional `genre`, `yearPublished`) |
-  | PUT | `/books/:id` | Update an existing book by ID |
-  | DELETE | `/books/:id` | Remove a book from the catalog |
-  | GET | _(Overdue Book)_ | Fetch books that are currently overdue |
-
-  ## Getting Started
-
-  1. Set the `baseUrl` variable to your server address (default: `http://localhost:3000`).
-      
-  2. Use **List Books** to browse the catalog or **Create Book** to add a new entry.
-      
-  3. Copy a returned book `id` into the `bookID` variable to use with Get, Update, and Delete requests.
-      
-
-  ## Variables
-
-  | Variable | Description |
-  | --- | --- |
-  | `baseUrl` | Base URL of the Book API server |
-  | `bookID` | ID of the book to target in single-resource requests |
+description: A RESTful API for managing a library book collection. Supports listing, retrieving, creating, updating, and deleting books.
 variables:
-  baseUrl: http://localhost:3000
-  bookID: ""
+  baseUrl: "{{baseUrl}}"

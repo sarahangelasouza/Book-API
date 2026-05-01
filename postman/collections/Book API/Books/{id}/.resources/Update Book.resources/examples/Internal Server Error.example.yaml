@@ -1,0 +1,55 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/books/:id"
+  method: PUT
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    - key: id
+      value: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+      description: The unique identifier of the book.
+  body:
+    type: json
+    content: |-
+      {
+        "title": "The Great Gatsby (Updated)",
+        "author": "F. Scott Fitzgerald",
+        "year": 1925
+      }
+response:
+  statusCode: 500
+  statusText: Internal Server Error
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "code": 500,
+          "message": "Internal Server Error"
+        }
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "integer",
+                "example": 400,
+                "description": "HTTP status code."
+              },
+              "message": {
+                "type": "string",
+                "example": "Bad Request",
+                "description": "Error message."
+              }
+            }
+          }
+        }
+      }
+order: 3000

@@ -9,3 +9,7 @@ workflows:
       collection: ../postman/collections/Swagger Plant Store - OpenAPI 3.1
       options:
         syncExamples: false
+    - spec: ../postman/specs/book-api.yaml
+      collection: ../postman/collections/Book API
+      options:
+        syncExamples: false

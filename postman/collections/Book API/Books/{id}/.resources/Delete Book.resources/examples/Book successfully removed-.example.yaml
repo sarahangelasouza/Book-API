@@ -1,0 +1,37 @@
+$kind: http-example
+name: Book successfully removed.
+request:
+  url: "{{baseUrl}}/books/:id"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: id
+      value: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+      description: The unique identifier of the book.
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Book successfully removed."
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Book successfully removed.",
+            "description": "Confirmation message."
+          }
+        }
+      }
+order: 1000

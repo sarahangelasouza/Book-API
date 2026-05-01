@@ -1,0 +1,29 @@
+$kind: http-request
+description: Deletes a book by ID.
+url: "{{baseUrl}}/books/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+    description: The unique identifier of the book.
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "Unique identifier for a book.",
+            "type": "string",
+            "example": "7f04875b-9201-4c8f-b381-18370f9b2dfb"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+body:
+  type: text
+  content: ""
+examples: ./.resources/Delete Book.resources/examples
+order: 3000

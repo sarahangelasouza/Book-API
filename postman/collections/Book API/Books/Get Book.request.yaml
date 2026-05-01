@@ -1,9 +1,0 @@
-$kind: http-request
-description: Returns a single book by ID.
-url: "{{baseUrl}}/books/:id"
-method: GET
-headers:
-  "": ""
-pathVariables:
-  id: "{{bookID}}"
-order: 2000

@@ -12,7 +12,6 @@ cloudResources:
     ../postman/collections/Aircraft Parts: 53115084-00868150-0c37-4c72-aa29-c8860b2bd377
     ../postman/collections/PayPal APIs: 53115084-32a507fd-35e6-4467-978a-4ac4be38146c
     ../postman/collections/Cat Facts: 53115084-818003f0-53a9-4038-a9cc-b81116922068
-    ../postman/collections/Book API: 53115084-de2d898a-1808-43fb-9f58-3ae3845149ec
 
 localResources:
   specs:

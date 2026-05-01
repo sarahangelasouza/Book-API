@@ -1,0 +1,86 @@
+$kind: http-example
+name: Book successfully updated.
+request:
+  url: "{{baseUrl}}/books/:id"
+  method: PUT
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  pathVariables:
+    - key: id
+      value: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+      description: The unique identifier of the book.
+  body:
+    type: json
+    content: |-
+      {
+        "title": "The Great Gatsby (Updated)",
+        "author": "F. Scott Fitzgerald",
+        "year": 1925
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "id": "7f04875b-9201-4c8f-b381-18370f9b2dfb",
+        "title": "The Great Gatsby (Updated)",
+        "author": "F. Scott Fitzgerald",
+        "genre": "fiction",
+        "yearPublished": 1925,
+        "checkedOut": false,
+        "isPermanentCollection": false,
+        "createdAt": "2024-09-27T15:48:46.962Z"
+      }
+    $type: |-
+      {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "7f04875b-9201-4c8f-b381-18370f9b2dfb",
+            "description": "Unique identifier for the book."
+          },
+          "title": {
+            "type": "string",
+            "example": "The Great Gatsby",
+            "description": "The title of the book."
+          },
+          "author": {
+            "type": "string",
+            "example": "F. Scott Fitzgerald",
+            "description": "The author of the book."
+          },
+          "genre": {
+            "type": "string",
+            "example": "fiction",
+            "description": "The genre of the book."
+          },
+          "yearPublished": {
+            "type": "integer",
+            "example": 1925,
+            "description": "The year the book was published."
+          },
+          "checkedOut": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether the book is currently checked out."
+          },
+          "isPermanentCollection": {
+            "type": "boolean",
+            "example": false,
+            "description": "Whether the book is part of the permanent collection."
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2024-09-27T15:48:46.962Z",
+            "description": "Timestamp of when the book record was created.",
+            "format": "date-time"
+          }
+        }
+      }
+order: 1000

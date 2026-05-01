@@ -2,4 +2,10 @@ $kind: http-request
 description: Returns a list of all books.
 url: "{{baseUrl}}/books"
 method: GET
+headers:
+  Accept: application/json
+body:
+  type: text
+  content: ""
+examples: ./.resources/List Books.resources/examples
 order: 1000

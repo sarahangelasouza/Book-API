@@ -13,3 +13,12 @@ workflows:
       collection: ../postman/collections/Book API
       options:
         syncExamples: true
+    - spec: ../postman/specs/New Specification/New Specification.yaml
+      collection: ../postman/collections/Omdb API
+      options:
+        syncExamples: false
+  syncCollectionToSpec:
+    - spec: ../postman/specs/New Specification/New Specification.yaml
+      collection: ../postman/collections/Omdb API
+      options:
+        syncExamples: false

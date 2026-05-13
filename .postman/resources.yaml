@@ -17,3 +17,4 @@ localResources:
   specs:
     - ../Projects/cat-facts/postman/schemas/index.yaml
     - ../postman/specs/book-api.yaml
+    - ../postman/specs/New Specification/New Specification.yaml

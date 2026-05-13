@@ -1,0 +1,13 @@
+{
+  "id": "c79e3453-bee0-4009-8a01-00848a084b51",
+  "version": 1,
+  "name": "New Book From Spec",
+  "protocol": "http",
+  "port": 4500,
+  "mockSrc": "./mock.js",
+  "autoRestartOnChange": true,
+  "logging": {
+    "level": "verbose",
+    "showBody": true
+  }
+}

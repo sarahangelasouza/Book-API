@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "name": "Book API CRUD Lifecycle",
+  "description": "",
+  "flow": {
+    "description": "",
+    "nodes": {
+      "Il-WxUg5": {
+        "type": "ev/endpoint@3",
+        "pos": {
+          "x": 0,
+          "y": 0
+        },
+        "config": {
+          "inputs": [],
+          "data": "",
+          "language": "json",
+          "allowAnyType": false
+        },
+        "ui": {
+          "data": {},
+          "namedInputsExpanded": true,
+          "color": "grey"
+        }
+      }
+    },
+    "connections": {},
+    "annotations": {},
+    "groups": {},
+    "webhook": {
+      "payloadContent": "body-only",
+      "responseType": "default"
+    },
+    "forms": {},
+    "modules": {},
+    "io": {},
+    "ports": {},
+    "meta": {},
+    "scenes": {},
+    "scenarios": {},
+    "config": {
+      "definitions": {},
+      "constants": {}
+    }
+  },
+  "lockbox": {},
+  "info": {
+    "_postman_id": "5d574aa9-10f9-4477-9eb6-7d6e760e6c74"
+  },
+  "_postman_exported_at": "2026-05-05T19:20:01.323Z",
+  "_postman_exported_using": "Postman/Local Mode"
+}

@@ -17,8 +17,8 @@ response:
     content: |-
       {
         "error": {
-          "code": 500,
-          "message": "Internal Server Error"
+          "code": "<integer>",
+          "message": "<string>"
         }
       }
     $type: |-

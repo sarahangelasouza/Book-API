@@ -9,10 +9,10 @@ body:
   type: json
   content: |-
     {
-      "title": "The Great Gatsby",
-      "author": "F. Scott Fitzgerald",
-      "genre": "fiction",
-      "yearPublished": 1925
+      "title": "<string>",
+      "author": "<string>",
+      "genre": "<string>",
+      "yearPublished": "<integer>"
     }
   $type: |-
     {

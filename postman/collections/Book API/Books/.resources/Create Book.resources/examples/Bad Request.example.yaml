@@ -9,10 +9,10 @@ request:
     type: json
     content: |-
       {
-        "title": "The Great Gatsby",
-        "author": "F. Scott Fitzgerald",
-        "genre": "fiction",
-        "yearPublished": 1925
+        "title": "<string>",
+        "author": "<string>",
+        "genre": "<string>",
+        "yearPublished": "<integer>"
       }
 response:
   statusCode: 400
@@ -24,8 +24,8 @@ response:
     content: |-
       {
         "error": {
-          "code": 400,
-          "message": "Bad Request"
+          "code": "<integer>",
+          "message": "<string>"
         }
       }
     $type: |-

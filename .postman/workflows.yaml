@@ -12,4 +12,4 @@ workflows:
     - spec: ../postman/specs/book-api.yaml
       collection: ../postman/collections/Book API
       options:
-        syncExamples: false
+        syncExamples: true

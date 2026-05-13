@@ -6,7 +6,7 @@ request:
     Accept: application/json
   pathVariables:
     - key: id
-      value: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+      value: <string>
       description: The unique identifier of the book.
   body:
     type: text
@@ -21,8 +21,8 @@ response:
     content: |-
       {
         "error": {
-          "code": 500,
-          "message": "Internal Server Error"
+          "code": "<integer>",
+          "message": "<string>"
         }
       }
     $type: |-

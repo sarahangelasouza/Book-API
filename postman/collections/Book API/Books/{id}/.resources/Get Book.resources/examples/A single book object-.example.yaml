@@ -7,7 +7,7 @@ request:
     Accept: application/json
   pathVariables:
     - key: id
-      value: 7f04875b-9201-4c8f-b381-18370f9b2dfb
+      value: <string>
       description: The unique identifier of the book.
   body:
     type: text
@@ -21,14 +21,14 @@ response:
     type: json
     content: |-
       {
-        "id": "7f04875b-9201-4c8f-b381-18370f9b2dfb",
-        "title": "Rubber maroon",
-        "author": "Gabriel García Márquez",
-        "genre": "fiction",
-        "yearPublished": 1967,
-        "checkedOut": false,
-        "isPermanentCollection": false,
-        "createdAt": "2024-09-27T15:59:14.438Z"
+        "id": "<string>",
+        "title": "<string>",
+        "author": "<string>",
+        "genre": "<string>",
+        "yearPublished": "<integer>",
+        "checkedOut": "<boolean>",
+        "isPermanentCollection": "<boolean>",
+        "createdAt": "<dateTime>"
       }
     $type: |-
       {

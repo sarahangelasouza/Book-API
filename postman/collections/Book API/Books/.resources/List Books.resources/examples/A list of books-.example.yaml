@@ -18,24 +18,24 @@ response:
     content: |-
       [
         {
-          "id": "ZUST9JFx-Sd9X0k",
-          "title": "Ficciones",
-          "author": "Jorge Luis Borges",
-          "genre": "fiction",
-          "yearPublished": 1944,
-          "checkedOut": true,
-          "isPermanentCollection": false,
-          "createdAt": "2021-06-02 17:37:38"
+          "id": "<string>",
+          "title": "<string>",
+          "author": "<string>",
+          "genre": "<string>",
+          "yearPublished": "<integer>",
+          "checkedOut": "<boolean>",
+          "isPermanentCollection": "<boolean>",
+          "createdAt": "<dateTime>"
         },
         {
-          "id": "bJmPVX5oFzAQJwI",
-          "title": "Dust Tracks on a Road",
-          "author": "Zora Neale Hurston",
-          "genre": "biography",
-          "yearPublished": 1942,
-          "checkedOut": true,
-          "isPermanentCollection": false,
-          "createdAt": "2021-06-02 17:37:38"
+          "id": "<string>",
+          "title": "<string>",
+          "author": "<string>",
+          "genre": "<string>",
+          "yearPublished": "<integer>",
+          "checkedOut": "<boolean>",
+          "isPermanentCollection": "<boolean>",
+          "createdAt": "<dateTime>"
         }
       ]
     $type: |-

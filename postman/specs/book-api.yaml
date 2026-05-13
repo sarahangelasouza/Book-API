@@ -5,6 +5,8 @@ info:
   description: >-
     A RESTful API for managing a library book collection. Supports listing,
     retrieving, creating, updating, and deleting books.
+
+    New line in description.
 servers:
   - url: '{{baseUrl}}'
     description: Base URL
@@ -99,6 +101,7 @@ paths:
                 error:
                   code: 400
                   message: Bad Request
+                  
 
 
   /books/{id}:

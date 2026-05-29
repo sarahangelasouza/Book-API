@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/books/:id"
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: <string>
+    description: Book ID
+body:
+  type: json
+  content: |-
+    {
+      "title": "<string>",
+      "author": "<string>",
+      "year": "<integer>"
+    }
+examples: ./.resources/Update a book.resources/examples
+order: 2000

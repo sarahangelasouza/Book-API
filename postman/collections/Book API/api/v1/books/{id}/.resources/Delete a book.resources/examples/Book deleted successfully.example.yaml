@@ -1,0 +1,26 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/v1/books/:id"
+  method: DELETE
+  headers:
+    Accept: application/json
+  pathVariables:
+    - key: id
+      value: <string>
+      description: Book ID
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: text
+    content: |-
+      {
+        "message": "<string>",
+        "id": "<string>"
+      }
+order: 1000

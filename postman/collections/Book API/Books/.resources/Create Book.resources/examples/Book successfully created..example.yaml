@@ -15,17 +15,21 @@ request:
         "yearPublished": "<integer>"
       }
 response:
-  statusCode: 400
-  statusText: Bad Request
+  statusCode: 200
+  statusText: OK
   headers:
     Content-Type: application/json
   body:
     type: text
     content: |-
       {
-        "error": {
-          "code": "<integer>",
-          "message": "<string>"
-        }
+        "id": "<string>",
+        "title": "<string>",
+        "author": "<string>",
+        "genre": "<string>",
+        "yearPublished": "<integer>",
+        "checkedOut": "<boolean>",
+        "isPermanentCollection": "<boolean>",
+        "createdAt": "<dateTime>"
       }
-order: 2000
+order: 1000

@@ -1,6 +1,6 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/books"
+  url: "{{baseUrl}}/health"
   method: GET
   headers:
     Accept: application/json
@@ -17,7 +17,7 @@ response:
     content: |-
       {
         "error": {
-          "code": "<integer>",
+          "name": "<string>",
           "message": "<string>"
         }
       }

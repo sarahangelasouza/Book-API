@@ -14,35 +14,5 @@ body:
       "genre": "<string>",
       "yearPublished": "<integer>"
     }
-  $type: |-
-    {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string",
-          "example": "The Great Gatsby",
-          "description": "The title of the book."
-        },
-        "author": {
-          "type": "string",
-          "example": "F. Scott Fitzgerald",
-          "description": "The author of the book."
-        },
-        "genre": {
-          "type": "string",
-          "example": "fiction",
-          "description": "The genre of the book."
-        },
-        "yearPublished": {
-          "type": "integer",
-          "example": 1925,
-          "description": "The year the book was published."
-        }
-      },
-      "required": [
-        "title",
-        "author"
-      ]
-    }
 examples: ./.resources/Create Book.resources/examples
 order: 2000

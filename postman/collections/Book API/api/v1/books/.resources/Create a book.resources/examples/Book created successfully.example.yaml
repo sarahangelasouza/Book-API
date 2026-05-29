@@ -1,6 +1,6 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/books"
+  url: "{{baseUrl}}/api/v1/books"
   method: POST
   headers:
     Content-Type: application/json
@@ -11,21 +11,22 @@ request:
       {
         "title": "<string>",
         "author": "<string>",
-        "genre": "<string>",
-        "yearPublished": "<integer>"
+        "year": "<integer>"
       }
 response:
-  statusCode: 400
-  statusText: Bad Request
+  statusCode: 201
+  statusText: Created
   headers:
     Content-Type: application/json
   body:
     type: text
     content: |-
       {
-        "error": {
-          "code": "<integer>",
-          "message": "<string>"
+        "book": {
+          "id": "<string>",
+          "title": "<string>",
+          "author": "<string>",
+          "year": "<integer>"
         }
       }
-order: 2000
+order: 1000

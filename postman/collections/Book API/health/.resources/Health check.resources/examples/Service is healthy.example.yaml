@@ -1,6 +1,6 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/books"
+  url: "{{baseUrl}}/health"
   method: GET
   headers:
     Accept: application/json
@@ -8,17 +8,15 @@ request:
     type: text
     content: ""
 response:
-  statusCode: 500
-  statusText: Internal Server Error
+  statusCode: 200
+  statusText: OK
   headers:
     Content-Type: application/json
   body:
     type: text
     content: |-
       {
-        "error": {
-          "code": "<integer>",
-          "message": "<string>"
-        }
+        "status": "<string>",
+        "timestamp": "<dateTime>"
       }
-order: 2000
+order: 1000

@@ -1,6 +1,11 @@
 $kind: collection
-name: Book API
-description: A RESTful API for managing a library book collection. Supports
-  listing, retrieving, creating, updating, and deleting books.
+description: >-
+  Simple REST API for managing books. CRUD operations, no authentication
+  required.
+
+
+  Contact Support:
+   Name: James De Luca
+   Email: james.deluca@postman.com
 variables:
-  baseUrl: "{{baseUrl}}"
+  baseUrl: http://localhost:3000

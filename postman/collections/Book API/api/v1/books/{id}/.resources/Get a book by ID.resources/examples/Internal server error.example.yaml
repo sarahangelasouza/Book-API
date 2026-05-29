@@ -1,9 +1,13 @@
 $kind: http-example
 request:
-  url: "{{baseUrl}}/books"
+  url: "{{baseUrl}}/api/v1/books/:id"
   method: GET
   headers:
     Accept: application/json
+  pathVariables:
+    - key: id
+      value: <string>
+      description: Book ID
   body:
     type: text
     content: ""
@@ -17,8 +21,8 @@ response:
     content: |-
       {
         "error": {
-          "code": "<integer>",
+          "name": "<string>",
           "message": "<string>"
         }
       }
-order: 2000
+order: 3000

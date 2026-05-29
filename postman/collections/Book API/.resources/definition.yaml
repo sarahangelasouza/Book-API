@@ -1,8 +1,6 @@
 $kind: collection
 name: Book API
-description: |-
-  A RESTful API for managing a library book collection. Supports listing, retrieving, creating, updating, and deleting books.
-
-  Again, test change.
+description: A RESTful API for managing a library book collection. Supports
+  listing, retrieving, creating, updating, and deleting books.
 variables:
   baseUrl: "{{baseUrl}}"

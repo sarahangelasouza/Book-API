@@ -1,0 +1,70 @@
+$kind: http-request
+name: Return Movie By Name
+url: "{{baseUrl}}/?t=A Series of Unfortunate Events&apikey={{api_key}}"
+method: GET
+queryParams:
+  - key: t
+    value: A Series of Unfortunate Events
+    description: Title of movie or series
+  - key: apikey
+    value: "{{api_key}}"
+  - key: y
+    value: "2099"
+    disabled: true
+    description: Year of release
+  - key: type
+    value: series
+    disabled: true
+    description: Return movie or series
+  - key: plot
+    value: short
+    disabled: true
+    description: Return short or full plot
+  - key: r
+    value: json
+    disabled: true
+    description: The response type to return
+  - key: callback
+    value: string
+    disabled: true
+    description: JSONP callback name
+body:
+  type: text
+  content: ""
+auth:
+  credentials:
+    key: apikey
+    value: "{{apiKey}}"
+    in: query
+  type: apikey
+scripts:
+  - type: afterResponse
+    code: |
+      const response = pm.response.json();
+
+      // Save imdbID into a collection variable
+      pm.collectionVariables.set("imdbID", response.imdbID);
+
+      // Optional logging
+      console.log("Saved imdbID:", response.imdbID);
+
+
+      //Save entire response body
+      const response = pm.response.json();
+
+      // Store values for later comparison
+      pm.collectionVariables.set("imdbID", response.imdbID);
+      pm.collectionVariables.set("originalTitle", response.Title);
+      pm.collectionVariables.set("originalYear", response.Year);
+      pm.collectionVariables.set("originalType", response.Type);
+
+      console.log("Stored imdbID:", response.imdbID);
+
+
+      //Test Conditions
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+    language: text/javascript
+examples: .resources/Return Movie By Name.resources/examples
+order: 1000

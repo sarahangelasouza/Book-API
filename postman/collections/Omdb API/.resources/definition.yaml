@@ -1,16 +1,24 @@
 $kind: collection
-description: |-
-  This API requires authorization, you can get a free key here: [http://omdbapi.com/apikey.aspx](http://omdbapi.com/apikey.aspx)
+name: Omdb API
+description: >-
+  This API requires authorization, you can get a free key here:
+  [http://omdbapi.com/apikey.aspx](http://omdbapi.com/apikey.aspx)
+
 
   Contact Support:
    Email: bfritz@fadingsignal.com
 variables:
   baseUrl: http://omdbapi.com
+  api_key: ""
+  imdbID: ""
+  originalTitle: ""
+  originalYear: ""
+  originalType: ""
 auth:
   - id: 373bad5e-fac2-458a-94ce-216de7e668d8
     type: apikey
     name: apikey auth
     credentials:
       key: apikey
-      value: "{{apiKey}}"
+      value: fbfa51c9
       in: query

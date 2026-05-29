@@ -1,0 +1,61 @@
+$kind: http-request
+name: Return Movie by ID
+url: "{{baseUrl}}/?i={{imdbID}}&apikey={{api_key}}"
+method: GET
+queryParams:
+  - key: i
+    value: "{{imdbID}}"
+    description: A valid IMDb ID (e.g. tt0000001)
+  - key: apikey
+    value: "{{api_key}}"
+  - key: plot
+    value: short
+    disabled: true
+    description: Return short or full plot
+  - key: r
+    value: json
+    disabled: true
+    description: The response type to return
+  - key: callback
+    value: string
+    disabled: true
+    description: JSONP callback name
+body:
+  type: text
+  content: ""
+auth:
+  credentials:
+    key: apikey
+    value: "{{apiKey}}"
+    in: query
+  type: apikey
+scripts:
+  - type: afterResponse
+    code: |-
+      const response = pm.response.json();
+
+      // Retrieve stored values
+      const originalTitle = pm.collectionVariables.get("originalTitle");
+      const originalYear = pm.collectionVariables.get("originalYear");
+      const originalType = pm.collectionVariables.get("originalType");
+      const originalImdbID = pm.collectionVariables.get("imdbID");
+
+      // Validate response matches original request
+      pm.test("IMDb ID matches", function () {
+          pm.expect(response.imdbID).to.eql(originalImdbID);
+      });
+
+      pm.test("Title matches", function () {
+          pm.expect(response.Title).to.eql(originalTitle);
+      });
+
+      pm.test("Year matches", function () {
+          pm.expect(response.Year).to.eql(originalYear);
+      });
+
+      pm.test("Type matches", function () {
+          pm.expect(response.Type).to.eql(originalType);
+      });
+    language: text/javascript
+examples: .resources/Return Movie by ID.resources/examples
+order: 2000

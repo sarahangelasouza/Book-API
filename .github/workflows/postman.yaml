@@ -12,7 +12,7 @@ jobs:
     name: Validate API Spec & Collection
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Postman CLI
         run: curl -o- "https://dl-cli.pstmn.io/install/unix.sh" | sh
@@ -26,7 +26,7 @@ jobs:
         run: postman spec lint ./postman/specs/book-api.yaml --fail-severity WARNING
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: "npm"

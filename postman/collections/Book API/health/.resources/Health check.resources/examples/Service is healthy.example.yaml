@@ -13,10 +13,10 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
-        "status": "<string>",
-        "timestamp": "<dateTime>"
+          "status": "<string>",
+          "timestamp": "<dateTime>"
       }
 order: 1000

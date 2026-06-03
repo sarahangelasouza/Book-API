@@ -13,22 +13,22 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
-        "books": [
-          {
-            "id": "<string>",
-            "title": "<string>",
-            "author": "<string>",
-            "year": "<integer>"
-          },
-          {
-            "id": "<string>",
-            "title": "<string>",
-            "author": "<string>",
-            "year": "<integer>"
-          }
-        ]
+          "books": [
+              {
+                  "id": "<string>",
+                  "title": "<string>",
+                  "author": "<string>",
+                  "year": "<integer>"
+              },
+              {
+                  "id": "<string>",
+                  "title": "<string>",
+                  "author": "<string>",
+                  "year": "<integer>"
+              }
+          ]
       }
 order: 1000

@@ -19,14 +19,14 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
-        "book": {
-          "id": "<string>",
-          "title": "<string>",
-          "author": "<string>",
-          "year": "<integer>"
-        }
+          "book": {
+              "id": "<string>",
+              "title": "<string>",
+              "author": "<string>",
+              "year": "<integer>"
+          }
       }
 order: 1000

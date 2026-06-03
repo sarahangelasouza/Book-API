@@ -19,12 +19,12 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
-        "error": {
-          "name": "<string>",
-          "message": "<string>"
-        }
+          "error": {
+              "name": "<string>",
+              "message": "<string>"
+          }
       }
 order: 3000

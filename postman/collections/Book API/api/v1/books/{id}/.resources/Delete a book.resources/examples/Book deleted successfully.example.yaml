@@ -17,10 +17,10 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
-        "message": "<string>",
-        "id": "<string>"
+          "message": "<string>",
+          "id": "<string>"
       }
 order: 1000

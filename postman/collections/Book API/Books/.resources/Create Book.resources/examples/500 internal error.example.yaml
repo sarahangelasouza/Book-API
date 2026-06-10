@@ -20,7 +20,7 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
           "message": "Internal Service Error. Try again later."

@@ -20,16 +20,16 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
-        "id": "<string>",
-        "title": "<string>",
-        "author": "<string>",
-        "genre": "<string>",
-        "yearPublished": "<integer>",
-        "checkedOut": "<boolean>",
-        "isPermanentCollection": "<boolean>",
-        "createdAt": "<dateTime>"
+          "id": "<string>",
+          "title": "<string>",
+          "author": "<string>",
+          "genre": "<string>",
+          "yearPublished": "<integer>",
+          "checkedOut": "<boolean>",
+          "isPermanentCollection": "<boolean>",
+          "createdAt": "<dateTime>"
       }
 order: 1000

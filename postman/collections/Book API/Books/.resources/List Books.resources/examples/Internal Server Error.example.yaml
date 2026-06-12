@@ -13,12 +13,12 @@ response:
   headers:
     Content-Type: application/json
   body:
-    type: text
+    type: json
     content: |-
       {
-        "error": {
-          "code": "<integer>",
-          "message": "<string>"
-        }
+          "error": {
+              "code": "<integer>",
+              "message": "<string>"
+          }
       }
 order: 2000

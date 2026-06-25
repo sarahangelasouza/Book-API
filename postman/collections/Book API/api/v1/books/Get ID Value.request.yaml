@@ -1,5 +1,5 @@
 $kind: http-request
-name: Get Customer ID
+name: Get ID Value
 url: ""
 method: GET
 order: 343114953788115

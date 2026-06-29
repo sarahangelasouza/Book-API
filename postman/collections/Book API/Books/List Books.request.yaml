@@ -7,5 +7,5 @@ headers:
 body:
   type: text
   content: ""
-examples: ./.resources/List Books.resources/examples
+examples: .resources/List Books.resources/examples
 order: 1000

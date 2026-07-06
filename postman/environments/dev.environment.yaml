@@ -1,5 +1,5 @@
 name: dev
 values:
   - key: dev-key
-    value: ''
+    value: dev1234
     enabled: true

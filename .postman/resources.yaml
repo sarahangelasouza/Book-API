@@ -3,7 +3,6 @@ workspace:
   id: 559ecd86-e0fc-4bcc-81e1-4f84e0ce217d
 
 # Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
-
 cloudResources:
   specs:
     ../postman/specs/book-api.yaml: 0c7a8814-7d77-48ea-9a04-201c26523f54

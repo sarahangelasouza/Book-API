@@ -1,0 +1,5 @@
+name: test
+values:
+  - key: test-key
+    value: ''
+    enabled: true

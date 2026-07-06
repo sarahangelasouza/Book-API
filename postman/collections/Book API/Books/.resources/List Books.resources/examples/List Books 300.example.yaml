@@ -1,0 +1,11 @@
+$kind: http-example
+request:
+  url: ""
+  method: GET
+response:
+  statusCode: 300
+  statusText: Multiple Choices
+  body:
+    type: json
+    content: '{"status" :"300"}'
+order: 2594828490638159

@@ -1,4 +1,5 @@
 $kind: http-example
+name: 200 - A list of books.
 request:
   url: "{{baseUrl}}/books"
   method: GET

@@ -1,0 +1,32 @@
+$kind: http-example
+request:
+  url: "{{baseUrl}}/api/v1/books"
+  method: POST
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "title": "<string>",
+        "author": "<string>",
+        "year": "<integer>"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+          "book": {
+              "id": "<string>",
+              "title": "<string>",
+              "author": "<string>",
+              "year": "<integer>"
+          }
+      }
+order: 1000

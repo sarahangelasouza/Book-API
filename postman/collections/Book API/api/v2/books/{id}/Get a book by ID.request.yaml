@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/books/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: <string>
+    description: Book ID
+body:
+  type: text
+  content: ""
+examples: ./.resources/Get a book by ID.resources/examples
+order: 1000

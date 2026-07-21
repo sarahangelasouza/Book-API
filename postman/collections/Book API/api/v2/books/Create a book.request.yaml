@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/v1/books"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "<string>",
+      "author": "<string>",
+      "year": "<integer>"
+    }
+examples: ./.resources/Create a book.resources/examples
+order: 2000

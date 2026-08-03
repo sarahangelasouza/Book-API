@@ -1,9 +1,5 @@
-# Use this workspace to collaborate
 workspace:
   id: 559ecd86-e0fc-4bcc-81e1-4f84e0ce217d
-
-# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
-
 cloudResources:
   specs:
     ../Projects/cat-facts/postman/schemas/index.yaml: ba84cd74-fd7a-423b-925f-c9695c34b612
@@ -12,9 +8,11 @@ cloudResources:
     ../postman/collections/Aircraft Parts: 53115084-00868150-0c37-4c72-aa29-c8860b2bd377
     ../postman/collections/PayPal APIs: 53115084-32a507fd-35e6-4467-978a-4ac4be38146c
     ../postman/collections/Cat Facts: 53115084-818003f0-53a9-4038-a9cc-b81116922068
-
 localResources:
   specs:
     - ../Projects/cat-facts/postman/schemas/index.yaml
     - ../postman/specs/book-api.json
     - ../postman/specs/New Specification/New Specification.yaml
+resourceNameMappings:
+  specs:
+    - ../postman/specs/Swagger Plant Store - OpenAPI 3.1/index.yaml: index.yaml
